@@ -371,10 +371,12 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
             {/* Agency-Grade Logo Branding */}
             <div className="space-y-1.5">
-              <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white flex items-center justify-center gap-1">
+              <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white flex items-center justify-center gap-2">
+                <span className="text-2xl md:text-3xl animate-bounce-slow select-none">🦁</span>
                 <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
                 <span className="text-red-500 font-extrabold px-2.5 py-0.5 bg-red-600 text-white rounded-lg shadow-lg border border-red-500 tracking-tighter text-3xl md:text-4xl">4D</span>
                 <span className="text-slate-400 font-light tracking-widest">LIVE</span>
+                <span className="text-2xl md:text-3xl animate-bounce-slow select-none">🐲</span>
               </h1>
               <p className="text-[10px] md:text-[11px] text-amber-400 font-bold tracking-[0.3em] uppercase flex items-center justify-center gap-1">
                 <span>✨</span> {lang === 'zh' ? '全马首家无广告实时4D开彩引擎' : 'MALAYSIA\'S FIRST AD-FREE REAL-TIME 4D ENGINE'} <span>✨</span>
