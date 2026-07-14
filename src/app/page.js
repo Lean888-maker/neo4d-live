@@ -303,6 +303,16 @@ export default function Home() {
     }, 850);
   };
 
+  const shareZodiacWhatsApp = () => {
+    const text = `我刚刚在 NEO4D.LIVE 摇出了生肖【${selectedZodiac}】的今日吉数：【${zodiacLuckyNum}】！🧧 全马首个无广告4D开彩，大字粗体超清晰，你也来测测手气：https://neo4d.live`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const shareFortuneWhatsApp = () => {
+    const text = `我在 NEO4D.LIVE 财神福地摇出了今日吉数：【${fortuneLuckyNum}】！🧧 全马首个无广告4D网站，大字粗体超清晰，你也来迎请你的吉数：https://neo4d.live`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-slate-600 font-medium bg-[#faf8f5]">
@@ -456,11 +466,19 @@ export default function Home() {
               </div>
 
               {fortuneLuckyNum && (
-                <div className="p-4 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-center animate-pulse-subtle max-w-xs mx-auto">
-                  <span className="text-[10px] text-amber-300 uppercase font-black tracking-widest block mb-1">
-                    {t[lang].fortunePick}
-                  </span>
-                  <div className="font-number text-5xl text-amber-400 tracking-[0.2em] font-black drop-shadow-md">{fortuneLuckyNum}</div>
+                <div className="p-4 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-center animate-pulse-subtle max-w-xs mx-auto space-y-3">
+                  <div>
+                    <span className="text-[10px] text-amber-300 uppercase font-black tracking-widest block mb-1">
+                      {t[lang].fortunePick}
+                    </span>
+                    <div className="font-number text-5xl text-amber-400 tracking-[0.2em] font-black drop-shadow-md">{fortuneLuckyNum}</div>
+                  </div>
+                  <button
+                    onClick={shareFortuneWhatsApp}
+                    className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow border border-emerald-700 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                  >
+                    <span>💬</span> {lang === 'zh' ? '分享至 WhatsApp' : 'Share on WhatsApp'}
+                  </button>
                 </div>
               )}
             </div>
@@ -707,16 +725,24 @@ export default function Home() {
               </div>
 
               {selectedZodiac && (
-                <div className="p-4 rounded-2xl bg-amber-50/40 border border-amber-100 text-center animate-pulse-subtle max-w-md mx-auto mt-4">
+                <div className="p-4 rounded-2xl bg-amber-50/40 border border-amber-100 text-center animate-pulse-subtle max-w-md mx-auto mt-4 space-y-3">
                   {isZodiacSpinning ? (
                     <div className="text-xs font-bold text-slate-400 uppercase tracking-widest animate-pulse">{t[lang].calcZodiac}</div>
                   ) : (
-                    <div className="space-y-1">
-                      <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                        {t[lang].zodiacLuck.replace('{name}', selectedZodiac)}
-                      </span>
-                      <div className="font-number text-4xl text-amber-600 tracking-[0.2em] font-black">{zodiacLuckyNum}</div>
-                    </div>
+                    <>
+                      <div className="space-y-1">
+                        <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          {t[lang].zodiacLuck.replace('{name}', selectedZodiac)}
+                        </span>
+                        <div className="font-number text-4xl text-amber-600 tracking-[0.2em] font-black">{zodiacLuckyNum}</div>
+                      </div>
+                      <button
+                        onClick={shareZodiacWhatsApp}
+                        className="mx-auto w-48 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow border border-emerald-700 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                      >
+                        <span>💬</span> {lang === 'zh' ? '分享至 WhatsApp' : 'Share on WhatsApp'}
+                      </button>
+                    </>
                   )}
                 </div>
               )}
