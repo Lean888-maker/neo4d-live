@@ -353,16 +353,16 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
 
           {/* EN / 中文 Switcher Button (Absolute Positioned, Sliding Pill Look) */}
-          <div className="absolute top-5 right-5 flex gap-0.5 bg-white/5 p-1 rounded-full border border-white/10 shadow-inner text-[10px] font-black tracking-wider z-20">
+          <div className="absolute top-5 right-5 flex gap-1 bg-black/30 p-1.5 rounded-full border border-white/20 shadow-inner text-xs md:text-sm font-black tracking-wider z-20">
             <button 
               onClick={() => setLang('en')} 
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${lang === 'en' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+              className={`px-4 py-1.5 rounded-full transition-all cursor-pointer font-black ${lang === 'en' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-300 hover:text-white'}`}
             >
               EN
             </button>
             <button 
               onClick={() => setLang('zh')} 
-              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${lang === 'zh' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+              className={`px-4 py-1.5 rounded-full transition-all cursor-pointer font-black ${lang === 'zh' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-300 hover:text-white'}`}
             >
               中文
             </button>
@@ -375,7 +375,7 @@ export default function Home() {
                 <img 
                   src="/images/badge_pixiu.png" 
                   alt="Pi Xiu" 
-                  className="h-10 md:h-12 w-auto animate-bounce-slow select-none mix-blend-screen" 
+                  className="h-16 md:h-24 w-auto animate-bounce-slow select-none mix-blend-screen" 
                 />
                 <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
                 <span className="text-red-500 font-extrabold px-2.5 py-0.5 bg-red-600 text-white rounded-lg shadow-lg border border-red-500 tracking-tighter text-3xl md:text-4xl">4D</span>
@@ -383,7 +383,7 @@ export default function Home() {
                 <img 
                   src="/images/badge_dragon.png" 
                   alt="Dragon" 
-                  className="h-10 md:h-12 w-auto animate-bounce-slow select-none mix-blend-screen" 
+                  className="h-16 md:h-24 w-auto animate-bounce-slow select-none mix-blend-screen" 
                 />
               </h1>
               <p className="text-[10px] md:text-[11px] text-amber-400 font-bold tracking-[0.3em] uppercase flex items-center justify-center gap-1">
