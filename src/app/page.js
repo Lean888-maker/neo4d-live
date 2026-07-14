@@ -26,11 +26,11 @@ const t = {
     fortunePick: 'Your Fortune Pick Number',
     drawNo: 'Draw',
     pending: 'PENDING',
-    prize1: '🏆 1ST PRIZE',
-    prize2: '🥈 2nd Prize',
-    prize3: '🥉 3rd Prize',
-    special: 'Special Prizes',
-    consolation: 'Consolation Prizes',
+    prize1: '🏆 首獎 1ST PRIZE',
+    prize2: '🥈 二獎 2ND PRIZE',
+    prize3: '🥉 三獎 3RD PRIZE',
+    special: '特別獎 (Special Prizes)',
+    consolation: '安慰獎 (Consolation Prizes)',
     showAll: 'Show All Prizes',
     hideSpecials: 'Hide Specials',
     statusActive: 'Active',
@@ -108,7 +108,7 @@ export default function Home() {
   const [fortuneLuckyNum, setFortuneLuckyNum] = useState('');
   const [isFortuneShaking, setIsFortuneShaking] = useState(false);
 
-  // List of operators with localized brand colors and Chinese translations
+  // List of operators with solid brand colors and Chinese translations
   const operators = [
     { 
       id: 'magnum', 
@@ -323,7 +323,17 @@ export default function Home() {
           })
         }}
       />
-      <main className="min-h-screen text-slate-800 pb-16">
+
+      {/* Thematic Background Watermark Overlay (Famous Lucky Numbers & Hanzi) */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-[0.02] select-none z-0">
+        <div className="absolute top-[12%] left-[4%] font-black text-[13vw] text-amber-600 font-mono tracking-tighter">8888</div>
+        <div className="absolute top-[32%] right-[8%] font-black text-[12vw] text-red-600 font-mono">發</div>
+        <div className="absolute top-[58%] left-[6%] font-black text-[15vw] text-amber-600 font-mono tracking-tighter">1688</div>
+        <div className="absolute top-[82%] right-[4%] font-black text-[13vw] text-red-600 font-mono">吉</div>
+        <div className="absolute top-[45%] left-[45%] font-black text-[9vw] text-amber-600 font-mono tracking-tighter">7777</div>
+      </div>
+
+      <main className="min-h-screen text-slate-800 pb-16 relative z-10">
         
         {/* Header (Clean, Compact, Minimal with Bilingual Toggle) */}
         <div className="relative py-6 border-b border-slate-200 bg-white">
@@ -533,7 +543,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredOperators.map((op) => {
               const data = getProviderData(op.id);
-              const isExpanded = expandedCards[op.id];
               const operatorName = lang === 'zh' ? op.jpName : op.name;
               
               return (
@@ -575,7 +584,7 @@ export default function Home() {
                   {/* High-Contrast Bold Prize Display */}
                   <div className="p-5 space-y-3 bg-white">
                     
-                    {/* 1st Prize */}
+                    {/* 1st Prize - Super Sized for Mobile */}
                     <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
                       <div className="flex justify-between items-center relative z-10">
                         <span className="text-slate-500 text-[9px] font-extrabold uppercase tracking-widest flex items-center gap-1">
@@ -591,19 +600,19 @@ export default function Home() {
                           </svg>
                         </button>
                       </div>
-                      <span className="font-number text-4xl text-center text-slate-900 tracking-[0.1em] py-1 drop-shadow-sm">
+                      <span className="font-number text-5xl md:text-6xl text-center text-slate-900 tracking-[0.05em] py-2 drop-shadow-sm">
                         {data?.numbers?.first || '----'}
                       </span>
                     </div>
 
-                    {/* 2nd & 3rd Prize Side-by-Side */}
+                    {/* 2nd & 3rd Prize Side-by-Side - Super Sized for Mobile */}
                     <div className="grid grid-cols-2 gap-2.5">
                       {/* 2nd Prize */}
                       <div className="flex flex-col p-3 rounded-xl border border-slate-100 bg-slate-50/30">
                         <span className="text-slate-500 text-[8px] font-extrabold uppercase tracking-widest">
                           {t[lang].prize2}
                         </span>
-                        <span className="font-number text-2xl text-center text-slate-800 tracking-[0.08em] mt-1">
+                        <span className="font-number text-3xl md:text-4xl text-center text-slate-800 tracking-[0.05em] mt-1.5">
                           {data?.numbers?.second || '----'}
                         </span>
                       </div>
@@ -613,31 +622,31 @@ export default function Home() {
                         <span className="text-slate-500 text-[8px] font-extrabold uppercase tracking-widest">
                           {t[lang].prize3}
                         </span>
-                        <span className="font-number text-2xl text-center text-slate-800 tracking-[0.08em] mt-1">
+                        <span className="font-number text-3xl md:text-4xl text-center text-slate-800 tracking-[0.05em] mt-1.5">
                           {data?.numbers?.third || '----'}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Dynamic Drawers for Specials/Consolation - Fully Expanded */}
+                  {/* Drawers for Specials/Consolation - Fully Expanded and Large Bold Cells */}
                   <div className="px-5 pb-5 border-t border-slate-100 bg-slate-50/20 pt-4 space-y-4">
                     
                     {/* Special Numbers */}
                     <div>
-                      <h4 className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                      <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                         <span className="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
                         {t[lang].special}
                       </h4>
-                      <div className="grid grid-cols-5 gap-1 text-center">
+                      <div className="grid grid-cols-4 md:grid-cols-5 gap-1.5 text-center">
                         {data?.numbers?.special && data.numbers.special.length > 0 ? (
                           data.numbers.special.map((num, i) => (
                             <div 
                               key={i} 
-                              className={`font-number text-xs py-1 rounded-md border text-slate-700 bg-white transition-all ${
+                              className={`font-number text-base md:text-lg py-1.5 rounded-md border text-slate-900 bg-white transition-all shadow-sm ${
                                 num === '----' 
                                   ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                  : 'border-slate-100 hover:border-slate-200'
+                                  : 'border-slate-200 hover:border-slate-300'
                               }`}
                             >
                               {num}
@@ -645,27 +654,27 @@ export default function Home() {
                           ))
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-xs py-1 rounded-md border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
+                            <div key={i} className="font-number text-base py-1.5 rounded-md border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
                           ))
                         )}
                       </div>
                     </div>
 
-                    {/* Consolation Numbers */}
+                    {/* Consolation Numbers (Starters) */}
                     <div>
-                      <h4 className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                      <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                         <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
                         {t[lang].consolation}
                       </h4>
-                      <div className="grid grid-cols-5 gap-1 text-center">
+                      <div className="grid grid-cols-4 md:grid-cols-5 gap-1.5 text-center">
                         {data?.numbers?.consolation && data.numbers.consolation.length > 0 ? (
                           data.numbers.consolation.map((num, i) => (
                             <div 
                               key={i} 
-                              className={`font-number text-xs py-1 rounded-md border text-slate-700 bg-white transition-all ${
+                              className={`font-number text-base md:text-lg py-1.5 rounded-md border text-slate-900 bg-white transition-all shadow-sm ${
                                 num === '----' 
                                   ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                  : 'border-slate-100 hover:border-slate-200'
+                                  : 'border-slate-200 hover:border-slate-300'
                               }`}
                             >
                               {num}
@@ -673,7 +682,7 @@ export default function Home() {
                           ))
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-xs py-1 rounded-md border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
+                            <div key={i} className="font-number text-base py-1.5 rounded-md border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
                           ))
                         )}
                       </div>
