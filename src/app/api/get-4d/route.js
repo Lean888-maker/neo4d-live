@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const url = 'https://www.4d2u.co/actions';
   
@@ -10,7 +12,7 @@ export async function GET() {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     },
     body: 'action=get_data2',
-    next: { revalidate: 30 } // Cache results in Next.js for 30 seconds
+    cache: 'no-store' // Do not cache this request in Next.js
   };
 
   try {
@@ -67,7 +69,7 @@ export async function GET() {
 
     return NextResponse.json(results, {
       headers: {
-        'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=59',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
       },
     });
   } catch (error) {
@@ -75,4 +77,3 @@ export async function GET() {
     return NextResponse.json({ error: 'Data Fetch Error', message: error.message }, { status: 500 });
   }
 }
-

@@ -222,11 +222,33 @@ export default function Home() {
 
   useEffect(() => {
     fetchResults();
-    const intervalId = setInterval(() => {
-      const activeDraw = checkIsDrawTime();
-      setIsDrawTime(activeDraw);
-      fetchResults();
-    }, 25000); // Check every 25 seconds
+    
+    // Dynamically adjust polling frequency: 4 seconds during active draws, 45 seconds during off-peak hours
+    const getPollInterval = () => {
+      return checkIsDrawTime() ? 4000 : 45000;
+    };
+    
+    let intervalId;
+    let currentInterval = getPollInterval();
+    
+    const startInterval = (ms) => {
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        const activeDraw = checkIsDrawTime();
+        setIsDrawTime(activeDraw);
+        fetchResults();
+        
+        // Re-clock interval dynamically if draw state changes
+        const nextInterval = getPollInterval();
+        if (nextInterval !== currentInterval) {
+          currentInterval = nextInterval;
+          startInterval(currentInterval);
+        }
+      }, ms);
+    };
+    
+    startInterval(currentInterval);
+    
     return () => clearInterval(intervalId);
   }, []);
 
