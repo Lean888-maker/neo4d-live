@@ -95,12 +95,8 @@ export default function Home() {
 
   // Tab state
   const [activeRegion, setActiveRegion] = useState('all');
-  
-  // Collapsible cards state
-  const [expandedCards, setExpandedCards] = useState({});
 
   // Interactive Features State
-  const [isPlaygroundOpen, setIsPlaygroundOpen] = useState(true);
   const [selectedZodiac, setSelectedZodiac] = useState(null);
   const [zodiacLuckyNum, setZodiacLuckyNum] = useState('');
   const [isZodiacSpinning, setIsZodiacSpinning] = useState(false);
@@ -250,13 +246,6 @@ export default function Home() {
     });
   }, [activeRegion]);
 
-  const toggleExpand = (id) => {
-    setExpandedCards(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
-
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     alert(t[lang].copied);
@@ -335,46 +324,57 @@ export default function Home() {
 
       <main className="min-h-screen text-slate-800 pb-16 relative z-10">
         
-        {/* Header (Clean, Compact, Minimal with Bilingual Toggle) */}
-        <div className="relative py-6 border-b border-slate-200 bg-white">
+        {/* Header Section (Agency-Grade Redesign) */}
+        <div className="relative py-8 border-b-2 border-amber-500/20 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white shadow-xl">
           
-          {/* EN / 中文 Switcher Button (Absolute Positioned) */}
-          <div className="absolute top-4 right-4 flex gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200/60 shadow-sm text-[10px] font-black">
+          {/* Decorative Crimson/Gold Top Bar */}
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
+
+          {/* EN / 中文 Switcher Button (Absolute Positioned, Sliding Pill Look) */}
+          <div className="absolute top-5 right-5 flex gap-0.5 bg-white/5 p-1 rounded-full border border-white/10 shadow-inner text-[10px] font-black tracking-wider z-20">
             <button 
               onClick={() => setLang('en')} 
-              className={`px-2.5 py-1 rounded transition-all cursor-pointer ${lang === 'en' ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${lang === 'en' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
             >
               EN
             </button>
             <button 
               onClick={() => setLang('zh')} 
-              className={`px-2.5 py-1 rounded transition-all cursor-pointer ${lang === 'zh' ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+              className={`px-3 py-1.5 rounded-full transition-all cursor-pointer ${lang === 'zh' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
             >
               中文
             </button>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
-            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 flex items-center gap-1.5">
-              {t[lang].title}<span className="text-amber-500 font-black bg-gradient-to-r from-amber-500 to-red-600 bg-clip-text text-transparent">4D</span><span className="text-slate-400 font-light">{t[lang].subtitle}</span>
-            </h1>
+            {/* Agency-Grade Logo Branding */}
+            <div className="space-y-1.5">
+              <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white flex items-center justify-center gap-1">
+                <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
+                <span className="text-red-500 font-extrabold px-2.5 py-0.5 bg-red-600 text-white rounded-lg shadow-lg border border-red-500 tracking-tighter text-3xl md:text-4xl">4D</span>
+                <span className="text-slate-400 font-light tracking-widest">LIVE</span>
+              </h1>
+              <p className="text-[10px] md:text-[11px] text-amber-400 font-bold tracking-[0.3em] uppercase flex items-center justify-center gap-1">
+                <span>✨</span> {lang === 'zh' ? '全马首家无广告实时4D开彩引擎' : 'MALAYSIA\'S FIRST AD-FREE REAL-TIME 4D ENGINE'} <span>✨</span>
+              </p>
+            </div>
             
-            <p className="text-[10px] text-red-600 font-black tracking-[0.25em] uppercase mt-1">
+            <p className="text-[10px] text-red-500 font-black tracking-[0.2em] uppercase mt-2.5 bg-red-950/40 px-3 py-0.5 rounded-full border border-red-900/30">
               {t[lang].blessing}
             </p>
             
             {isDrawTime ? (
-              <div className="mt-3 bg-red-50 border border-red-200 text-red-600 px-4 py-1.5 rounded-full flex items-center gap-2.5 shadow-sm">
-                <span className="relative flex h-2 w-2">
+              <div className="mt-4 bg-red-500/10 border border-red-500/30 text-red-400 px-5 py-1.5 rounded-full flex items-center gap-2.5 shadow-md backdrop-blur-sm">
+                <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                 </span>
                 <span className="text-[10px] font-black tracking-widest uppercase">{t[lang].drawLive}</span>
               </div>
             ) : (
-              <div className="mt-3 border border-slate-200 bg-slate-50 text-slate-500 px-4 py-1.5 rounded-full flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                <span className="text-[10px] font-bold tracking-widest uppercase text-emerald-600">{t[lang].drawStandby}</span>
+              <div className="mt-4 border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 px-5 py-1.5 rounded-full flex items-center gap-2 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="text-[10px] font-extrabold tracking-widest uppercase">{t[lang].drawStandby}</span>
               </div>
             )}
           </div>
@@ -382,136 +382,60 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 mt-6 space-y-6">
           
-          {/* Interactive "Dragon Prosperity" Section */}
-          <div className="space-y-3">
-            <div className="flex justify-between items-center border-b border-slate-200 pb-2">
-              <span className="text-xs font-bold tracking-widest uppercase text-slate-500 flex items-center gap-1">
-                {t[lang].secFortune}
-              </span>
-              <button 
-                onClick={() => setIsPlaygroundOpen(!isPlaygroundOpen)}
-                className="text-[10px] font-extrabold text-slate-500 hover:text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors shadow-sm"
-              >
-                {isPlaygroundOpen ? t[lang].hideFeatures : t[lang].showFeatures}
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d={isPlaygroundOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}/>
-                </svg>
-              </button>
-            </div>
+          {/* Interactive "Red Envelope Shaker" Hero component at Top */}
+          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-gradient-to-br from-red-700 via-red-800 to-red-950 border-2 border-amber-500/30 shadow-xl text-white text-center max-w-2xl mx-auto">
+            {/* Decorative Chinese Gold Cloud Pattern Watermarks */}
+            <div className="absolute top-4 left-4 text-white/5 text-6xl select-none pointer-events-none">☁️</div>
+            <div className="absolute bottom-4 right-4 text-white/5 text-6xl select-none pointer-events-none">☁️</div>
             
-            {isPlaygroundOpen && (
-              <section className="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden bg-white border border-red-100 shadow-md">
+            <div className="space-y-4 max-w-xl mx-auto">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-2xl">🧧</span>
+                <h2 className="text-base font-black text-amber-300 uppercase tracking-wider">
+                  {t[lang].fortuneTitle}
+                </h2>
+              </div>
+              <p className="text-xs text-red-200 leading-relaxed">
+                {t[lang].fortuneDesc}
+              </p>
+              
+              <div className="flex flex-col items-center justify-center py-4">
+                <button
+                  onClick={triggerFortuneShaker}
+                  className={`relative text-8xl select-none filter active:scale-95 transition-transform duration-75 cursor-pointer ${
+                    isFortuneShaking ? 'animate-bounce' : 'hover:scale-105 duration-200'
+                  }`}
+                  title="Shake for Luck!"
+                >
+                  <div className="relative flex flex-col items-center justify-center drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)]">
+                    <span>🧧</span>
+                    <span className="absolute top-[40%] text-sm font-black text-yellow-400 select-none drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">
+                      福
+                    </span>
+                  </div>
+                </button>
                 
-                {/* Background Dragon/Cloud Overlay */}
-                <div className="absolute -right-12 -bottom-12 text-slate-50 opacity-5 text-9xl font-black select-none pointer-events-none">
-                  🐉
+                <button 
+                  onClick={triggerFortuneShaker}
+                  className="mt-6 px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs uppercase tracking-widest rounded-full shadow-lg cursor-pointer border border-amber-300 transition-all duration-150 transform hover:scale-102"
+                >
+                  {isFortuneShaking ? t[lang].fortuneShaking : t[lang].fortuneButton}
+                </button>
+              </div>
+
+              {fortuneLuckyNum && (
+                <div className="p-4 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-center animate-pulse-subtle max-w-xs mx-auto">
+                  <span className="text-[10px] text-amber-300 uppercase font-black tracking-widest block mb-1">
+                    {t[lang].fortunePick}
+                  </span>
+                  <div className="font-number text-5xl text-amber-400 tracking-[0.2em] font-black drop-shadow-md">{fortuneLuckyNum}</div>
                 </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
-                  
-                  {/* Feature 1: Zodiac Lucky Picker */}
-                  <div className="space-y-4 pb-6 lg:pb-0 lg:pr-8">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl">🔮</span>
-                      <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
-                        {t[lang].zodiacTitle}
-                      </h2>
-                    </div>
-                    <p className="text-[11px] text-slate-500">
-                      {t[lang].zodiacDesc}
-                    </p>
-                    
-                    <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-                      {zodiacList.map(z => {
-                        const localZodiacName = lang === 'zh' ? z.name.zh : z.name.en;
-                        return (
-                          <button
-                            key={z.raw}
-                            onClick={() => getZodiacLuckyNumber(localZodiacName)}
-                            className={`p-2 rounded-xl text-center border text-[10px] font-extrabold transition-all cursor-pointer ${
-                              selectedZodiac === localZodiacName
-                                ? 'bg-red-600 border-red-600 text-white shadow-sm'
-                                : 'bg-white border-slate-200 text-slate-600 hover:bg-red-50/50 hover:border-red-200'
-                            }`}
-                          >
-                            <div className="text-lg mb-0.5">{z.emoji}</div>
-                            <div>{localZodiacName}</div>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {selectedZodiac && (
-                      <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-100 text-center animate-pulse-subtle">
-                        {isZodiacSpinning ? (
-                          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest animate-pulse">{t[lang].calcZodiac}</div>
-                        ) : (
-                          <div className="space-y-1">
-                            <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">
-                              {t[lang].zodiacLuck.replace('{name}', selectedZodiac)}
-                            </span>
-                            <div className="font-number text-4xl text-amber-600 tracking-[0.25em]">{zodiacLuckyNum}</div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Feature 2: Fortune Red Packet Shaker */}
-                  <div className="space-y-4 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl">🧧</span>
-                        <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
-                          {t[lang].fortuneTitle}
-                        </h2>
-                      </div>
-                      <p className="text-[11px] text-slate-500 mb-6">
-                        {t[lang].fortuneDesc}
-                      </p>
-                      
-                      <div className="flex flex-col items-center justify-center py-4">
-                        <button
-                          onClick={triggerFortuneShaker}
-                          className={`relative text-7xl select-none filter active:scale-95 transition-transform duration-75 cursor-pointer ${
-                            isFortuneShaking ? 'animate-bounce' : ''
-                          }`}
-                          title="Shake for Luck!"
-                        >
-                          <div className="relative flex flex-col items-center justify-center">
-                            <span>🧧</span>
-                            <span className="absolute top-[40%] text-xs font-black text-yellow-400 select-none drop-shadow-[0_1.5px_2px_rgba(0,0,0,0.6)]">
-                              福
-                            </span>
-                          </div>
-                        </button>
-                        
-                        <button 
-                          onClick={triggerFortuneShaker}
-                          className="mt-4 px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-md cursor-pointer border border-red-700 transition-colors"
-                        >
-                          {isFortuneShaking ? t[lang].fortuneShaking : t[lang].fortuneButton}
-                        </button>
-                      </div>
-                    </div>
-
-                    {fortuneLuckyNum && (
-                      <div className="mt-4 p-4 rounded-xl bg-red-50/50 border border-red-100 text-center animate-pulse-subtle">
-                        <span className="text-[10px] text-red-500 uppercase font-black tracking-widest block mb-0.5">
-                          {t[lang].fortunePick}
-                        </span>
-                        <div className="font-number text-4xl text-red-600 tracking-[0.25em]">{fortuneLuckyNum}</div>
-                      </div>
-                    )}
-                  </div>
-
-                </div>
-              </section>
-            )}
-          </div>
+              )}
+            </div>
+          </section>
           
           {/* Regional Filter Tabs */}
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-3 pt-4">
             <div className="flex items-center justify-between border-b border-slate-200 pb-2">
               <span className="text-xs font-bold tracking-widest uppercase text-slate-500">{t[lang].selectRegion}</span>
               <span className="text-[10px] text-slate-400 font-mono font-bold">{t[lang].feeds}</span>
@@ -584,7 +508,7 @@ export default function Home() {
                   {/* High-Contrast Bold Prize Display */}
                   <div className="p-5 space-y-3 bg-white">
                     
-                    {/* 1st Prize - Super Sized for Mobile */}
+                    {/* 1st Prize - Super Sized */}
                     <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
                       <div className="flex justify-between items-center relative z-10">
                         <span className="text-slate-500 text-[9px] font-extrabold uppercase tracking-widest flex items-center gap-1">
@@ -605,7 +529,7 @@ export default function Home() {
                       </span>
                     </div>
 
-                    {/* 2nd & 3rd Prize Side-by-Side - Super Sized for Mobile */}
+                    {/* 2nd & 3rd Prize Side-by-Side - Super Sized */}
                     <div className="grid grid-cols-2 gap-2.5">
                       {/* 2nd Prize */}
                       <div className="flex flex-col p-3 rounded-xl border border-slate-100 bg-slate-50/30">
@@ -629,32 +553,41 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Drawers for Specials/Consolation - Fully Expanded and Large Bold Cells */}
+                  {/* Drawers for Specials/Consolation - Color-Coded & Enlarged */}
                   <div className="px-5 pb-5 border-t border-slate-100 bg-slate-50/20 pt-4 space-y-4">
                     
                     {/* Special Numbers */}
                     <div>
-                      <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                      <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-amber-500"></span>
                         {t[lang].special}
                       </h4>
                       <div className="grid grid-cols-4 md:grid-cols-5 gap-1.5 text-center">
                         {data?.numbers?.special && data.numbers.special.length > 0 ? (
-                          data.numbers.special.map((num, i) => (
-                            <div 
-                              key={i} 
-                              className={`font-number text-base md:text-lg py-1.5 rounded-md border text-slate-900 bg-white transition-all shadow-sm ${
-                                num === '----' 
-                                  ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                  : 'border-slate-200 hover:border-slate-300'
-                              }`}
-                            >
-                              {num}
-                            </div>
-                          ))
+                          data.numbers.special.map((num, i) => {
+                            const isPending = num === '----';
+                            return (
+                              <div 
+                                key={i} 
+                                className={`font-number text-lg md:text-xl py-2 rounded-xl border transition-all font-black shadow-sm ${
+                                  isPending 
+                                    ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
+                                    : `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 text-amber-700 hover:border-amber-400' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 text-rose-600 hover:border-rose-400' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 text-blue-700 hover:border-blue-400' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 text-sky-700 hover:border-sky-400' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 text-orange-700 hover:border-orange-400' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 text-emerald-700 hover:border-emerald-400' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 text-purple-700 hover:border-purple-400' : ''}`
+                                }`}
+                              >
+                                {num}
+                              </div>
+                            );
+                          })
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-base py-1.5 rounded-md border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
+                            <div key={i} className="font-number text-lg py-2 rounded-xl border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
                           ))
                         )}
                       </div>
@@ -662,27 +595,36 @@ export default function Home() {
 
                     {/* Consolation Numbers (Starters) */}
                     <div>
-                      <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                      <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-slate-400"></span>
                         {t[lang].consolation}
                       </h4>
                       <div className="grid grid-cols-4 md:grid-cols-5 gap-1.5 text-center">
                         {data?.numbers?.consolation && data.numbers.consolation.length > 0 ? (
-                          data.numbers.consolation.map((num, i) => (
-                            <div 
-                              key={i} 
-                              className={`font-number text-base md:text-lg py-1.5 rounded-md border text-slate-900 bg-white transition-all shadow-sm ${
-                                num === '----' 
-                                  ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                  : 'border-slate-200 hover:border-slate-300'
-                              }`}
-                            >
-                              {num}
-                            </div>
-                          ))
+                          data.numbers.consolation.map((num, i) => {
+                            const isPending = num === '----';
+                            return (
+                              <div 
+                                key={i} 
+                                className={`font-number text-lg md:text-xl py-2 rounded-xl border transition-all font-black shadow-sm ${
+                                  isPending 
+                                    ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
+                                    : `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 text-amber-700 hover:border-amber-400' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 text-rose-600 hover:border-rose-400' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 text-blue-700 hover:border-blue-400' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 text-sky-700 hover:border-sky-400' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 text-orange-700 hover:border-orange-400' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 text-emerald-700 hover:border-emerald-400' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 text-purple-700 hover:border-purple-400' : ''}`
+                                }`}
+                              >
+                                {num}
+                              </div>
+                            );
+                          })
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-base py-1.5 rounded-md border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
+                            <div key={i} className="font-number text-lg py-2 rounded-xl border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
                           ))
                         )}
                       </div>
@@ -698,6 +640,56 @@ export default function Home() {
               );
             })}
           </div>
+
+          {/* Bottom Section: Zodiac Lucky Picker (Relocated to clean up space) */}
+          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200 shadow-md">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span className="text-xl">🔮</span>
+                <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
+                  {t[lang].zodiacTitle}
+                </h2>
+              </div>
+              <p className="text-[11px] text-slate-500">
+                {t[lang].zodiacDesc}
+              </p>
+              
+              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-12 gap-2">
+                {zodiacList.map(z => {
+                  const localZodiacName = lang === 'zh' ? z.name.zh : z.name.en;
+                  return (
+                    <button
+                      key={z.raw}
+                      onClick={() => getZodiacLuckyNumber(localZodiacName)}
+                      className={`p-2.5 rounded-2xl text-center border text-[10px] font-extrabold transition-all cursor-pointer ${
+                        selectedZodiac === localZodiacName
+                          ? 'bg-red-600 border-red-600 text-white shadow-md transform scale-105'
+                          : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:bg-red-50/50 hover:border-red-200'
+                      }`}
+                    >
+                      <div className="text-xl mb-0.5">{z.emoji}</div>
+                      <div className="truncate">{localZodiacName}</div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {selectedZodiac && (
+                <div className="p-4 rounded-2xl bg-amber-50/40 border border-amber-100 text-center animate-pulse-subtle max-w-md mx-auto mt-4">
+                  {isZodiacSpinning ? (
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest animate-pulse">{t[lang].calcZodiac}</div>
+                  ) : (
+                    <div className="space-y-1">
+                      <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        {t[lang].zodiacLuck.replace('{name}', selectedZodiac)}
+                      </span>
+                      <div className="font-number text-4xl text-amber-600 tracking-[0.2em] font-black">{zodiacLuckyNum}</div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </section>
 
           {/* System footer */}
           <footer className="mt-12 text-center text-[10px] text-slate-400 font-medium tracking-widest border-t border-slate-200 pt-8 space-y-2">
