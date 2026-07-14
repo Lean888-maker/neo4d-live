@@ -10,6 +10,14 @@ export const metadata = {
     description: 'Fastest live 4D results (Keputusan 4D) in Malaysia and Singapore. Ad-free, lightweight, and fully optimized for mobile devices.',
     url: 'https://neo4d.live',
     siteName: 'NEO4D LIVE',
+    images: [
+      {
+        url: 'https://neo4d.live/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'NEO4D LIVE - Ad-Free Live 4D Results',
+      }
+    ],
     type: 'website',
     locale: 'en_MY',
   },
