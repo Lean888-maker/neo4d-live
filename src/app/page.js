@@ -345,8 +345,13 @@ export default function Home() {
         }}
       />
 
-      {/* Thematic Background Watermark Overlay (Famous Lucky Numbers & Hanzi) */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-[0.02] select-none z-0">
+      {/* Thematic Background Watermark Overlay (Famous Lucky Numbers, Hanzi & Giant Mythical Creatures) */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-[0.025] select-none z-0">
+        {/* Giant Dragon & Pi Xiu Watermarks */}
+        <div className="absolute top-[18%] left-[-8%] font-black text-[35vw] text-amber-600 leading-none select-none">🐲</div>
+        <div className="absolute bottom-[18%] right-[-8%] font-black text-[35vw] text-red-600 leading-none select-none">🦁</div>
+
+        {/* Lucky Numbers */}
         <div className="absolute top-[12%] left-[4%] font-black text-[13vw] text-amber-600 font-mono tracking-tighter">8888</div>
         <div className="absolute top-[32%] right-[8%] font-black text-[12vw] text-red-600 font-mono">發</div>
         <div className="absolute top-[58%] left-[6%] font-black text-[15vw] text-amber-600 font-mono tracking-tighter">1688</div>
@@ -357,10 +362,15 @@ export default function Home() {
       <main className="min-h-screen text-slate-800 pb-16 relative z-10">
         
         {/* Header Section (Agency-Grade Redesign) */}
-        <div className="relative py-8 border-b-2 border-amber-500/20 bg-gradient-to-b from-red-800 via-red-900 to-red-950 text-white shadow-xl">
+        <div className="relative py-8 border-b-2 border-amber-500/20 bg-gradient-to-b from-red-800 via-red-900 to-red-950 text-white shadow-xl overflow-hidden">
           
           {/* Decorative Crimson/Gold Top Bar */}
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
+
+          {/* Giant Header Dragon Watermark Backdrop */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.035] select-none z-0">
+            <span className="text-[35vw] md:text-[18vw] text-amber-400 font-black leading-none">🐲</span>
+          </div>
 
           {/* EN / 中文 Switcher Button (Absolute Positioned, Sliding Pill Look) */}
           <div className="absolute top-5 right-5 flex gap-1 bg-black/30 p-1.5 rounded-full border border-white/20 shadow-inner text-xs md:text-sm font-black tracking-wider z-20">
