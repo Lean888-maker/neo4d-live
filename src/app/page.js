@@ -208,7 +208,23 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen text-slate-200 pb-16">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "NEO4D LIVE",
+            "url": "https://neo4d.live",
+            "description": "Fastest real-time live 4D draw results in Malaysia and Singapore. Search winning numbers for Magnum 4D, Sports Toto, Da Ma Cai, Singapore Pools, Sabah 88, Sandakan 4D, and CashSweep.",
+            "applicationCategory": "UtilityApplication",
+            "operatingSystem": "All",
+            "browserRequirements": "Requires JavaScript. Requires HTML5."
+          })
+        }}
+      />
+      <main className="min-h-screen text-slate-200 pb-16">
       
       {/* Header and Live indicator */}
       <div className="relative py-8 md:py-12 overflow-hidden border-b border-slate-900 bg-slate-950/20 backdrop-blur-md">
@@ -537,5 +553,6 @@ export default function Home() {
 
       </div>
     </main>
+    </>
   );
 }

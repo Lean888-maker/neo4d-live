@@ -1,6 +1,29 @@
 export const metadata = {
-  title: 'Neo4D Live',
-  description: 'High Performance Live Engine',
+  title: 'NEO4D LIVE - Live 4D Results Today (Magnum, Sports Toto, Da Ma Cai)',
+  description: 'Fastest live 4D results (Keputusan 4D) in Malaysia and Singapore. Check real-time results for Magnum 4D, Sports Toto, Da Ma Cai, Singapore Pools, Sabah 88, Sandakan 4D, and Special Cashsweep. Ad-free, fast, and mobile-optimized.',
+  keywords: 'live 4d results, check4d, keputusan 4d, 4d results today, magnum 4d, sports toto 4d, da ma cai 1+3d, singapore pools 4d, sabah 88, sandakan 4d, special cashsweep, neo4d, live 4d',
+  alternates: {
+    canonical: 'https://neo4d.live',
+  },
+  openGraph: {
+    title: 'NEO4D LIVE - Live 4D Results Today (Magnum, Sports Toto, Da Ma Cai)',
+    description: 'Fastest live 4D results (Keputusan 4D) in Malaysia and Singapore. Ad-free, lightweight, and fully optimized for mobile devices.',
+    url: 'https://neo4d.live',
+    siteName: 'NEO4D LIVE',
+    type: 'website',
+    locale: 'en_MY',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({ children }) {
@@ -9,4 +32,4 @@ export default function RootLayout({ children }) {
       <body>{children}</body>
     </html>
   )
-}
+}
