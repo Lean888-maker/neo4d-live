@@ -8,7 +8,7 @@ const t = {
   en: {
     title: 'NEO',
     subtitle: '.LIVE',
-    blessing: ' Wishing You Good Luck & Huat Ah!',
+    blessing: '🧧 Huat Liao!',
     drawLive: 'Live Draw in Progress',
     drawStandby: 'Draw Completed / Standby',
     selectRegion: 'Select Region',
@@ -47,7 +47,7 @@ const t = {
   zh: {
     title: 'NEO',
     subtitle: '.LIVE',
-    blessing: '🧧 祝您中獎 · 發啊！(Good Luck & Huat Ah!)',
+    blessing: '🧧 發啊！(Huat Liao!)',
     drawLive: '現場開彩進行中',
     drawStandby: '開彩已結束 / 待機中',
     selectRegion: '選擇區域',
