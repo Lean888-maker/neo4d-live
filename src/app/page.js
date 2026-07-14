@@ -23,7 +23,7 @@ export default function Home() {
   const [fortuneLuckyNum, setFortuneLuckyNum] = useState('');
   const [isFortuneShaking, setIsFortuneShaking] = useState(false);
 
-  // List of operators with light mode configurations, local logo paths, and solid brand colors
+  // List of operators with solid brand colors and Chinese translations
   const operators = [
     { 
       id: 'magnum', 
@@ -33,7 +33,6 @@ export default function Home() {
       color: 'text-slate-900', // Dark text for yellow background
       headerBg: 'bg-[#FFCC00]', // Solid official yellow
       borderColor: 'group-hover:border-[#FFCC00] border-slate-200 border-t-8 border-t-[#FFCC00]',
-      badgeBg: 'bg-amber-50 text-amber-800 border-amber-200',
       p1Gradient: 'from-yellow-100/50 via-yellow-50/10 to-white border-yellow-300'
     },
     { 
@@ -44,7 +43,6 @@ export default function Home() {
       color: 'text-white', 
       headerBg: 'bg-[#E11D48]', // Solid official red
       borderColor: 'group-hover:border-[#E11D48] border-slate-200 border-t-8 border-t-[#E11D48]',
-      badgeBg: 'bg-red-50 text-red-800 border-red-200',
       p1Gradient: 'from-red-100/50 via-red-50/10 to-white border-red-300'
     },
     { 
@@ -55,68 +53,64 @@ export default function Home() {
       color: 'text-white', 
       headerBg: 'bg-[#1D4ED8]', // Solid official blue
       borderColor: 'group-hover:border-[#1D4ED8] border-slate-200 border-t-8 border-t-[#1D4ED8]',
-      badgeBg: 'bg-blue-50 text-blue-800 border-blue-200',
       p1Gradient: 'from-blue-100/50 via-blue-50/10 to-white border-blue-300'
     },
     { 
       id: 'singapore', 
       name: 'SINGAPORE POOLS', 
-      jpName: '新加坡', 
+      jpName: '新加坡博彩', 
       logoImg: null, // Custom SVG fallback
       color: 'text-white', 
       headerBg: 'bg-[#0369A1]', // Solid official cyan-blue
       borderColor: 'group-hover:border-[#0369A1] border-slate-200 border-t-8 border-t-[#0369A1]',
-      badgeBg: 'bg-cyan-50 text-cyan-800 border-cyan-200',
       p1Gradient: 'from-sky-100/50 via-sky-50/10 to-white border-cyan-300'
     },
     { 
       id: 'sabah', 
       name: 'SABAH 88', 
-      jpName: '沙巴', 
+      jpName: '沙巴 88', 
       logoImg: '/images/logo_sabah88.gif',
       color: 'text-white', 
       headerBg: 'bg-[#EA580C]', // Solid official orange
       borderColor: 'group-hover:border-[#EA580C] border-slate-200 border-t-8 border-t-[#EA580C]',
-      badgeBg: 'bg-orange-50 text-orange-800 border-orange-200',
       p1Gradient: 'from-orange-100/50 via-orange-50/10 to-white border-orange-300'
     },
     { 
       id: 'sarawak', 
       name: 'SPECIAL CASHSWEEP', 
-      jpName: '掃描', 
+      jpName: '砂拉越特別大彩', 
       logoImg: '/images/logo_cashsweep.gif',
       color: 'text-white', 
       headerBg: 'bg-[#15803D]', // Solid official green
       borderColor: 'group-hover:border-[#15803D] border-slate-200 border-t-8 border-t-[#15803D]',
-      badgeBg: 'bg-green-50 text-green-800 border-green-200',
       p1Gradient: 'from-green-100/50 via-green-50/10 to-white border-green-300'
     },
     { 
       id: 'sandakan', 
       name: 'SANDAKAN 4D', 
-      jpName: '山打根', 
+      jpName: '山打根 4D', 
       logoImg: '/images/logo_stc4d.gif',
       color: 'text-white', 
       headerBg: 'bg-[#6B21A8]', // Solid official purple
       borderColor: 'group-hover:border-[#6B21A8] border-slate-200 border-t-8 border-t-[#6B21A8]',
-      badgeBg: 'bg-purple-50 text-purple-800 border-purple-200',
       p1Gradient: 'from-purple-100/50 via-purple-50/10 to-white border-purple-300'
     },
   ];
 
+  // Zodiac list with Chinese characters and English names
   const zodiacList = [
-    { name: 'Rat', emoji: '🐭' },
-    { name: 'Ox', emoji: '🐮' },
-    { name: 'Tiger', emoji: '🐯' },
-    { name: 'Rabbit', emoji: '🐰' },
-    { name: 'Dragon', emoji: '🐲' },
-    { name: 'Snake', emoji: '🐍' },
-    { name: 'Horse', emoji: '🐴' },
-    { name: 'Goat', emoji: '🐐' },
-    { name: 'Monkey', emoji: '🐵' },
-    { name: 'Rooster', emoji: '🐔' },
-    { name: 'Dog', emoji: '🐶' },
-    { name: 'Pig', emoji: '🐷' }
+    { name: 'Rat 鼠', raw: 'Rat', emoji: '🐭' },
+    { name: 'Ox 牛', raw: 'Ox', emoji: '🐮' },
+    { name: 'Tiger 虎', raw: 'Tiger', emoji: '🐯' },
+    { name: 'Rabbit 兔', raw: 'Rabbit', emoji: '🐰' },
+    { name: 'Dragon 龍', raw: 'Dragon', emoji: '🐲' },
+    { name: 'Snake 蛇', raw: 'Snake', emoji: '🐍' },
+    { name: 'Horse 馬', raw: 'Horse', emoji: '🐴' },
+    { name: 'Goat 羊', raw: 'Goat', emoji: '🐑' },
+    { name: 'Monkey 猴', raw: 'Monkey', emoji: '🐵' },
+    { name: 'Rooster 雞', raw: 'Rooster', emoji: '🐔' },
+    { name: 'Dog 狗', raw: 'Dog', emoji: '🐶' },
+    { name: 'Pig 豬', raw: 'Pig', emoji: '🐷' }
   ];
 
   const checkIsDrawTime = () => {
@@ -215,10 +209,10 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-slate-600 font-medium bg-[#f8fafc]">
+      <div className="min-h-screen flex flex-col items-center justify-center text-slate-600 font-medium bg-[#faf8f5]">
         <div className="relative flex h-16 w-16 mb-6">
-          <span className="draw-ping-ring absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-60"></span>
-          <div className="relative inline-flex rounded-full h-16 w-16 bg-slate-100 border-2 border-slate-300 items-center justify-center text-slate-700 font-black text-xl tracking-widest">
+          <span className="draw-ping-ring absolute inline-flex h-full w-full rounded-full bg-slate-300 opacity-60"></span>
+          <div className="relative inline-flex rounded-full h-16 w-16 bg-white border-2 border-slate-300 items-center justify-center text-slate-700 font-black text-xl tracking-widest">
             4D
           </div>
         </div>
@@ -253,6 +247,10 @@ export default function Home() {
               NEO<span className="text-amber-500 font-black bg-gradient-to-r from-amber-500 to-red-600 bg-clip-text text-transparent">4D</span><span className="text-slate-400 font-light">.LIVE</span>
             </h1>
             
+            <p className="text-[10px] text-red-600 font-black tracking-[0.25em] uppercase mt-1">
+              🧧 祝您中獎 · 發啊！(Good Luck & Huat Ah!)
+            </p>
+            
             {isDrawTime ? (
               <div className="mt-3 bg-red-50 border border-red-200 text-red-600 px-4 py-1.5 rounded-full flex items-center gap-2.5 shadow-sm">
                 <span className="relative flex h-2 w-2">
@@ -272,15 +270,17 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 mt-6 space-y-6">
           
-          {/* Interactive "Crowd Attractor" Section (At the Very Top for Accessibility) */}
+          {/* Interactive "Dragon Prosperity" Section (At the Very Top for Accessibility) */}
           <div className="space-y-3">
             <div className="flex justify-between items-center border-b border-slate-200 pb-2">
-              <span className="text-xs font-bold tracking-widest uppercase text-slate-500">Fortune Playground</span>
+              <span className="text-xs font-bold tracking-widest uppercase text-slate-500 flex items-center gap-1">
+                <span>🧧</span> 財神福地 (Fortune Playground)
+              </span>
               <button 
                 onClick={() => setIsPlaygroundOpen(!isPlaygroundOpen)}
                 className="text-[10px] font-extrabold text-slate-500 hover:text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors shadow-sm"
               >
-                {isPlaygroundOpen ? 'Hide Features' : 'Show Features'}
+                {isPlaygroundOpen ? '收起福地 (Hide)' : '開啟福地 (Show)'}
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d={isPlaygroundOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}/>
                 </svg>
@@ -288,28 +288,36 @@ export default function Home() {
             </div>
             
             {isPlaygroundOpen && (
-              <section className="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200/80 shadow-md">
+              <section className="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden bg-white border border-red-100 shadow-md">
+                
+                {/* Background Dragon/Cloud Overlay styling */}
+                <div className="absolute -right-12 -bottom-12 text-slate-50 opacity-5 text-9xl font-black select-none pointer-events-none">
+                  🐉
+                </div>
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
                   
                   {/* Feature 1: Zodiac Lucky Picker */}
                   <div className="space-y-4 pb-6 lg:pb-0 lg:pr-8">
                     <div className="flex items-center gap-2">
                       <span className="text-xl">🔮</span>
-                      <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">Horoscope Lucky Pick (星座/十二生肖)</h2>
+                      <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
+                        生肖幸運吉數 (Zodiac Lucky Pick)
+                      </h2>
                     </div>
                     <p className="text-[11px] text-slate-500">
-                      Select your Chinese Zodiac sign below to calculate your personalized 4D lucky number for today.
+                      选择您的生肖，获取今日专属财运4D吉数。(Select your sign to draw today's fortune number.)
                     </p>
                     
                     <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
                       {zodiacList.map(z => (
                         <button
-                          key={z.name}
+                          key={z.raw}
                           onClick={() => getZodiacLuckyNumber(z.name)}
                           className={`p-2 rounded-xl text-center border text-[10px] font-extrabold transition-all cursor-pointer ${
                             selectedZodiac === z.name
-                              ? 'bg-slate-900 border-slate-900 text-white shadow-sm'
-                              : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
+                              ? 'bg-red-600 border-red-600 text-white shadow-sm'
+                              : 'bg-white border-slate-200 text-slate-600 hover:bg-red-50/50 hover:border-red-200'
                           }`}
                         >
                           <div className="text-lg mb-0.5">{z.emoji}</div>
@@ -325,9 +333,9 @@ export default function Home() {
                         ) : (
                           <div className="space-y-1">
                             <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">
-                              Lucky 4D for Zodiac {selectedZodiac} today
+                              {selectedZodiac} 今日吉數 (Zodiac Lucky 4D)
                             </span>
-                            <div className="font-number text-4xl text-amber-500 tracking-[0.25em]">{zodiacLuckyNum}</div>
+                            <div className="font-number text-4xl text-amber-600 tracking-[0.25em]">{zodiacLuckyNum}</div>
                           </div>
                         )}
                       </div>
@@ -339,10 +347,12 @@ export default function Home() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-xl">🧧</span>
-                        <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">Red Packet Fortune Shake (搖一搖搖好運)</h2>
+                        <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
+                          財神爺送福袋 (Red Packet Fortune Shake)
+                        </h2>
                       </div>
                       <p className="text-[11px] text-slate-500 mb-6">
-                        Tap the red packet envelope to shake the fortune cylinder and extract your random winning ticket numbers.
+                        点击红包进行摇号，迎请财神爷降临赐您中奖吉数！(Tap the red envelope to shake out a lucky ticket!)
                       </p>
                       
                       <div className="flex flex-col items-center justify-center py-4">
@@ -353,14 +363,19 @@ export default function Home() {
                           }`}
                           title="Shake for Luck!"
                         >
-                          🧧
+                          <div className="relative flex flex-col items-center justify-center">
+                            <span>🧧</span>
+                            <span className="absolute top-[40%] text-xs font-black text-yellow-400 select-none drop-shadow-[0_1.5px_2px_rgba(0,0,0,0.6)]">
+                              福
+                            </span>
+                          </div>
                         </button>
                         
                         <button 
                           onClick={triggerFortuneShaker}
                           className="mt-4 px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-md cursor-pointer border border-red-700 transition-colors"
                         >
-                          {isFortuneShaking ? 'Shaking Cylinder...' : 'Open Red Packet'}
+                          {isFortuneShaking ? '迎请吉数中...' : '開啓福包 (Open Red Packet)'}
                         </button>
                       </div>
                     </div>
@@ -368,7 +383,7 @@ export default function Home() {
                     {fortuneLuckyNum && (
                       <div className="mt-4 p-4 rounded-xl bg-red-50/50 border border-red-100 text-center animate-pulse-subtle">
                         <span className="text-[10px] text-red-500 uppercase font-black tracking-widest block mb-0.5">
-                          Your Fortune Pick Number
+                          財神賜號 (Your Lucky 4D)
                         </span>
                         <div className="font-number text-4xl text-red-600 tracking-[0.25em]">{fortuneLuckyNum}</div>
                       </div>
@@ -438,8 +453,8 @@ export default function Home() {
                       )}
                       <div>
                         <h3 className="font-black text-sm tracking-tight flex items-center gap-1 uppercase">
-                          {op.name}
-                          <span className="text-[10px] opacity-75 font-semibold">{op.jpName}</span>
+                          <span className="text-[12px] opacity-90 font-black">{op.jpName}</span>
+                          <span className="text-[10px] font-bold opacity-75">{op.name}</span>
                         </h3>
                         <p className="text-[9px] opacity-90 font-semibold uppercase tracking-wider">
                           Draw: <span className="font-mono font-bold">{data?.drawNo || 'PENDING'}</span>
@@ -459,7 +474,7 @@ export default function Home() {
                     <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
                       <div className="flex justify-between items-center relative z-10">
                         <span className="text-slate-500 text-[9px] font-extrabold uppercase tracking-widest flex items-center gap-1">
-                          🏆 1ST PRIZE
+                          🏆 首獎 1ST PRIZE
                         </span>
                         <button 
                           onClick={() => copyToClipboard(`${op.name} 1st: ${data?.numbers?.first || '----'}`)}
@@ -481,7 +496,7 @@ export default function Home() {
                       {/* 2nd Prize */}
                       <div className="flex flex-col p-3 rounded-xl border border-slate-100 bg-slate-50/30">
                         <span className="text-slate-500 text-[8px] font-extrabold uppercase tracking-widest">
-                          🥈 2nd Prize
+                          🥈 二獎 2ND PRIZE
                         </span>
                         <span className="font-number text-2xl text-center text-slate-800 tracking-[0.08em] mt-1">
                           {data?.numbers?.second || '----'}
@@ -491,7 +506,7 @@ export default function Home() {
                       {/* 3rd Prize */}
                       <div className="flex flex-col p-3 rounded-xl border border-slate-100 bg-slate-50/30">
                         <span className="text-slate-500 text-[8px] font-extrabold uppercase tracking-widest">
-                          🥉 3rd Prize
+                          🥉 三獎 3RD PRIZE
                         </span>
                         <span className="font-number text-2xl text-center text-slate-800 tracking-[0.08em] mt-1">
                           {data?.numbers?.third || '----'}
@@ -508,7 +523,7 @@ export default function Home() {
                       <div>
                         <h4 className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                           <span className="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
-                          Special Prizes
+                          特別獎 (Special Prizes)
                         </h4>
                         <div className="grid grid-cols-5 gap-1 text-center">
                           {data?.numbers?.special && data.numbers.special.length > 0 ? (
@@ -536,7 +551,7 @@ export default function Home() {
                       <div>
                         <h4 className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                           <span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
-                          Consolation Prizes
+                          安慰獎 (Consolation Prizes)
                         </h4>
                         <div className="grid grid-cols-5 gap-1 text-center">
                           {data?.numbers?.consolation && data.numbers.consolation.length > 0 ? (
@@ -568,20 +583,20 @@ export default function Home() {
                       onClick={() => toggleExpand(op.id)}
                       className={`font-extrabold uppercase tracking-wider flex items-center gap-1 py-1 px-2 rounded-lg transition-colors cursor-pointer ${
                         isExpanded 
-                          ? 'text-amber-600 bg-amber-50 border border-amber-200' 
+                          ? 'text-red-600 bg-red-50 border border-red-200' 
                           : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
                       }`}
                     >
                       {isExpanded ? (
                         <>
-                          Hide Specials
+                          收起獎項 (Hide)
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 15l7-7 7 7"/>
                           </svg>
                         </>
                       ) : (
                         <>
-                          Show All Prizes
+                          展開全部 (Prizes)
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"/>
                           </svg>

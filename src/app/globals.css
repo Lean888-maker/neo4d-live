@@ -2,13 +2,13 @@
 
 @layer base {
   body {
-    background-color: #f8fafc; /* Sharp clean light grey/white */
+    background-color: #faf8f5; /* Warm premium parchment cream background */
     color: #1e293b; /* Dark slate for high readability */
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(234, 179, 8, 0.015) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(239, 68, 68, 0.015) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(185, 28, 28, 0.02) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(217, 119, 6, 0.02) 0px, transparent 50%);
     background-attachment: fixed;
   }
 }
