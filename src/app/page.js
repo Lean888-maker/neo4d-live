@@ -674,26 +674,26 @@ export default function Home() {
                         <img 
                           src={op.logoImg} 
                           alt={operatorName} 
-                          className="h-9 w-auto object-contain rounded border border-white bg-white p-0.5 shadow-sm" 
+                          className="h-14 md:h-16 w-auto object-contain rounded border border-white bg-white p-0.5 shadow-sm shrink-0" 
                         />
                       ) : (
                         /* Circular SVG Singapore Pools Badge */
-                        <div className="w-9 h-9 rounded-full bg-white flex flex-col items-center justify-center text-sky-800 font-extrabold text-[9px] border border-slate-200 shadow-sm leading-tight">
+                        <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex flex-col items-center justify-center text-sky-800 font-black text-xs md:text-sm border border-slate-200 shadow-sm leading-tight shrink-0">
                           <span>SG</span>
-                          <span className="text-[7px] font-medium opacity-90">POOL</span>
+                          <span className="text-[8px] md:text-[9px] font-black opacity-90">POOL</span>
                         </div>
                       )}
                       <div>
-                        <h3 className="font-black text-sm tracking-tight flex items-center gap-1 uppercase">
-                          <span className="text-[12px] font-black">{operatorName}</span>
+                        <h3 className="font-black text-sm md:text-base tracking-tight uppercase">
+                          <span className="font-black">{operatorName}</span>
                         </h3>
-                        <p className="text-[9px] opacity-90 font-semibold uppercase tracking-wider">
-                          {t[lang].drawNo}: <span className="font-mono font-bold">{data?.drawNo || t[lang].pending}</span>
+                        <p className="text-[10px] md:text-[11px] opacity-90 font-bold uppercase tracking-wider">
+                          {t[lang].drawNo}: <span className="font-mono font-black">{data?.drawNo || t[lang].pending}</span>
                         </p>
                       </div>
                     </div>
                     
-                    <span className="text-[9px] font-mono font-bold bg-white/20 border border-white/30 px-2 py-0.5 rounded text-inherit shadow-sm">
+                    <span className="text-[10px] md:text-[11px] font-mono font-black bg-white/20 border border-white/30 px-2.5 py-1 rounded text-inherit shadow-sm shrink-0">
                       {data?.date || results?.date || t[lang].pending}
                     </span>
                   </div>
@@ -704,7 +704,7 @@ export default function Home() {
                     {/* 1st Prize - Super Sized */}
                     <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
                       <div className="flex justify-between items-center relative z-10">
-                        <span className="text-slate-500 text-[9px] font-extrabold uppercase tracking-widest flex items-center gap-1">
+                        <span className="text-black text-[12px] md:text-[14px] font-black uppercase tracking-wider flex items-center gap-1">
                           {t[lang].prize1}
                         </span>
                         <button 
@@ -717,7 +717,7 @@ export default function Home() {
                           </svg>
                         </button>
                       </div>
-                      <span className="font-number text-5xl md:text-6xl text-center text-slate-900 tracking-[0.05em] py-2 drop-shadow-sm">
+                      <span className="font-number text-5xl md:text-6xl text-center text-black tracking-[0.05em] py-2 drop-shadow-sm">
                         {data?.numbers?.first || '----'}
                       </span>
                     </div>
@@ -725,21 +725,21 @@ export default function Home() {
                     {/* 2nd & 3rd Prize Side-by-Side - Super Sized */}
                     <div className="grid grid-cols-2 gap-2.5">
                       {/* 2nd Prize */}
-                      <div className="flex flex-col p-3 rounded-xl border border-slate-100 bg-slate-50/30">
-                        <span className="text-slate-500 text-[8px] font-extrabold uppercase tracking-widest">
+                      <div className="flex flex-col p-3 rounded-xl border border-slate-200 bg-slate-50/50">
+                        <span className="text-black text-[10px] md:text-[12px] font-black uppercase tracking-wider">
                           {t[lang].prize2}
                         </span>
-                        <span className="font-number text-3xl md:text-4xl text-center text-slate-800 tracking-[0.05em] mt-1.5">
+                        <span className="font-number text-3xl md:text-4xl text-center text-black tracking-[0.05em] mt-1.5">
                           {data?.numbers?.second || '----'}
                         </span>
                       </div>
 
                       {/* 3rd Prize */}
-                      <div className="flex flex-col p-3 rounded-xl border border-slate-100 bg-slate-50/30">
-                        <span className="text-slate-500 text-[8px] font-extrabold uppercase tracking-widest">
+                      <div className="flex flex-col p-3 rounded-xl border border-slate-200 bg-slate-50/50">
+                        <span className="text-black text-[10px] md:text-[12px] font-black uppercase tracking-wider">
                           {t[lang].prize3}
                         </span>
-                        <span className="font-number text-3xl md:text-4xl text-center text-slate-800 tracking-[0.05em] mt-1.5">
+                        <span className="font-number text-3xl md:text-4xl text-center text-black tracking-[0.05em] mt-1.5">
                           {data?.numbers?.third || '----'}
                         </span>
                       </div>
@@ -751,7 +751,7 @@ export default function Home() {
                     
                     {/* Special Numbers */}
                     <div>
-                      <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                      <h4 className="text-[12px] font-black text-black uppercase tracking-wider mb-2 flex items-center gap-1.5">
                         <span className="h-2 w-2 rounded-full bg-amber-500"></span>
                         {t[lang].special}
                       </h4>
@@ -765,13 +765,14 @@ export default function Home() {
                                 className={`font-number text-lg md:text-xl py-2 rounded-xl border transition-all font-black shadow-sm ${
                                   isPending 
                                     ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                    : `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 text-amber-700 hover:border-amber-400' : ''}` +
-                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 text-rose-600 hover:border-rose-400' : ''}` +
-                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 text-blue-700 hover:border-blue-400' : ''}` +
-                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 text-sky-700 hover:border-sky-400' : ''}` +
-                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 text-orange-700 hover:border-orange-400' : ''}` +
-                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 text-emerald-700 hover:border-emerald-400' : ''}` +
-                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 text-purple-700 hover:border-purple-400' : ''}`
+                                    : 'text-black ' +
+                                      `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 hover:border-amber-400' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 hover:border-rose-400' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 hover:border-blue-400' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 hover:border-sky-400' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 hover:border-orange-400' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 hover:border-emerald-400' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 hover:border-purple-400' : ''}`
                                 }`}
                               >
                                 {num}
@@ -788,7 +789,7 @@ export default function Home() {
 
                     {/* Consolation Numbers (Starters) */}
                     <div>
-                      <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                      <h4 className="text-[12px] font-black text-black uppercase tracking-wider mb-2 flex items-center gap-1.5">
                         <span className="h-2 w-2 rounded-full bg-slate-400"></span>
                         {t[lang].consolation}
                       </h4>
@@ -802,13 +803,14 @@ export default function Home() {
                                 className={`font-number text-lg md:text-xl py-2 rounded-xl border transition-all font-black shadow-sm ${
                                   isPending 
                                     ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                    : `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 text-amber-700 hover:border-amber-400' : ''}` +
-                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 text-rose-600 hover:border-rose-400' : ''}` +
-                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 text-blue-700 hover:border-blue-400' : ''}` +
-                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 text-sky-700 hover:border-sky-400' : ''}` +
-                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 text-orange-700 hover:border-orange-400' : ''}` +
-                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 text-emerald-700 hover:border-emerald-400' : ''}` +
-                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 text-purple-700 hover:border-purple-400' : ''}`
+                                    : 'text-black ' +
+                                      `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 hover:border-amber-400' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 hover:border-rose-400' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 hover:border-blue-400' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 hover:border-sky-400' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 hover:border-orange-400' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 hover:border-emerald-400' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 hover:border-purple-400' : ''}`
                                 }`}
                               >
                                 {num}
