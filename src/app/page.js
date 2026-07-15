@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import './globals.css'; 
 import { dreamData } from './dream_data'; 
+import Link from 'next/link'; 
 
 // Translation dictionary for EN / ZH
 const t = {
@@ -450,6 +451,22 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 mt-6 space-y-6">
           
+          {/* Quick Navigation SEO Links */}
+          <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto relative z-10">
+            <Link 
+              href="/predictions" 
+              className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer"
+            >
+              <span>📈</span> {lang === 'zh' ? '今日万字预测' : 'Daily AI Predictions'}
+            </Link>
+            <Link 
+              href="/dreams" 
+              className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer"
+            >
+              <span>🔮</span> {lang === 'zh' ? '千字图梦境解析' : 'Dream Meaning Dictionary'}
+            </Link>
+          </div>
+
           {/* Interactive "Red Envelope Shaker" Hero component at Top */}
           <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-gradient-to-br from-red-700 via-red-800 to-red-950 border-2 border-amber-500/30 shadow-xl text-white text-center max-w-2xl mx-auto">
             {/* Decorative Chinese Gold Cloud Pattern Watermarks */}
