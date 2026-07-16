@@ -464,15 +464,15 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
             </Link>
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 flex flex-col items-center text-center relative z-10">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col items-center text-center relative z-10 pt-16 md:pt-4">
             {/* Agency-Grade Logo Branding */}
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap text-white">
-                <span className="text-4xl md:text-6xl font-black tracking-widest bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
-                <span className="text-7xl md:text-9xl font-black px-10 py-4 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-[2rem] shadow-2xl border-4 border-amber-400 tracking-normal transform hover:scale-105 transition-all duration-200">4D</span>
-                <span className="text-3xl md:text-5xl font-light tracking-[0.25em] text-amber-200">LIVE</span>
+            <div className="space-y-2 md:space-y-4">
+              <div className="flex items-center justify-center gap-2 md:gap-6 text-white whitespace-nowrap">
+                <span className="text-3xl sm:text-4xl md:text-6xl font-black tracking-widest bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
+                <span className="text-5xl sm:text-6xl md:text-9xl font-black px-4 py-2 md:px-10 md:py-4 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-4 border-amber-400 tracking-normal transform hover:scale-105 transition-all duration-200">4D</span>
+                <span className="text-2xl sm:text-3xl md:text-5xl font-light tracking-[0.25em] text-amber-200">LIVE</span>
               </div>
-              <p className="text-xs md:text-sm text-amber-400 font-black tracking-[0.2em] uppercase flex items-center justify-center gap-1.5 pt-2">
+              <p className="text-[10px] sm:text-xs md:text-sm text-amber-400 font-black tracking-[0.1em] md:tracking-[0.2em] uppercase flex items-center justify-center gap-1 md:gap-1.5 pt-2">
                 <span>✨</span> {lang === 'zh' ? '全马首家无广告实时4D开彩引擎' : 'MALAYSIA\'S FIRST AD-FREE REAL-TIME 4D ENGINE'} <span>✨</span>
               </p>
             </div>
