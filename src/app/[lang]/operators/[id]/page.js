@@ -1,4 +1,4 @@
-import { fetch4dData } from '../../utils/fetch4d';
+import { fetch4dData } from '../../../utils/fetch4d';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 

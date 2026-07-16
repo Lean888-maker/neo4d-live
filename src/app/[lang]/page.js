@@ -1,5 +1,5 @@
-import { fetch4dData } from './utils/fetch4d';
-import HomeClient from './HomeClient';
+import { fetch4dData } from '../utils/fetch4d';
+import HomeClient from '../HomeClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,7 +23,7 @@ export const metadata = {
     siteName: 'NEO4D LIVE',
     images: [
       {
-        url: 'https://neo4d.live/og-image.png',
+        url: 'https://neo4d.live/api/og',
         width: 1200,
         height: 630,
         alt: 'NEO4D LIVE - 无广告实时4D开彩',
@@ -40,7 +40,7 @@ export const metadata = {
   }
 };
 
-export default async function Page() {
+export default async function Page({ params }) {
   let initialResults = null;
   
   try {
@@ -130,7 +130,7 @@ export default async function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <HomeClient initialResults={initialResults} />
+      <HomeClient initialResults={initialResults} initialLang={params.lang} />
     </>
   );
 }

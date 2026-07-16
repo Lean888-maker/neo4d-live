@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import './globals.css'; 
 import { dreamData } from './dream_data'; 
 import Link from 'next/link'; 
+import { useRouter } from 'next/navigation'; 
 
 // Translation dictionary for EN / ZH
 const t = {
@@ -97,16 +98,27 @@ const t = {
   }
 };
 
-export default function HomeClient({ initialResults }) {
+export default function HomeClient({ initialResults, initialLang = 'zh' }) {
   const [results, setResults] = useState(initialResults);
   const [isDrawTime, setIsDrawTime] = useState(false);
   const [loading, setLoading] = useState(!initialResults);
 
-  // Language state (defaults to Chinese 'zh' for target audience)
-  const [lang, setLang] = useState('zh');
+  // Language state (defaults to route param)
+  const [lang, setLang] = useState(initialLang);
 
   // Tab state
   const [activeRegion, setActiveRegion] = useState('all');
+
+  // Search state
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.length === 4 && !isNaN(searchQuery)) {
+      router.push(`/${lang}/number/${searchQuery}`);
+    }
+  };
 
   // Interactive Features State
   const [selectedZodiac, setSelectedZodiac] = useState(null);
@@ -438,18 +450,18 @@ export default function HomeClient({ initialResults }) {
 
           {/* EN / 中文 Switcher Button (Absolute Positioned, Sliding Pill Look) */}
           <div className="absolute top-5 right-5 flex gap-1 bg-black/30 p-1.5 rounded-full border border-white/20 shadow-inner text-xs md:text-sm font-black tracking-wider z-20">
-            <button 
-              onClick={() => setLang('en')} 
+            <Link 
+              href="/en"
               className={`px-4 py-1.5 rounded-full transition-all cursor-pointer font-black ${lang === 'en' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-300 hover:text-white'}`}
             >
               EN
-            </button>
-            <button 
-              onClick={() => setLang('zh')} 
+            </Link>
+            <Link 
+              href="/zh"
               className={`px-4 py-1.5 rounded-full transition-all cursor-pointer font-black ${lang === 'zh' ? 'bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-md' : 'text-slate-300 hover:text-white'}`}
             >
               中文
-            </button>
+            </Link>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 flex flex-col items-center text-center relative z-10">
@@ -489,26 +501,50 @@ export default function HomeClient({ initialResults }) {
         <div className="max-w-7xl mx-auto px-4 mt-6 space-y-6">
           
           {/* Quick Navigation SEO Links */}
-          <div className="grid grid-cols-3 gap-3 max-w-3xl mx-auto relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto relative z-10">
             <Link 
-              href="/predictions" 
+              href={`/${lang}/scanner`}
+              className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
+            >
+              <span>📷</span> {lang === 'zh' ? '扫票对奖' : 'Scan Ticket'}
+            </Link>
+            <Link 
+              href={`/${lang}/predictions`}
               className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
             >
               <span>📈</span> {lang === 'zh' ? '万字预测' : 'AI Predictions'}
             </Link>
             <Link 
-              href="/analysis" 
+              href={`/${lang}/analysis`}
               className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
             >
               <span>📊</span> {lang === 'zh' ? '频数分析' : 'Stats Analyzer'}
             </Link>
             <Link 
-              href="/dreams" 
+              href={`/${lang}/dreams`}
               className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
             >
               <span>🔮</span> {lang === 'zh' ? '千字图' : 'Dream Dict'}
             </Link>
           </div>
+
+          {/* pSEO Search Number Input */}
+          <form onSubmit={handleSearch} className="max-w-xl mx-auto relative z-10 flex gap-2">
+            <input 
+              type="text" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value.replace(/\D/g, '').slice(0, 4))}
+              placeholder={lang === 'zh' ? "搜索任意4D号码 (例: 8888)" : "Search any 4D number (e.g., 8888)"}
+              className="flex-1 bg-slate-900/80 border border-amber-500/30 rounded-2xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 shadow-inner text-center font-black tracking-widest"
+            />
+            <button 
+              type="submit"
+              disabled={searchQuery.length !== 4}
+              className="bg-amber-500 text-slate-900 px-6 py-3 rounded-2xl font-black uppercase tracking-wider hover:bg-amber-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {lang === 'zh' ? "分析" : "Analyze"}
+            </button>
+          </form>
 
           {/* Formatted Today's Results Copy Tool */}
           <div className="max-w-2xl mx-auto relative z-10">

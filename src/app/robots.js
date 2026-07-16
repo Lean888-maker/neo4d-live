@@ -3,7 +3,11 @@ export default function robots() {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/api/'],
     },
-    sitemap: 'https://neo4d.live/sitemap.xml',
-  }
+    sitemap: [
+      'https://neo4d.live/sitemap.xml',
+      'https://neo4d.live/sitemap-numbers.xml'
+    ]
+  };
 }

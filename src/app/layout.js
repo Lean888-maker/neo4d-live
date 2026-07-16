@@ -13,7 +13,7 @@ export const metadata = {
     siteName: 'NEO4D LIVE',
     images: [
       {
-        url: 'https://neo4d.live/og-image.png',
+        url: 'https://neo4d.live/api/og',
         width: 1200,
         height: 630,
         alt: 'NEO4D LIVE - Ad-Free Live 4D Results',
@@ -41,9 +41,45 @@ export const metadata = {
   },
 }
 
+import Script from 'next/script';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-MY">
+      <head>
+        <Script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" strategy="beforeInteractive" />
+        <Script id="onesignal-init" strategy="afterInteractive">
+          {`
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(async function(OneSignal) {
+              await OneSignal.init({
+                appId: "978d5ce1-c635-4a40-8135-442c974d40c4",
+                notifyButton: {
+                  enable: true,
+                  position: 'bottom-right',
+                },
+                promptOptions: {
+                  slidedown: {
+                    prompts: [{
+                      type: "push",
+                      autoPrompt: true,
+                      text: {
+                        actionMessage: "Receive instant notifications when Live 4D Draws start at 7:00 PM!",
+                        acceptButton: "Allow",
+                        cancelButton: "Later"
+                      },
+                      delay: {
+                        pageViews: 1,
+                        timeDelay: 5
+                      }
+                    }]
+                  }
+                }
+              });
+            });
+          `}
+        </Script>
+      </head>
       <body>{children}</body>
     </html>
   )
