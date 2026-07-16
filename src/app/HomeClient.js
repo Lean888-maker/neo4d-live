@@ -476,10 +476,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                 <span>✨</span> {lang === 'zh' ? '全马首家无广告实时4D开彩引擎' : 'MALAYSIA\'S FIRST AD-FREE REAL-TIME 4D ENGINE'} <span>✨</span>
               </p>
             </div>
-            
-            <p className="text-sm md:text-base text-amber-300 font-black tracking-[0.2em] uppercase mt-3 bg-red-950/60 px-5 py-1.5 rounded-full border border-red-900/50 shadow-inner">
-              {t[lang].blessing}
-            </p>
+
             
             {isDrawTime ? (
               <div className="mt-5 bg-red-500/20 border border-red-400/50 text-red-300 px-6 py-2.5 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md">
