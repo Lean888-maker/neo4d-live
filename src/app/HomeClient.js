@@ -468,31 +468,31 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
             {/* Agency-Grade Logo Branding */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap text-white">
-                <span className="text-3xl md:text-5xl font-black tracking-widest bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
-                <span className="text-7xl md:text-9xl font-black px-8 py-3.5 bg-gradient-to-br from-red-600 to-red-700 text-white rounded-[2rem] shadow-2xl border-4 border-amber-400 tracking-normal transform hover:scale-105 transition-all duration-200">4D</span>
-                <span className="text-2xl md:text-4xl font-light tracking-[0.25em] text-slate-300">LIVE</span>
+                <span className="text-4xl md:text-6xl font-black tracking-widest bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent drop-shadow">NEO</span>
+                <span className="text-7xl md:text-9xl font-black px-10 py-4 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-[2rem] shadow-2xl border-4 border-amber-400 tracking-normal transform hover:scale-105 transition-all duration-200">4D</span>
+                <span className="text-3xl md:text-5xl font-light tracking-[0.25em] text-amber-200">LIVE</span>
               </div>
-              <p className="text-[10px] md:text-[11px] text-amber-400 font-bold tracking-[0.3em] uppercase flex items-center justify-center gap-1">
+              <p className="text-xs md:text-sm text-amber-400 font-black tracking-[0.2em] uppercase flex items-center justify-center gap-1.5 pt-2">
                 <span>✨</span> {lang === 'zh' ? '全马首家无广告实时4D开彩引擎' : 'MALAYSIA\'S FIRST AD-FREE REAL-TIME 4D ENGINE'} <span>✨</span>
               </p>
             </div>
             
-            <p className="text-[10px] text-red-500 font-black tracking-[0.2em] uppercase mt-2.5 bg-red-950/40 px-3 py-0.5 rounded-full border border-red-900/30">
+            <p className="text-sm md:text-base text-amber-300 font-black tracking-[0.2em] uppercase mt-3 bg-red-950/60 px-5 py-1.5 rounded-full border border-red-900/50 shadow-inner">
               {t[lang].blessing}
             </p>
             
             {isDrawTime ? (
-              <div className="mt-4 bg-red-500/10 border border-red-500/30 text-red-400 px-5 py-1.5 rounded-full flex items-center gap-2.5 shadow-md backdrop-blur-sm">
-                <span className="relative flex h-2.5 w-2.5">
+              <div className="mt-5 bg-red-500/20 border border-red-400/50 text-red-300 px-6 py-2.5 rounded-full flex items-center gap-3 shadow-lg backdrop-blur-md">
+                <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
                 </span>
-                <span className="text-[10px] font-black tracking-widest uppercase">{t[lang].drawLive}</span>
+                <span className="text-sm md:text-base font-black tracking-widest uppercase text-white drop-shadow-md">{t[lang].drawLive}</span>
               </div>
             ) : (
-              <div className="mt-4 border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 px-5 py-1.5 rounded-full flex items-center gap-2 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-[10px] font-extrabold tracking-widest uppercase">{t[lang].drawStandby}</span>
+              <div className="mt-5 border border-emerald-400/30 bg-emerald-900/40 text-emerald-300 px-6 py-2.5 rounded-full flex items-center gap-2.5 shadow-lg backdrop-blur-md">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                <span className="text-sm md:text-base font-black tracking-widest uppercase">{t[lang].drawStandby}</span>
               </div>
             )}
           </div>
@@ -504,27 +504,27 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto relative z-10">
             <Link 
               href={`/${lang}/scanner`}
-              className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
             >
-              <span>📷</span> {lang === 'zh' ? '扫票对奖' : 'Scan Ticket'}
+              <span className="text-lg">📷</span> {lang === 'zh' ? '扫票对奖' : 'Scan Ticket'}
             </Link>
             <Link 
               href={`/${lang}/predictions`}
-              className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
             >
-              <span>📈</span> {lang === 'zh' ? '万字预测' : 'AI Predictions'}
+              <span className="text-lg">📈</span> {lang === 'zh' ? '万字预测' : 'AI Predictions'}
             </Link>
             <Link 
               href={`/${lang}/analysis`}
-              className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
             >
-              <span>📊</span> {lang === 'zh' ? '频数分析' : 'Stats Analyzer'}
+              <span className="text-lg">📊</span> {lang === 'zh' ? '频数分析' : 'Stats Analyzer'}
             </Link>
             <Link 
               href={`/${lang}/dreams`}
-              className="flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border border-amber-500/20 font-black text-[10px] md:text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-amber-400/50 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
             >
-              <span>🔮</span> {lang === 'zh' ? '千字图' : 'Dream Dict'}
+              <span className="text-lg">🔮</span> {lang === 'zh' ? '千字图' : 'Dream Dict'}
             </Link>
           </div>
 
@@ -535,14 +535,14 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value.replace(/\D/g, '').slice(0, 4))}
               placeholder={lang === 'zh' ? "搜索任意4D号码 (例: 8888)" : "Search any 4D number (e.g., 8888)"}
-              className="flex-1 bg-slate-900/80 border border-amber-500/30 rounded-2xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 shadow-inner text-center font-black tracking-widest"
+              className="flex-1 bg-slate-900 border-2 border-amber-500/50 rounded-2xl px-5 py-4 text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 shadow-inner text-center font-black tracking-widest text-lg md:text-xl"
             />
             <button 
               type="submit"
               disabled={searchQuery.length !== 4}
-              className="bg-amber-500 text-slate-900 px-6 py-3 rounded-2xl font-black uppercase tracking-wider hover:bg-amber-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-2xl font-black text-sm md:text-base uppercase tracking-wider hover:from-amber-300 hover:to-amber-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transition-all"
             >
-              {lang === 'zh' ? "分析" : "Analyze"}
+              {lang === 'zh' ? "分析查询" : "Analyze"}
             </button>
           </form>
 
@@ -550,9 +550,9 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
           <div className="max-w-2xl mx-auto relative z-10">
             <button
               onClick={copyShareTextToClipboard}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-emerald-600 to-emerald-800 text-white rounded-2xl border border-emerald-500/20 font-black text-xs uppercase tracking-wider shadow-md hover:scale-102 hover:border-emerald-400/50 transition-all cursor-pointer active:scale-95 duration-100"
+              className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl border-2 border-emerald-400/40 font-black text-sm md:text-base uppercase tracking-wider shadow-lg hover:scale-102 hover:border-emerald-300 transition-all cursor-pointer active:scale-95 duration-100"
             >
-              <span>📋</span> {lang === 'zh' ? '一键复制今日开彩结果 (微信/WhatsApp转发文案)' : 'Copy Today\'s 4D Results (Share to WhatsApp/WeChat)'}
+              <span className="text-xl">📋</span> {lang === 'zh' ? '一键复制今日开彩结果 (微信/WhatsApp转发文案)' : 'Copy Today\'s 4D Results (Share to WhatsApp)'}
             </button>
           </div>
 
@@ -576,14 +576,14 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
               <div className="flex flex-col items-center justify-center py-4">
                 <button
                   onClick={triggerFortuneShaker}
-                  className={`relative text-8xl select-none filter active:scale-95 transition-transform duration-75 cursor-pointer ${
+                  className={`relative text-9xl select-none filter active:scale-95 transition-transform duration-75 cursor-pointer ${
                     isFortuneShaking ? 'animate-bounce' : 'hover:scale-105 duration-200'
                   }`}
                   title="Shake for Luck!"
                 >
-                  <div className="relative flex flex-col items-center justify-center drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)]">
+                  <div className="relative flex flex-col items-center justify-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]">
                     <span>🧧</span>
-                    <span className="absolute top-[40%] text-sm font-black text-yellow-400 select-none drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">
+                    <span className="absolute top-[40%] text-2xl font-black text-yellow-400 select-none drop-shadow-[0_3px_4px_rgba(0,0,0,0.9)]">
                       福
                     </span>
                   </div>
@@ -591,25 +591,25 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                 
                 <button 
                   onClick={triggerFortuneShaker}
-                  className="mt-6 px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs uppercase tracking-widest rounded-full shadow-lg cursor-pointer border border-amber-300 transition-all duration-150 transform hover:scale-102"
+                  className="mt-6 px-10 py-4 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-sm md:text-base uppercase tracking-widest rounded-full shadow-[0_0_15px_rgba(251,191,36,0.5)] cursor-pointer border-2 border-amber-200 transition-all duration-150 transform hover:scale-105"
                 >
                   {isFortuneShaking ? t[lang].fortuneShaking : t[lang].fortuneButton}
                 </button>
               </div>
 
               {fortuneLuckyNum && (
-                <div className="p-4 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-center animate-pulse-subtle max-w-xs mx-auto space-y-3">
+                <div className="p-5 rounded-2xl bg-amber-400/10 border-2 border-amber-400/40 text-center animate-pulse-subtle max-w-sm mx-auto space-y-4 shadow-inner">
                   <div>
-                    <span className="text-[10px] text-amber-300 uppercase font-black tracking-widest block mb-1">
+                    <span className="text-sm md:text-base text-amber-300 uppercase font-black tracking-widest block mb-2">
                       {t[lang].fortunePick}
                     </span>
-                    <div className="font-number text-5xl text-amber-400 tracking-[0.2em] font-black drop-shadow-md">{fortuneLuckyNum}</div>
+                    <div className="font-number text-6xl text-amber-400 tracking-[0.2em] font-black drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]">{fortuneLuckyNum}</div>
                   </div>
                   <button
                     onClick={shareFortuneWhatsApp}
-                    className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow border border-emerald-700 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                    className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm md:text-base rounded-xl shadow border-2 border-emerald-400 flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-105"
                   >
-                    <span>💬</span> {lang === 'zh' ? '分享至 WhatsApp' : 'Share on WhatsApp'}
+                    <span className="text-xl">💬</span> {lang === 'zh' ? '分享至 WhatsApp' : 'Share on WhatsApp'}
                   </button>
                 </div>
               )}
@@ -792,10 +792,10 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                         </div>
                       )}
                       <div>
-                        <h3 className="font-black text-sm md:text-base tracking-tight uppercase">
+                        <h3 className="font-black text-base md:text-lg tracking-tight uppercase">
                           <span className="font-black">{operatorName}</span>
                         </h3>
-                        <p className="text-[10px] md:text-[11px] opacity-90 font-bold uppercase tracking-wider">
+                        <p className="text-xs md:text-sm opacity-95 font-bold uppercase tracking-wider mt-0.5">
                           {t[lang].drawNo}: <span className="font-mono font-black">{data?.drawNo || t[lang].pending}</span>
                         </p>
                       </div>
@@ -812,42 +812,42 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                     {/* 1st Prize - Super Sized */}
                     <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
                       <div className="flex justify-between items-center relative z-10">
-                        <span className="text-black text-[12px] md:text-[14px] font-black uppercase tracking-wider flex items-center gap-1">
+                        <span className="text-black text-sm md:text-base font-black uppercase tracking-widest flex items-center gap-1.5">
                           {t[lang].prize1}
                         </span>
                         <button 
                           onClick={() => copyToClipboard(`${operatorName} 1st: ${data?.numbers?.first || '----'}`)}
-                          className="opacity-0 group-hover/prize:opacity-100 transition-opacity p-1 text-slate-400 hover:text-slate-600"
+                          className="opacity-0 group-hover/prize:opacity-100 transition-opacity p-2 text-slate-500 hover:text-slate-800"
                           title="Copy result"
                         >
-                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
                           </svg>
                         </button>
                       </div>
-                      <span className="font-number text-5xl md:text-6xl text-center text-black tracking-[0.05em] py-2 drop-shadow-sm">
+                      <span className="font-number text-6xl md:text-[5.5rem] text-center text-black tracking-[0.05em] py-3 drop-shadow-md">
                         {data?.numbers?.first || '----'}
                       </span>
                     </div>
 
                     {/* 2nd & 3rd Prize Side-by-Side - Super Sized */}
-                    <div className="grid grid-cols-2 gap-2.5">
+                    <div className="grid grid-cols-2 gap-3">
                       {/* 2nd Prize */}
-                      <div className="flex flex-col p-3 rounded-xl border border-slate-200 bg-slate-50/50">
-                        <span className="text-black text-[10px] md:text-[12px] font-black uppercase tracking-wider">
+                      <div className="flex flex-col p-4 rounded-xl border-2 border-slate-200 bg-slate-50">
+                        <span className="text-black text-xs md:text-sm font-black uppercase tracking-widest">
                           {t[lang].prize2}
                         </span>
-                        <span className="font-number text-3xl md:text-4xl text-center text-black tracking-[0.05em] mt-1.5">
+                        <span className="font-number text-4xl md:text-5xl text-center text-black tracking-[0.05em] mt-2 font-black">
                           {data?.numbers?.second || '----'}
                         </span>
                       </div>
 
                       {/* 3rd Prize */}
-                      <div className="flex flex-col p-3 rounded-xl border border-slate-200 bg-slate-50/50">
-                        <span className="text-black text-[10px] md:text-[12px] font-black uppercase tracking-wider">
+                      <div className="flex flex-col p-4 rounded-xl border-2 border-slate-200 bg-slate-50">
+                        <span className="text-black text-xs md:text-sm font-black uppercase tracking-widest">
                           {t[lang].prize3}
                         </span>
-                        <span className="font-number text-3xl md:text-4xl text-center text-black tracking-[0.05em] mt-1.5">
+                        <span className="font-number text-4xl md:text-5xl text-center text-black tracking-[0.05em] mt-2 font-black">
                           {data?.numbers?.third || '----'}
                         </span>
                       </div>
@@ -859,28 +859,28 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                     
                     {/* Special Numbers */}
                     <div>
-                      <h4 className="text-[12px] font-black text-black uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-amber-500"></span>
+                      <h4 className="text-sm font-black text-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-amber-500 shadow-sm"></span>
                         {t[lang].special}
                       </h4>
-                      <div className="grid grid-cols-4 md:grid-cols-5 gap-1.5 text-center">
+                      <div className="grid grid-cols-4 md:grid-cols-5 gap-2 text-center">
                         {data?.numbers?.special && data.numbers.special.length > 0 ? (
                           data.numbers.special.map((num, i) => {
                             const isPending = num === '----';
                             return (
                               <div 
                                 key={i} 
-                                className={`font-number text-lg md:text-xl py-2 rounded-xl border transition-all font-black shadow-sm ${
+                                className={`font-number text-xl md:text-2xl py-2.5 rounded-xl border-2 transition-all font-black shadow-sm ${
                                   isPending 
                                     ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
                                     : 'text-black ' +
-                                      `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 hover:border-amber-400' : ''}` +
-                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 hover:border-rose-400' : ''}` +
-                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 hover:border-blue-400' : ''}` +
-                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 hover:border-sky-400' : ''}` +
-                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 hover:border-orange-400' : ''}` +
-                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 hover:border-emerald-400' : ''}` +
-                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 hover:border-purple-400' : ''}`
+                                      `${op.id === 'magnum' ? 'bg-amber-100/70 border-amber-300 hover:border-amber-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-100/70 border-rose-300 hover:border-rose-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-100/70 border-blue-300 hover:border-blue-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-100/70 border-sky-300 hover:border-sky-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-100/70 border-orange-300 hover:border-orange-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-100/70 border-emerald-300 hover:border-emerald-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-100/70 border-purple-300 hover:border-purple-500 hover:shadow-md' : ''}`
                                 }`}
                               >
                                 {num}
@@ -889,7 +889,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           })
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-lg py-2 rounded-xl border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
+                            <div key={i} className="font-number text-xl py-2.5 rounded-xl border-2 border-slate-50 bg-slate-50/10 text-slate-300 font-black">{num}</div>
                           ))
                         )}
                       </div>
@@ -897,28 +897,28 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
 
                     {/* Consolation Numbers (Starters) */}
                     <div>
-                      <h4 className="text-[12px] font-black text-black uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-slate-400"></span>
+                      <h4 className="text-sm font-black text-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-slate-400 shadow-sm"></span>
                         {t[lang].consolation}
                       </h4>
-                      <div className="grid grid-cols-4 md:grid-cols-5 gap-1.5 text-center">
+                      <div className="grid grid-cols-4 md:grid-cols-5 gap-2 text-center">
                         {data?.numbers?.consolation && data.numbers.consolation.length > 0 ? (
                           data.numbers.consolation.map((num, i) => {
                             const isPending = num === '----';
                             return (
                               <div 
                                 key={i} 
-                                className={`font-number text-lg md:text-xl py-2 rounded-xl border transition-all font-black shadow-sm ${
+                                className={`font-number text-xl md:text-2xl py-2.5 rounded-xl border-2 transition-all font-black shadow-sm ${
                                   isPending 
                                     ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
                                     : 'text-black ' +
-                                      `${op.id === 'magnum' ? 'bg-amber-50/70 border-amber-200 hover:border-amber-400' : ''}` +
-                                      `${op.id === 'toto' ? 'bg-rose-50/70 border-rose-200 hover:border-rose-400' : ''}` +
-                                      `${op.id === 'damacai' ? 'bg-blue-50/70 border-blue-200 hover:border-blue-400' : ''}` +
-                                      `${op.id === 'singapore' ? 'bg-sky-50/70 border-sky-200 hover:border-sky-400' : ''}` +
-                                      `${op.id === 'sabah' ? 'bg-orange-50/70 border-orange-200 hover:border-orange-400' : ''}` +
-                                      `${op.id === 'sarawak' ? 'bg-emerald-50/70 border-emerald-200 hover:border-emerald-400' : ''}` +
-                                      `${op.id === 'sandakan' ? 'bg-purple-50/70 border-purple-200 hover:border-purple-400' : ''}`
+                                      `${op.id === 'magnum' ? 'bg-amber-100/70 border-amber-300 hover:border-amber-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-100/70 border-rose-300 hover:border-rose-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-100/70 border-blue-300 hover:border-blue-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-100/70 border-sky-300 hover:border-sky-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-100/70 border-orange-300 hover:border-orange-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-100/70 border-emerald-300 hover:border-emerald-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-100/70 border-purple-300 hover:border-purple-500 hover:shadow-md' : ''}`
                                 }`}
                               >
                                 {num}
@@ -927,7 +927,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           })
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-lg py-2 rounded-xl border border-slate-50 bg-slate-50/10 text-slate-300">{num}</div>
+                            <div key={i} className="font-number text-xl py-2.5 rounded-xl border-2 border-slate-50 bg-slate-50/10 text-slate-300 font-black">{num}</div>
                           ))
                         )}
                       </div>

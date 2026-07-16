@@ -92,15 +92,15 @@ export default function CaiShenChat() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/80 scroll-smooth">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className={`px-4 py-2 rounded-2xl text-sm max-w-[85%] ${
+                <div className={`px-4 py-3 rounded-2xl text-base max-w-[85%] ${
                   msg.sender === 'user' 
-                    ? 'bg-amber-500 text-slate-950 rounded-br-sm font-medium' 
+                    ? 'bg-amber-500 text-slate-950 rounded-br-sm font-bold' 
                     : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-sm leading-relaxed'
                 }`}>
                   {/* Markdown-style bold replacement */}
                   {msg.text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
                     if (part.startsWith('**') && part.endsWith('**')) {
-                      return <strong key={i} className="text-amber-400 font-black text-lg">{part.slice(2, -2)}</strong>;
+                      return <strong key={i} className="text-amber-400 font-black text-2xl drop-shadow-md">{part.slice(2, -2)}</strong>;
                     }
                     return part;
                   })}
@@ -109,9 +109,9 @@ export default function CaiShenChat() {
                 {msg.isFinal && (
                   <button 
                     onClick={() => handleShare(msg.isFinal)}
-                    className="mt-2 flex items-center gap-1.5 bg-[#25D366] text-white px-3 py-1.5 rounded-full text-xs font-bold hover:scale-105 transition-transform"
+                    className="mt-3 flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-full text-sm font-black hover:scale-105 transition-transform shadow-md"
                   >
-                    <span>💬</span> Share to WhatsApp
+                    <span className="text-lg">💬</span> Share to WhatsApp
                   </button>
                 )}
               </div>
@@ -122,9 +122,9 @@ export default function CaiShenChat() {
           {/* Input area */}
           <div className="p-3 bg-slate-900 border-t border-slate-800">
             {chatState === 0 && (
-              <div className="flex gap-2 flex-wrap mb-2">
+              <div className="flex gap-2 flex-wrap mb-3">
                 {['Dragon', 'Snake', 'Horse', 'Sheep'].map(z => (
-                  <button key={z} onClick={() => handleSend(z)} className="px-2 py-1 bg-slate-800 text-amber-500/80 rounded border border-slate-700 text-[10px] hover:bg-slate-700">{z}</button>
+                  <button key={z} onClick={() => handleSend(z)} className="px-3 py-1.5 bg-slate-800 text-amber-500/90 rounded border border-slate-600 text-xs font-bold hover:bg-slate-700">{z}</button>
                 ))}
               </div>
             )}
@@ -137,12 +137,12 @@ export default function CaiShenChat() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 placeholder="Type your reply..."
-                className="flex-1 bg-slate-950 border border-slate-700 text-white text-sm rounded-full px-4 py-2 focus:outline-none focus:border-amber-500 transition-colors"
+                className="flex-1 bg-slate-950 border border-slate-700 text-white text-base rounded-full px-5 py-3 focus:outline-none focus:border-amber-500 transition-colors shadow-inner"
               />
               <button 
                 type="submit" 
                 disabled={!input.trim()}
-                className="bg-amber-500 text-slate-900 rounded-full w-9 h-9 flex items-center justify-center font-black disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-amber-500 text-slate-900 rounded-full w-12 h-12 flex items-center justify-center font-black disabled:opacity-50 disabled:cursor-not-allowed shadow-md text-xl"
               >
                 ↗
               </button>
@@ -155,19 +155,22 @@ export default function CaiShenChat() {
       {!isOpen && (
         <button 
           onClick={() => setIsOpen(true)}
-          className="group relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)] hover:scale-110 transition-transform duration-300 border-2 border-amber-200"
+          className="group relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full shadow-[0_0_25px_rgba(245,158,11,0.6)] hover:scale-105 transition-transform duration-300 border-[3px] border-amber-200 cursor-pointer animate-bounce-slow"
         >
-          <span className="text-3xl filter drop-shadow-md">👲</span>
+          <span className="text-4xl md:text-5xl filter drop-shadow-md">👲</span>
           
           {/* Notification Badge */}
-          <span className="absolute -top-1 -right-1 flex h-4 w-4">
+          <span className="absolute -top-1 -right-1 flex h-6 w-6">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 border border-white text-[8px] text-white font-black justify-center items-center">1</span>
+            <span className="relative inline-flex rounded-full h-6 w-6 bg-red-600 border-2 border-white text-[10px] text-white font-black justify-center items-center shadow-lg">1</span>
           </span>
           
-          {/* Tooltip */}
-          <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 w-max px-3 py-1.5 bg-slate-900 text-amber-400 text-xs font-bold rounded-lg border border-amber-500/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
-            Ask Uncle Cai Shen for Lucky Number!
+          {/* Tooltip (Always visible on mobile, hover on desktop) */}
+          <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 w-max px-4 py-2.5 bg-slate-900 text-amber-400 text-sm font-black rounded-xl border-2 border-amber-500/50 flex flex-col items-end shadow-2xl animate-pulse-subtle">
+            <span>点击获取财神爷今日吉数！</span>
+            <span className="text-[10px] text-slate-300">Ask Uncle Cai Shen for Lucky Number!</span>
+            {/* Right arrow pointer */}
+            <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-y-8 border-y-transparent border-l-8 border-l-amber-500/50"></div>
           </span>
         </button>
       )}
