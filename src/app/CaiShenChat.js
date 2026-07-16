@@ -77,7 +77,7 @@ export default function CaiShenChat() {
           {/* Header */}
           <div className="bg-gradient-to-r from-red-800 to-red-600 px-4 py-3 flex justify-between items-center shadow-md z-10">
             <div className="flex items-center gap-2">
-              <div className="text-2xl">👲</div>
+              <img src="/caishen.png" alt="Uncle Cai Shen" className="w-10 h-10 rounded-full border-2 border-amber-500 object-cover shadow-sm bg-slate-900" />
               <div>
                 <h3 className="text-white font-black text-sm">Uncle Cai Shen</h3>
                 <p className="text-red-200 text-[10px] leading-none">Online - AI Oracle</p>
@@ -157,7 +157,7 @@ export default function CaiShenChat() {
           onClick={() => setIsOpen(true)}
           className="group relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full shadow-[0_0_25px_rgba(245,158,11,0.6)] hover:scale-105 transition-transform duration-300 border-[3px] border-amber-200 cursor-pointer animate-bounce-slow"
         >
-          <span className="text-4xl md:text-5xl filter drop-shadow-md">👲</span>
+          <img src="/caishen.png" alt="Cai Shen" className="w-[90%] h-[90%] object-cover rounded-full shadow-inner" />
           
           {/* Notification Badge */}
           <span className="absolute -top-1 -right-1 flex h-6 w-6">
