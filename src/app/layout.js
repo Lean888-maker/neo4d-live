@@ -35,13 +35,11 @@ export const metadata = {
   },
   verification: {
     google: 'b4QjddVCf67G-frXKSLfZj7NlNJKO5rJEVpkurOhlYQ',
-    other: {
-      'msvalidate.01': '9CE1B0F2F43E22E0706B879AE521A68A',
-    },
   },
 }
 
 import Script from 'next/script';
+import CaiShenChat from './CaiShenChat';
 
 export default function RootLayout({ children }) {
   return (
@@ -80,7 +78,10 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CaiShenChat />
+      </body>
     </html>
   )
 }

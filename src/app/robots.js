@@ -7,7 +7,8 @@ export default function robots() {
     },
     sitemap: [
       'https://neo4d.live/sitemap.xml',
-      'https://neo4d.live/sitemap-numbers.xml'
+      'https://neo4d.live/sitemap-numbers.xml',
+      'https://neo4d.live/feed.xml'
     ]
   };
 }
