@@ -41,6 +41,8 @@ export const metadata = {
 };
 
 export default async function Page({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
   let initialResults = null;
   
   try {
@@ -130,7 +132,7 @@ export default async function Page({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <HomeClient initialResults={initialResults} initialLang={params.lang} />
+      <HomeClient initialResults={initialResults} initialLang={lang} />
     </>
   );
 }

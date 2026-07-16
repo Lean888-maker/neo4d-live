@@ -106,6 +106,10 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
   // Language state (defaults to route param)
   const [lang, setLang] = useState(initialLang);
 
+  useEffect(() => {
+    setLang(initialLang);
+  }, [initialLang]);
+
   // Tab state
   const [activeRegion, setActiveRegion] = useState('all');
 

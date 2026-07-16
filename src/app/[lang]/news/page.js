@@ -3,7 +3,8 @@ import Link from 'next/link';
 export const revalidate = 3600; // Revalidate every hour
 
 export async function generateMetadata({ params }) {
-  const { lang } = params;
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
   const dateStr = new Date().toISOString().split('T')[0];
 
   return {
@@ -19,8 +20,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function DailyNewsPage({ params }) {
-  const { lang } = params;
+export default async function DailyNewsPage({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
   
   // Deterministic daily generation based on the date string
   const dateObj = new Date();
