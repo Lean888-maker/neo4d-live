@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 export default function CaiShenChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function CaiShenChat() {
   useEffect(() => {
     if (messages.length === 0) {
       setTimeout(() => {
-        setMessages([{ sender: 'bot', text: 'Aiyo Boss! I am Uncle Cai Shen 财神爷. You want lucky 4D number today right? What is your Chinese Zodiac?' }]);
+        setMessages([{ sender: 'bot', text: '哎哟老板！我是财神爷。今天想要发财拿吉数对吗？请问你的生肖是什么？' }]);
       }, 500);
     }
   }, [messages.length]);
@@ -39,10 +40,10 @@ export default function CaiShenChat() {
     setTimeout(() => {
       if (chatState === 0) {
         setUserZodiac(userText);
-        setMessages(prev => [...prev, { sender: 'bot', text: `Ah, ${userText}! Very good magnetic field today for this zodiac. Tell me, what did you dream about last night? (Or type 'nothing')` }]);
+        setMessages(prev => [...prev, { sender: 'bot', text: `啊，属${userText}！今天这个生肖的磁场非常强。告诉我，你昨晚梦到了什么？（或者回复'没有'）` }]);
         setChatState(1);
       } else if (chatState === 1) {
-        setMessages(prev => [...prev, { sender: 'bot', text: `Calculating wealth aura based on your dream and Zodiac... wait ah...` }]);
+        setMessages(prev => [...prev, { sender: 'bot', text: `正在为你测算梦境与生肖的财富磁场... 稍等啊...` }]);
         
         setTimeout(() => {
           // Generate a deterministic random number based on input length
@@ -51,19 +52,19 @@ export default function CaiShenChat() {
           
           setMessages(prev => [...prev, { 
             sender: 'bot', 
-            text: `Huat ah! 🧧 Your supreme lucky number is [ **${luckyNum}** ]. Uncle Cai Shen says you MUST share this to 3 WhatsApp groups to lock in the wealth aura, otherwise the luck will fly away!`,
+            text: `发啊！🧧 你的专属超强发财字是 [ **${luckyNum}** ]。财神爷指示你**必须**把这个发财字分享到3个WhatsApp群，锁定你的财富磁场，不然财运就溜走咯！`,
             isFinal: luckyNum
           }]);
           setChatState(2);
         }, 3000); // 3 seconds calculating (increases dwell time)
       } else {
-        setMessages(prev => [...prev, { sender: 'bot', text: `Go buy your number now! Share to WhatsApp first for good luck!` }]);
+        setMessages(prev => [...prev, { sender: 'bot', text: `快去买你的发财字！记得先分享到WhatsApp聚财气！` }]);
       }
     }, 1000);
   };
 
   const handleShare = (luckyNum) => {
-    const text = `Uncle Cai Shen just gave me my lucky 4D number [ ${luckyNum} ] for today! Get yours free at https://neo4d.live/ 🧧💰`;
+    const text = `财神爷刚刚赐给我今天的专属发财字 [ ${luckyNum} ]！你也来免费获取你的发财字：https://neo4d.live/ 🧧💰`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -77,10 +78,10 @@ export default function CaiShenChat() {
           {/* Header */}
           <div className="bg-gradient-to-r from-red-800 to-red-600 px-4 py-3 flex justify-between items-center shadow-md z-10">
             <div className="flex items-center gap-2">
-              <img src="/caishen.png" alt="Uncle Cai Shen" className="w-10 h-10 rounded-full border-2 border-amber-500 object-cover shadow-sm bg-slate-900" />
+              <Image src="/caishen.png" alt="Uncle Cai Shen" width={40} height={40} className="w-10 h-10 rounded-full border-2 border-amber-500 object-cover shadow-sm bg-slate-900" unoptimized={false} />
               <div>
-                <h3 className="text-white font-black text-sm">Uncle Cai Shen</h3>
-                <p className="text-red-200 text-[10px] leading-none">Online - AI Oracle</p>
+                <h3 className="text-white font-black text-sm">财神爷</h3>
+                <p className="text-red-200 text-[10px] leading-none">在线 - 人工智能算命</p>
               </div>
             </div>
             <button onClick={() => setIsOpen(false)} className="text-white hover:text-amber-300">
@@ -111,7 +112,7 @@ export default function CaiShenChat() {
                     onClick={() => handleShare(msg.isFinal)}
                     className="mt-3 flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-full text-sm font-black hover:scale-105 transition-transform shadow-md"
                   >
-                    <span className="text-lg">💬</span> Share to WhatsApp
+                    <span className="text-lg">💬</span> 分享至 WhatsApp
                   </button>
                 )}
               </div>
@@ -123,7 +124,7 @@ export default function CaiShenChat() {
           <div className="p-3 bg-slate-900 border-t border-slate-800">
             {chatState === 0 && (
               <div className="flex gap-2 flex-wrap mb-3">
-                {['Dragon', 'Snake', 'Horse', 'Sheep'].map(z => (
+                {['龙', '蛇', '马', '羊'].map(z => (
                   <button key={z} onClick={() => handleSend(z)} className="px-3 py-1.5 bg-slate-800 text-amber-500/90 rounded border border-slate-600 text-xs font-bold hover:bg-slate-700">{z}</button>
                 ))}
               </div>
@@ -136,7 +137,7 @@ export default function CaiShenChat() {
                 type="text"
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                placeholder="Type your reply..."
+                placeholder="输入你的回复..."
                 className="flex-1 bg-slate-950 border border-slate-700 text-white text-base rounded-full px-5 py-3 focus:outline-none focus:border-amber-500 transition-colors shadow-inner"
               />
               <button 
@@ -157,7 +158,7 @@ export default function CaiShenChat() {
           onClick={() => setIsOpen(true)}
           className="group relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full shadow-[0_0_25px_rgba(245,158,11,0.6)] hover:scale-105 transition-transform duration-300 border-[3px] border-amber-200 cursor-pointer animate-bounce-slow"
         >
-          <img src="/caishen.png" alt="Cai Shen" className="w-[90%] h-[90%] object-cover rounded-full shadow-inner" />
+          <Image src="/caishen.png" alt="Cai Shen" width={80} height={80} className="w-[90%] h-[90%] object-cover rounded-full shadow-inner" unoptimized={false} />
           
           {/* Notification Badge */}
           <span className="absolute -top-1 -right-1 flex h-6 w-6">
@@ -168,7 +169,7 @@ export default function CaiShenChat() {
           {/* Tooltip (Always visible on mobile, hover on desktop) */}
           <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 w-max px-4 py-2.5 bg-slate-900 text-amber-400 text-sm font-black rounded-xl border-2 border-amber-500/50 flex flex-col items-end shadow-2xl animate-pulse-subtle">
             <span>点击获取财神爷今日吉数！</span>
-            <span className="text-[10px] text-slate-300">Ask Uncle Cai Shen for Lucky Number!</span>
+            
             {/* Right arrow pointer */}
             <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-y-8 border-y-transparent border-l-8 border-l-amber-500/50"></div>
           </span>
