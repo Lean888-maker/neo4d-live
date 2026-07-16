@@ -1,75 +1,26 @@
 import { NextResponse } from 'next/server';
+import { fetch4dData } from '../../utils/fetch4d';
+import { pingSearchEngines } from '../../utils/seo';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+
+let lastPingedDraw = '';
 
 export async function GET() {
-  const url = 'https://www.4d2u.co/actions';
-  
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    },
-    body: 'action=get_data2',
-    cache: 'no-store' // Do not cache this request in Next.js
-  };
-
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch from 4D2U API: status ${response.status}`);
-    }
-    const data = await response.json();
-
-    const mapping = {
-      magnum: { key: 'M', special: 13, consolation: 10 },
-      toto: { key: 'T', special: 13, consolation: 10 },
-      damacai: { key: 'D', special: 10, consolation: 10 },
-      singapore: { key: 'S', special: 10, consolation: 10 },
-      sandakan: { key: 'ST', special: 13, consolation: 10 },
-      sarawak: { key: 'SW', special: 10, consolation: 10 },
-      sabah: { key: 'SB', special: 13, consolation: 10 }
-    };
-
-    const results = {
-      date: new Date().toLocaleDateString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })
-    };
-
-    for (const [id, cfg] of Object.entries(mapping)) {
-      const opData = data[cfg.key];
-      if (!opData) {
-        results[id] = null;
-        continue;
-      }
-
-      const special = [];
-      for (let i = 1; i <= cfg.special; i++) {
-        special.push(opData[`S${i}`] || '----');
-      }
-
-      const consolation = [];
-      for (let i = 1; i <= cfg.consolation; i++) {
-        consolation.push(opData[`C${i}`] || '----');
-      }
-
-      results[id] = {
-        provider: id.toUpperCase(),
-        date: opData.DD || results.date,
-        drawNo: opData.DN || '',
-        numbers: {
-          first: opData.P1 || '----',
-          second: opData.P2 || '----',
-          third: opData.P3 || '----',
-          special,
-          consolation
-        }
-      };
+    const results = await fetch4dData();
+    
+    // Dynamic Sitemap Index Sync on live draw updates
+    const currentDraw = results.magnum?.drawNo;
+    if (currentDraw && currentDraw !== lastPingedDraw) {
+      lastPingedDraw = currentDraw;
+      pingSearchEngines().catch((err) => console.error('SEO Ping execution failed:', err));
     }
 
     return NextResponse.json(results, {
       headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+        'Cache-Control': 'public, s-maxage=3, stale-while-revalidate=5',
       },
     });
   } catch (error) {

@@ -5,6 +5,7 @@ export const metadata = {
   alternates: {
     canonical: 'https://neo4d.live',
   },
+  manifest: '/manifest.json',
   openGraph: {
     title: 'NEO4D LIVE - Live 4D Results Today (Magnum, Sports Toto, Da Ma Cai)',
     description: 'Fastest live 4D results (Keputusan 4D) in Malaysia and Singapore. Ad-free, lightweight, and fully optimized for mobile devices.',
@@ -34,12 +35,15 @@ export const metadata = {
   },
   verification: {
     google: 'b4QjddVCf67G-frXKSLfZj7NlNJKO5rJEVpkurOhlYQ',
+    other: {
+      'msvalidate.01': '9CE1B0F2F43E22E0706B879AE521A68A',
+    },
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="zh-MY">
       <body>{children}</body>
     </html>
   )
