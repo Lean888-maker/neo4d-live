@@ -472,7 +472,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                 <span className="text-5xl sm:text-6xl md:text-9xl font-black px-4 py-2 md:px-10 md:py-4 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-4 border-amber-400 tracking-normal transform hover:scale-105 transition-all duration-200">4D</span>
                 <span className="text-2xl sm:text-3xl md:text-5xl font-light tracking-[0.25em] text-amber-200">LIVE</span>
               </div>
-              <p className="text-[10px] sm:text-xs md:text-sm text-amber-400 font-black tracking-[0.1em] md:tracking-[0.2em] uppercase flex items-center justify-center gap-1 md:gap-1.5 pt-2">
+              <p className="text-xs sm:text-sm md:text-lg text-amber-400 font-black tracking-[0.1em] md:tracking-[0.2em] uppercase flex items-center justify-center gap-1 md:gap-1.5 pt-2 md:pt-4">
                 <span>✨</span> {lang === 'zh' ? '全马首家无广告实时4D开彩引擎' : 'MALAYSIA\'S FIRST AD-FREE REAL-TIME 4D ENGINE'} <span>✨</span>
               </p>
             </div>
