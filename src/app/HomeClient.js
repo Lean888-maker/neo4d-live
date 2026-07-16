@@ -556,183 +556,6 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
             </button>
           </div>
 
-          {/* Interactive "Red Envelope Shaker" Hero component at Top */}
-          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-gradient-to-br from-red-700 via-red-800 to-red-950 border-2 border-amber-500/30 shadow-xl text-white text-center max-w-2xl mx-auto">
-            {/* Decorative Chinese Gold Cloud Pattern Watermarks */}
-            <div className="absolute top-4 left-4 text-white/5 text-6xl select-none pointer-events-none">☁️</div>
-            <div className="absolute bottom-4 right-4 text-white/5 text-6xl select-none pointer-events-none">☁️</div>
-            
-            <div className="space-y-4 max-w-xl mx-auto">
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-2xl">🧧</span>
-                <h2 className="text-base font-black text-amber-300 uppercase tracking-wider">
-                  {t[lang].fortuneTitle}
-                </h2>
-              </div>
-              <p className="text-xs text-red-200 leading-relaxed">
-                {t[lang].fortuneDesc}
-              </p>
-              
-              <div className="flex flex-col items-center justify-center py-4">
-                <button
-                  onClick={triggerFortuneShaker}
-                  className={`relative text-9xl select-none filter active:scale-95 transition-transform duration-75 cursor-pointer ${
-                    isFortuneShaking ? 'animate-bounce' : 'hover:scale-105 duration-200'
-                  }`}
-                  title="Shake for Luck!"
-                >
-                  <div className="relative flex flex-col items-center justify-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]">
-                    <span>🧧</span>
-                    <span className="absolute top-[40%] text-2xl font-black text-yellow-400 select-none drop-shadow-[0_3px_4px_rgba(0,0,0,0.9)]">
-                      福
-                    </span>
-                  </div>
-                </button>
-                
-                <button 
-                  onClick={triggerFortuneShaker}
-                  className="mt-6 px-10 py-4 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-sm md:text-base uppercase tracking-widest rounded-full shadow-[0_0_15px_rgba(251,191,36,0.5)] cursor-pointer border-2 border-amber-200 transition-all duration-150 transform hover:scale-105"
-                >
-                  {isFortuneShaking ? t[lang].fortuneShaking : t[lang].fortuneButton}
-                </button>
-              </div>
-
-              {fortuneLuckyNum && (
-                <div className="p-5 rounded-2xl bg-amber-400/10 border-2 border-amber-400/40 text-center animate-pulse-subtle max-w-sm mx-auto space-y-4 shadow-inner">
-                  <div>
-                    <span className="text-sm md:text-base text-amber-300 uppercase font-black tracking-widest block mb-2">
-                      {t[lang].fortunePick}
-                    </span>
-                    <div className="font-number text-6xl text-amber-400 tracking-[0.2em] font-black drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]">{fortuneLuckyNum}</div>
-                  </div>
-                  <button
-                    onClick={shareFortuneWhatsApp}
-                    className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm md:text-base rounded-xl shadow border-2 border-emerald-400 flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-105"
-                  >
-                    <span className="text-xl">💬</span> {lang === 'zh' ? '分享至 WhatsApp' : 'Share on WhatsApp'}
-                  </button>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Interactive Dream Dictionary Component */}
-          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200 shadow-md max-w-2xl mx-auto w-full">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <span className="text-xl">🔮</span>
-                <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
-                  {t[lang].dreamTitle}
-                </h2>
-              </div>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
-                {t[lang].dreamDesc}
-              </p>
-              
-              <div className="relative">
-                <input
-                  type="text"
-                  value={searchVal}
-                  onChange={(e) => setSearchVal(e.target.value)}
-                  placeholder={t[lang].dreamPlaceholder}
-                  className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-slate-800 transition-all font-medium pr-10"
-                />
-                {searchVal && (
-                  <button 
-                    onClick={() => { setSearchVal(''); setDreamQuery(''); }}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
-
-              {dreamQuery.trim() && (
-                <div className="space-y-3 mt-4 animate-fade-in">
-                  {dreamResults.length > 0 ? (
-                    <div className="grid grid-cols-1 gap-3 max-h-60 overflow-y-auto pr-1">
-                      {dreamResults.map(item => (
-                        <div key={item.id} className="p-4 rounded-2xl bg-amber-50/30 border border-amber-100 flex items-center justify-between gap-4">
-                          <div className="space-y-1">
-                            <h4 className="text-xs font-bold text-slate-800">
-                              {lang === 'zh' ? item.titleZh : item.titleEn}
-                            </h4>
-                            <p className="text-[10px] text-slate-500 leading-normal">
-                              {lang === 'zh' ? item.descZh : item.descEn}
-                            </p>
-                          </div>
-                          <div className="flex flex-col items-center gap-1.5 shrink-0">
-                            <span className="font-number text-2xl text-amber-600 tracking-wider font-black">
-                              {item.number}
-                            </span>
-                            <div className="flex gap-1">
-                              <button
-                                onClick={() => {
-                                  navigator.clipboard.writeText(item.number);
-                                  alert(t[lang].copied);
-                                }}
-                                className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-[9px] font-bold rounded text-slate-600 transition-colors cursor-pointer"
-                              >
-                                {lang === 'zh' ? '复制' : 'Copy'}
-                              </button>
-                              <button
-                                onClick={() => {
-                                  const shareText = `我在 NEO4D.LIVE 梦境/万字图查到【${lang === 'zh' ? item.titleZh : item.titleEn}】的吉数是【${item.number}】！🧧 全马首个无广告4D网站，大字粗体超清晰，你也来查查你的梦境吉数：https://neo4d.live`;
-                                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
-                                }}
-                                className="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-bold rounded transition-colors cursor-pointer"
-                              >
-                                💬
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    /* Fallback Deterministic Generator */
-                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4">
-                      <div className="space-y-1">
-                        <h4 className="text-xs font-bold text-slate-700">
-                          {t[lang].dreamNoMatch.replace('{query}', dreamQuery)}
-                        </h4>
-                        <p className="text-[10px] text-slate-400">
-                          {lang === 'zh' ? '这是根据您的关键字专属算出的今日好运吉数。' : 'This is your custom fortune lucky number calculated for today based on your search keyword.'}
-                        </p>
-                      </div>
-                      <div className="flex flex-col items-center gap-1.5 shrink-0">
-                        <span className="font-number text-2xl text-slate-700 tracking-wider font-black">
-                          {getDeterministicDreamNumber(dreamQuery)}
-                        </span>
-                        <div className="flex gap-1">
-                          <button
-                            onClick={() => {
-                              navigator.clipboard.writeText(getDeterministicDreamNumber(dreamQuery));
-                              alert(t[lang].copied);
-                            }}
-                            className="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-[9px] font-bold rounded text-slate-700 transition-colors cursor-pointer"
-                          >
-                            {lang === 'zh' ? '复制' : 'Copy'}
-                          </button>
-                          <button
-                            onClick={() => {
-                              const calculatedNum = getDeterministicDreamNumber(dreamQuery);
-                              const shareText = `我在 NEO4D.LIVE 摇出了“${dreamQuery}”的专属好运吉数：【${calculatedNum}】！🧧 全马首个无广告4D网站，你也来测试你的关键字吉数：https://neo4d.live`;
-                              window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
-                            }}
-                            className="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-bold rounded transition-colors cursor-pointer"
-                          >
-                            💬
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </section>
-
           {/* Regional Filter Tabs */}
           <div className="flex flex-col space-y-3 pt-4">
             <div className="flex items-center justify-between border-b border-slate-200 pb-2">
@@ -943,6 +766,185 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
               );
             })}
           </div>
+
+          {/* Moved Fortune Interactive Components Below Results */}
+
+          {/* Interactive "Red Envelope Shaker" Hero component at Top */}
+          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-gradient-to-br from-red-700 via-red-800 to-red-950 border-2 border-amber-500/30 shadow-xl text-white text-center max-w-2xl mx-auto">
+            {/* Decorative Chinese Gold Cloud Pattern Watermarks */}
+            <div className="absolute top-4 left-4 text-white/5 text-6xl select-none pointer-events-none">☁️</div>
+            <div className="absolute bottom-4 right-4 text-white/5 text-6xl select-none pointer-events-none">☁️</div>
+            
+            <div className="space-y-4 max-w-xl mx-auto">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-2xl">🧧</span>
+                <h2 className="text-base font-black text-amber-300 uppercase tracking-wider">
+                  {t[lang].fortuneTitle}
+                </h2>
+              </div>
+              <p className="text-xs text-red-200 leading-relaxed">
+                {t[lang].fortuneDesc}
+              </p>
+              
+              <div className="flex flex-col items-center justify-center py-4">
+                <button
+                  onClick={triggerFortuneShaker}
+                  className={`relative text-9xl select-none filter active:scale-95 transition-transform duration-75 cursor-pointer ${
+                    isFortuneShaking ? 'animate-bounce' : 'hover:scale-105 duration-200'
+                  }`}
+                  title="Shake for Luck!"
+                >
+                  <div className="relative flex flex-col items-center justify-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]">
+                    <span>🧧</span>
+                    <span className="absolute top-[40%] text-2xl font-black text-yellow-400 select-none drop-shadow-[0_3px_4px_rgba(0,0,0,0.9)]">
+                      福
+                    </span>
+                  </div>
+                </button>
+                
+                <button 
+                  onClick={triggerFortuneShaker}
+                  className="mt-6 px-10 py-4 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-sm md:text-base uppercase tracking-widest rounded-full shadow-[0_0_15px_rgba(251,191,36,0.5)] cursor-pointer border-2 border-amber-200 transition-all duration-150 transform hover:scale-105"
+                >
+                  {isFortuneShaking ? t[lang].fortuneShaking : t[lang].fortuneButton}
+                </button>
+              </div>
+
+              {fortuneLuckyNum && (
+                <div className="p-5 rounded-2xl bg-amber-400/10 border-2 border-amber-400/40 text-center animate-pulse-subtle max-w-sm mx-auto space-y-4 shadow-inner">
+                  <div>
+                    <span className="text-sm md:text-base text-amber-300 uppercase font-black tracking-widest block mb-2">
+                      {t[lang].fortunePick}
+                    </span>
+                    <div className="font-number text-6xl text-amber-400 tracking-[0.2em] font-black drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]">{fortuneLuckyNum}</div>
+                  </div>
+                  <button
+                    onClick={shareFortuneWhatsApp}
+                    className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm md:text-base rounded-xl shadow border-2 border-emerald-400 flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-105"
+                  >
+                    <span className="text-xl">💬</span> {lang === 'zh' ? '分享至 WhatsApp' : 'Share on WhatsApp'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Interactive Dream Dictionary Component */}
+          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200 shadow-md max-w-2xl mx-auto w-full">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <span className="text-xl">🔮</span>
+                <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
+                  {t[lang].dreamTitle}
+                </h2>
+              </div>
+              <p className="text-[11px] text-slate-500 leading-relaxed">
+                {t[lang].dreamDesc}
+              </p>
+              
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchVal}
+                  onChange={(e) => setSearchVal(e.target.value)}
+                  placeholder={t[lang].dreamPlaceholder}
+                  className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-slate-800 transition-all font-medium pr-10"
+                />
+                {searchVal && (
+                  <button 
+                    onClick={() => { setSearchVal(''); setDreamQuery(''); }}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+
+              {dreamQuery.trim() && (
+                <div className="space-y-3 mt-4 animate-fade-in">
+                  {dreamResults.length > 0 ? (
+                    <div className="grid grid-cols-1 gap-3 max-h-60 overflow-y-auto pr-1">
+                      {dreamResults.map(item => (
+                        <div key={item.id} className="p-4 rounded-2xl bg-amber-50/30 border border-amber-100 flex items-center justify-between gap-4">
+                          <div className="space-y-1">
+                            <h4 className="text-xs font-bold text-slate-800">
+                              {lang === 'zh' ? item.titleZh : item.titleEn}
+                            </h4>
+                            <p className="text-[10px] text-slate-500 leading-normal">
+                              {lang === 'zh' ? item.descZh : item.descEn}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center gap-1.5 shrink-0">
+                            <span className="font-number text-2xl text-amber-600 tracking-wider font-black">
+                              {item.number}
+                            </span>
+                            <div className="flex gap-1">
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(item.number);
+                                  alert(t[lang].copied);
+                                }}
+                                className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-[9px] font-bold rounded text-slate-600 transition-colors cursor-pointer"
+                              >
+                                {lang === 'zh' ? '复制' : 'Copy'}
+                              </button>
+                              <button
+                                onClick={() => {
+                                  const shareText = `我在 NEO4D.LIVE 梦境/万字图查到【${lang === 'zh' ? item.titleZh : item.titleEn}】的吉数是【${item.number}】！🧧 全马首个无广告4D网站，大字粗体超清晰，你也来查查你的梦境吉数：https://neo4d.live`;
+                                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+                                }}
+                                className="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-bold rounded transition-colors cursor-pointer"
+                              >
+                                💬
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    /* Fallback Deterministic Generator */
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4">
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-bold text-slate-700">
+                          {t[lang].dreamNoMatch.replace('{query}', dreamQuery)}
+                        </h4>
+                        <p className="text-[10px] text-slate-400">
+                          {lang === 'zh' ? '这是根据您的关键字专属算出的今日好运吉数。' : 'This is your custom fortune lucky number calculated for today based on your search keyword.'}
+                        </p>
+                      </div>
+                      <div className="flex flex-col items-center gap-1.5 shrink-0">
+                        <span className="font-number text-2xl text-slate-700 tracking-wider font-black">
+                          {getDeterministicDreamNumber(dreamQuery)}
+                        </span>
+                        <div className="flex gap-1">
+                          <button
+                            onClick={() => {
+                              navigator.clipboard.writeText(getDeterministicDreamNumber(dreamQuery));
+                              alert(t[lang].copied);
+                            }}
+                            className="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-[9px] font-bold rounded text-slate-700 transition-colors cursor-pointer"
+                          >
+                            {lang === 'zh' ? '复制' : 'Copy'}
+                          </button>
+                          <button
+                            onClick={() => {
+                              const calculatedNum = getDeterministicDreamNumber(dreamQuery);
+                              const shareText = `我在 NEO4D.LIVE 摇出了“${dreamQuery}”的专属好运吉数：【${calculatedNum}】！🧧 全马首个无广告4D网站，你也来测试你的关键字吉数：https://neo4d.live`;
+                              window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+                            }}
+                            className="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-bold rounded transition-colors cursor-pointer"
+                          >
+                            💬
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </section>
 
           {/* Bottom Section: Zodiac Lucky Picker (Relocated to clean up space) */}
           <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200 shadow-md">
