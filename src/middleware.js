@@ -13,6 +13,7 @@ export function middleware(request) {
     pathname.startsWith('/widget') ||
     pathname.startsWith('/promo') ||
     pathname.startsWith('/telegram-vip') ||
+    pathname.startsWith('/telegram-game') ||
     pathname.includes('.') ||
     pathname === '/favicon.ico' ||
     pathname === '/manifest.json' ||
