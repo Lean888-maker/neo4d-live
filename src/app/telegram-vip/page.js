@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import styles from './Wheel.module.css';
 
+export const dynamic = 'force-dynamic';
+
 export default function TelegramGame() {
   const [tgUser, setTgUser] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
@@ -136,6 +138,7 @@ export default function TelegramGame() {
         <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)] tracking-widest uppercase">
           Spin For Today's<br/>VIP Lucky Number
         </h1>
+        <p className="text-xs text-gray-500 mt-2 font-mono">v9.0-LIVE-NOCACHE</p>
       </div>
 
       <div className={`${styles.wheelContainer} relative z-10`}>
