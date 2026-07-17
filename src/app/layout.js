@@ -36,6 +36,23 @@ export const metadata = {
   verification: {
     google: 'b4QjddVCf67G-frXKSLfZj7NlNJKO5rJEVpkurOhlYQ',
   },
+  appleWebApp: {
+    capable: true,
+    title: 'NEO4D',
+    statusBarStyle: 'black-translucent',
+  },
+  formatDetection: {
+    telephone: false,
+  }
+}
+
+export const viewport = {
+  themeColor: '#7f1d1d',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
 }
 
 import Script from 'next/script';

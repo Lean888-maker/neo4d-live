@@ -3,7 +3,8 @@ import { dreamData } from '../../../dream_data';
 import Link from 'next/link';
 
 export async function generateMetadata({ params }) {
-  const { lang, id } = params;
+  const resolvedParams = await params;
+  const { lang, id } = resolvedParams;
   
   if (!id || id.length !== 4 || isNaN(id)) {
     return { title: 'Number Not Found' };
@@ -22,8 +23,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function NumberAnalysisPage({ params }) {
-  const { lang, id } = params;
+export default async function NumberAnalysisPage({ params }) {
+  const resolvedParams = await params;
+  const { lang, id } = resolvedParams;
   
   if (!id || id.length !== 4 || isNaN(id)) {
     notFound();
@@ -107,8 +109,8 @@ export default function NumberAnalysisPage({ params }) {
               </div>
             </div>
             <div className="flex flex-wrap gap-2 mt-4">
-              {dreamMatch.keywords.map(kw => (
-                <span key={kw} className="px-3 py-1 bg-indigo-500/20 rounded-lg text-xs font-medium text-indigo-300" key={kw}>#{kw}</span>
+              {dreamMatch.keywords.map((kw, i) => (
+                <span key={i} className="px-3 py-1 bg-indigo-500/20 rounded-lg text-xs font-medium text-indigo-300">#{kw}</span>
               ))}
             </div>
           </div>

@@ -370,12 +370,12 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
   };
 
   const shareZodiacWhatsApp = () => {
-    const text = `我刚刚在 NEO4D.LIVE 摇出了生肖【${selectedZodiac}】的今日吉数：【${zodiacLuckyNum}】！🧧 全马首个无广告4D开彩，大字粗体超清晰，你也来测测手气：https://neo4d.live`;
+    const text = `我刚刚在 NEO4D.LIVE 摇出了生肖【${selectedZodiac}】的今日吉数：【${zodiacLuckyNum}】！🧧 全马首个无广告4D开彩，大字粗体超清晰，你也来测测手气：\nhttps://neo4d.live/`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const shareFortuneWhatsApp = () => {
-    const text = `我在 NEO4D.LIVE 财神福地摇出了今日吉数：【${fortuneLuckyNum}】！🧧 全马首个无广告4D网站，大字粗体超清晰，你也来迎请你的吉数：https://neo4d.live`;
+    const text = `我在 NEO4D.LIVE 财神福地摇出了今日吉数：【${fortuneLuckyNum}】！🧧 全马首个无广告4D网站，大字粗体超清晰，你也来迎请你的吉数：\nhttps://neo4d.live/`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -399,14 +399,14 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       const opData = results[id];
       if (!opData) continue;
       text += `【${label}】\n`;
-      text += `1ST: *${opData.numbers?.first || '----'}*\n`;
-      text += `2ND: *${opData.numbers?.second || '----'}*\n`;
-      text += `3RD: *${opData.numbers?.third || '----'}*\n\n`;
-    }
-    
-    text += `查看完整特别奖、安慰奖与大伯公梦境吉数解析：\n👉 https://neo4d.live`;
-    return text;
-  };
+    text += `1ST: *${opData.numbers?.first || '----'}*\n`;
+    text += `2ND: *${opData.numbers?.second || '----'}*\n`;
+    text += `3RD: *${opData.numbers?.third || '----'}*\n\n`;
+  }
+  
+  text += `查看完整特别奖、安慰奖与大伯公梦境吉数解析：\n👉 https://neo4d.live/`;
+  return text;
+};
 
   const copyShareTextToClipboard = () => {
     const text = getFormattedShareText();
@@ -501,31 +501,30 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
 
         <div className="max-w-7xl mx-auto px-4 mt-6 space-y-6">
           
-          {/* Quick Navigation SEO Links */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto relative z-10">
             <Link 
               href={`/${lang}/scanner`}
-              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
-              <span className="text-lg">📷</span> {lang === 'zh' ? '扫票对奖' : 'Scan Ticket'}
+              <span className="text-lg">📷</span> <span className="whitespace-nowrap">{lang === 'zh' ? '扫票对奖' : 'Scan Ticket'}</span>
             </Link>
             <Link 
               href={`/${lang}/predictions`}
-              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
-              <span className="text-lg">📈</span> {lang === 'zh' ? '万字预测' : 'AI Predictions'}
+              <span className="text-lg">📈</span> <span className="whitespace-nowrap">{lang === 'zh' ? '万字预测' : 'AI Predictions'}</span>
             </Link>
             <Link 
               href={`/${lang}/analysis`}
-              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
-              <span className="text-lg">📊</span> {lang === 'zh' ? '频数分析' : 'Stats Analyzer'}
+              <span className="text-lg">📊</span> <span className="whitespace-nowrap">{lang === 'zh' ? '频数分析' : 'Stats Analyzer'}</span>
             </Link>
             <Link 
               href={`/${lang}/dreams`}
-              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center"
+              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
-              <span className="text-lg">🔮</span> {lang === 'zh' ? '千字图' : 'Dream Dict'}
+              <span className="text-lg">🔮</span> <span className="whitespace-nowrap">{lang === 'zh' ? '千字图' : 'Dream Dict'}</span>
             </Link>
           </div>
 

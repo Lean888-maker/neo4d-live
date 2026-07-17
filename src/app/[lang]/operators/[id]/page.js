@@ -65,7 +65,8 @@ const operatorsInfo = {
 
 // Next.js dynamic metadata generator
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
   const info = operatorsInfo[id];
   if (!info) return {};
 
@@ -78,7 +79,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function OperatorPage({ params }) {
-  const { id } = params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
   const info = operatorsInfo[id];
   
   if (!info) {

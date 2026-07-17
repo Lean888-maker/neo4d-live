@@ -64,7 +64,7 @@ export default function CaiShenChat() {
   };
 
   const handleShare = (luckyNum) => {
-    const text = `财神爷刚刚赐给我今天的专属发财字 [ ${luckyNum} ]！你也来免费获取你的发财字：https://neo4d.live/ 🧧💰`;
+    const text = `财神爷刚刚赐给我今天的专属发财字 [ ${luckyNum} ]！你也来免费获取你的发财字：\nhttps://neo4d.live/ 🧧💰`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 

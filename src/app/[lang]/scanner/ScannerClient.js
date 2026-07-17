@@ -31,6 +31,10 @@ export default function ScannerClient({ liveData }) {
 
   const startCamera = async () => {
     try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Camera API is not supported in this browser. Please ensure you are using HTTPS or a secure context.");
+        return;
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment' }
       });
@@ -40,7 +44,7 @@ export default function ScannerClient({ liveData }) {
       }
     } catch (err) {
       console.error("Camera error:", err);
-      alert("Unable to access camera. Please check permissions.");
+      alert("Unable to access camera. Please check permissions or ensure you are on HTTPS.");
     }
   };
 
@@ -95,7 +99,7 @@ export default function ScannerClient({ liveData }) {
       
     } catch (err) {
       console.error(err);
-      alert("Error scanning image.");
+      setMatchResult({ status: 'no_numbers_found' });
     } finally {
       setScanning(false);
     }
@@ -144,7 +148,7 @@ export default function ScannerClient({ liveData }) {
               disabled={scanning}
               className={`${scanning ? 'bg-neutral-600 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'} text-white px-8 py-3 rounded-full font-bold shadow-lg flex items-center gap-2`}
             >
-              {scanning ? 'Scanning...' : 'Scan Now'}
+              {scanning ? 'Analyzing (Takes 5-10s)...' : 'Scan Now'}
             </button>
             <button 
               onClick={stopCamera}
