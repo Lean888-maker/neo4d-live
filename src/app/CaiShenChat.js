@@ -2,14 +2,20 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function CaiShenChat() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [chatState, setChatState] = useState(0);
   const [userZodiac, setUserZodiac] = useState('');
   const messagesEndRef = useRef(null);
+
+  if (pathname === '/telegram-game') {
+    return null;
+  }
 
   // Initialize with welcome message only once
   useEffect(() => {

@@ -9,9 +9,7 @@
     0 0 30px rgba(255, 215, 0, 0.6),
     inset 0 0 20px rgba(0,0,0,0.8),
     0 0 10px #ffea00;
-  overflow: hidden;
-  background: #1a1a1a;
-  position: relative;
+  overflow: visible;
 }
 
 /* Lights around the border effect */
@@ -37,59 +35,22 @@
   border-radius: 50%;
   transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
   position: relative;
-  background: conic-gradient(
-    #8b0000 0deg 60deg,
-    #2c2c2c 60deg 120deg,
-    #8b0000 120deg 180deg,
-    #2c2c2c 180deg 240deg,
-    #8b0000 240deg 300deg,
-    #2c2c2c 300deg 360deg
-  );
   box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
 }
 
 /* Add a center gold pin */
-.wheel::after {
+.wheelContainer::after {
   content: '';
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px; height: 40px;
+  width: 50px; height: 50px;
   background: radial-gradient(circle, #ffe066 0%, #b8860b 80%, #000 100%);
   border-radius: 50%;
-  z-index: 10;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-  border: 2px solid #ffea00;
+  z-index: 30;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+  border: 3px solid #ffea00;
 }
-
-.sliceText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-origin: center;
-  text-align: center;
-  font-weight: 900;
-  font-size: 16px;
-  color: #fff;
-  text-shadow: 
-    1px 1px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    0 2px 4px rgba(0,0,0,0.8);
-  width: 120px;
-  margin-left: -60px;
-  margin-top: -95px;
-  letter-spacing: 0.5px;
-}
-
-/* Adjusted placement so text points correctly to edge */
-.slice1 { transform: rotate(30deg) translateY(-85px); }
-.slice2 { transform: rotate(90deg) translateY(-85px); color: #ffd700; }
-.slice3 { transform: rotate(150deg) translateY(-85px); }
-.slice4 { transform: rotate(210deg) translateY(-85px); color: #ffd700; }
-.slice5 { transform: rotate(270deg) translateY(-85px); }
-.slice6 { transform: rotate(330deg) translateY(-85px); color: #ffd700; }
 
 .pointer {
   position: absolute;
@@ -101,7 +62,7 @@
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 40px solid #ffd700;
-  z-index: 20;
+  z-index: 40;
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.7));
 }
 
@@ -113,11 +74,11 @@
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-top: 30px solid #fff3a1;
-  z-index: 21;
+  z-index: 41;
 }
 
 .spinButton {
-  margin-top: 50px;
+  margin-top: 40px;
   background: linear-gradient(to bottom, #ffe066 0%, #f59e0b 50%, #b8860b 100%);
   color: #3e2723;
   border: 2px solid #fff3a1;

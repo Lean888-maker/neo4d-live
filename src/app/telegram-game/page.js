@@ -146,11 +146,31 @@ export default function TelegramGame() {
           className={styles.wheel}
           style={{ transform: `rotate(${wheelRotation}deg)` }}
         >
-          {slices.map((s, i) => (
-             <div key={s.id} className={`${styles.sliceText} ${styles[`slice${i+1}`]}`}>
-               {s.text}
-             </div>
-          ))}
+          <svg viewBox="0 0 320 320" width="100%" height="100%" style={{ filter: 'drop-shadow(inset 0 0 10px black)' }}>
+            <g transform="translate(160, 160)">
+              {slices.map((s, i) => (
+                <g key={s.id} transform={`rotate(${i * 60})`}>
+                  {/* 60-degree slice path centered at the top */}
+                  <path 
+                    d="M 0 0 L -80 -138.56 A 160 160 0 0 1 80 -138.56 Z" 
+                    fill={i % 2 === 0 ? "#8b0000" : "#2c2c2c"} 
+                  />
+                  {/* Text perfectly centered inside the slice */}
+                  <text 
+                    y="-105" 
+                    textAnchor="middle" 
+                    fill={i % 2 === 0 ? "#ffffff" : "#ffd700"} 
+                    fontSize="26" 
+                    fontWeight="900" 
+                    fontFamily="sans-serif"
+                    style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.9), -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }}
+                  >
+                    {s.text}
+                  </text>
+                </g>
+              ))}
+            </g>
+          </svg>
         </div>
       </div>
 
