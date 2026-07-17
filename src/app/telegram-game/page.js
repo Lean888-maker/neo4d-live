@@ -51,8 +51,7 @@ export default function TelegramGame() {
         }
       } else {
         // Fallback for desktop browser testing (non-Telegram environment)
-        console.warn("Telegram WebApp not detected. Running in mock mode.");
-        setTgUser({ first_name: "Mock User", id: "123456" });
+        console.warn("Telegram WebApp not detected. Running in browser mode.");
         setIsVerified(true);
       }
       setLoading(false);
@@ -127,7 +126,7 @@ export default function TelegramGame() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-black to-black text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
       
       {/* Background ambient light */}
