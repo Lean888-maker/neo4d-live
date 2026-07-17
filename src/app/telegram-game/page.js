@@ -127,17 +127,16 @@ export default function TelegramGame() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-900 via-black to-black text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-black to-black text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
       
       {/* Background ambient light */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="mb-12 text-center relative z-10">
-        <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 mb-3 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-          Welcome, {tgUser?.first_name || 'VIP'}!
+      <div className="mb-10 text-center relative z-10">
+        <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)] tracking-widest uppercase">
+          Spin For Today's<br/>VIP Lucky Number
         </h1>
-        <p className="text-lg text-amber-100/80 font-bold tracking-wide uppercase">Spin for today's lucky VIP number</p>
       </div>
 
       <div className={`${styles.wheelContainer} relative z-10`}>
@@ -146,24 +145,42 @@ export default function TelegramGame() {
           className={styles.wheel}
           style={{ transform: `rotate(${wheelRotation}deg)` }}
         >
-          <svg viewBox="0 0 320 320" width="100%" height="100%" style={{ filter: 'drop-shadow(inset 0 0 10px black)' }}>
+          <svg viewBox="0 0 320 320" width="100%" height="100%" style={{ filter: 'drop-shadow(inset 0 0 15px rgba(0,0,0,0.9))' }}>
+            <defs>
+              <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ffd700" />
+                <stop offset="50%" stopColor="#b8860b" />
+                <stop offset="100%" stopColor="#8b6508" />
+              </linearGradient>
+              <linearGradient id="dark-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#2c2c2c" />
+                <stop offset="100%" stopColor="#111111" />
+              </linearGradient>
+              <linearGradient id="red-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#991b1b" />
+                <stop offset="100%" stopColor="#450a0a" />
+              </linearGradient>
+            </defs>
+
             <g transform="translate(160, 160)">
               {slices.map((s, i) => (
                 <g key={s.id} transform={`rotate(${i * 60})`}>
-                  {/* 60-degree slice path centered at the top */}
+                  {/* Premium metallic slices */}
                   <path 
                     d="M 0 0 L -80 -138.56 A 160 160 0 0 1 80 -138.56 Z" 
-                    fill={i % 2 === 0 ? "#8b0000" : "#2c2c2c"} 
+                    fill={i % 2 === 0 ? "url(#red-gradient)" : "url(#dark-gradient)"} 
+                    stroke="rgba(255, 215, 0, 0.3)"
+                    strokeWidth="1"
                   />
-                  {/* Text perfectly centered inside the slice */}
+                  {/* Inner glowing text */}
                   <text 
-                    y="-105" 
+                    y="-110" 
                     textAnchor="middle" 
-                    fill={i % 2 === 0 ? "#ffffff" : "#ffd700"} 
-                    fontSize="26" 
+                    fill={i % 2 === 0 ? "#ffffff" : "url(#gold-gradient)"} 
+                    fontSize="28" 
                     fontWeight="900" 
                     fontFamily="sans-serif"
-                    style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.9), -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }}
+                    style={{ textShadow: i % 2 === 0 ? "0 2px 4px rgba(0,0,0,0.8)" : "0 2px 6px rgba(0,0,0,1)" }}
                   >
                     {s.text}
                   </text>
@@ -174,22 +191,27 @@ export default function TelegramGame() {
         </div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 w-full max-w-md px-4">
         {!prize ? (
-          <button 
-            className={styles.spinButton} 
-            onClick={spinWheel}
-            disabled={spinning}
-          >
-            {spinning ? 'SPINNING...' : 'SPIN NOW!'}
-          </button>
+          <div className="flex justify-center">
+            <button 
+              className={styles.spinButton} 
+              onClick={spinWheel}
+              disabled={spinning}
+            >
+              {spinning ? 'GENERATING...' : 'SPIN NOW!'}
+            </button>
+          </div>
         ) : (
-          <div className="mt-10 bg-gradient-to-b from-gray-800 to-gray-900 border-2 border-amber-400 rounded-2xl p-8 text-center animate-bounce shadow-[0_0_30px_rgba(245,158,11,0.4)]">
-            <h2 className="text-2xl font-black text-gray-300 mb-1 uppercase tracking-widest">Your Lucky Number:</h2>
-            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-600 mb-8 drop-shadow-lg tracking-widest">{prize}</p>
+          <div className="mt-12 backdrop-blur-xl bg-gray-900/80 border border-amber-500/50 rounded-3xl p-8 text-center animate-bounce shadow-[0_0_40px_rgba(245,158,11,0.3)]">
+            <h2 className="text-xl font-bold text-gray-400 mb-2 uppercase tracking-[0.2em]">Your Lucky Number</h2>
+            <p className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 mb-10 drop-shadow-2xl tracking-widest">{prize}</p>
             
-            <button onClick={handleClaim} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 px-8 py-4 rounded-xl text-white font-black text-xl shadow-[0_0_20px_rgba(34,197,94,0.6)] transform transition hover:scale-105">
-              CHECK LIVE RESULTS NOW
+            <button onClick={handleClaim} className="w-full relative group overflow-hidden bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 px-6 py-5 rounded-2xl shadow-[0_0_25px_rgba(16,185,129,0.5)] transform transition-all duration-300 hover:scale-[1.03] active:scale-95">
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_infinite]"></div>
+              <span className="relative text-white font-black text-2xl uppercase tracking-wider drop-shadow-md">
+                CHECK LIVE RESULTS
+              </span>
             </button>
           </div>
         )}
