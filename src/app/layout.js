@@ -94,6 +94,22 @@ export default function RootLayout({ children }) {
             });
           `}
         </Script>
+        <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "NEO4D LIVE",
+              "url": "https://neo4d.live/",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://neo4d.live/{search_term_string}",
+                "query-input": "required name=search_term_string"
+              },
+              "description": "Malaysia's Fastest Live 4D Results Today. Check Magnum, Sports Toto, and Da Ma Cai in real-time."
+            }
+          `}
+        </Script>
       </head>
       <body>
         {children}

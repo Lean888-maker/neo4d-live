@@ -14,12 +14,12 @@ export default function TelegramGame() {
   const [prize, setPrize] = useState(null);
 
   const slices = [
-    { id: 1, text: "RM10 Credit", color: "#dc2626" },
-    { id: 2, text: "Try Again", color: "#1f2937" },
-    { id: 3, text: "RM5 Credit", color: "#dc2626" },
-    { id: 4, text: "Try Again", color: "#1f2937" },
-    { id: 5, text: "Mystery Prize", color: "#dc2626" },
-    { id: 6, text: "RM1 Credit", color: "#1f2937" },
+    { id: 1, text: "8831" },
+    { id: 2, text: "1299" },
+    { id: 3, text: "7632" },
+    { id: 4, text: "4509" },
+    { id: 5, text: "9918" },
+    { id: 6, text: "3201" },
   ];
 
   useEffect(() => {
@@ -91,9 +91,8 @@ export default function TelegramGame() {
   };
 
   const handleClaim = () => {
-    // Generate a unique promo code for the user
-    const promoCode = `NEO-TG-${tgUser?.id || 'LUCKY'}`;
-    const targetUrl = `https://neo4d.live/?promo=${promoCode}`;
+    // Drive traffic back to the main site to check results
+    const targetUrl = `https://neo4d.live/`;
     
     // Open link safely using Telegram SDK if available
     if (window.Telegram?.WebApp) {
@@ -116,7 +115,7 @@ export default function TelegramGame() {
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <h1 className="text-3xl font-bold text-red-500 mb-4">ACCESS DENIED</h1>
-        <p className="text-gray-300 mb-8">You must be a subscriber of the NEO4D Live Telegram Channel to play the Spinning Wheel and win free credits!</p>
+        <p className="text-gray-300 mb-8">You must be a subscriber of the NEO4D Live Telegram Channel to generate your daily lucky 4D numbers!</p>
         <button 
           onClick={() => { window.Telegram?.WebApp?.openTelegramLink('https://t.me/NEO4DLIVE'); }}
           className="bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 px-8 rounded-full"
@@ -138,7 +137,7 @@ export default function TelegramGame() {
         <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 mb-3 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
           Welcome, {tgUser?.first_name || 'VIP'}!
         </h1>
-        <p className="text-lg text-amber-100/80 font-bold tracking-wide uppercase">Spin the wheel to win free credit</p>
+        <p className="text-lg text-amber-100/80 font-bold tracking-wide uppercase">Spin for today's lucky VIP number</p>
       </div>
 
       <div className={`${styles.wheelContainer} relative z-10`}>
@@ -166,18 +165,12 @@ export default function TelegramGame() {
           </button>
         ) : (
           <div className="mt-10 bg-gradient-to-b from-gray-800 to-gray-900 border-2 border-amber-400 rounded-2xl p-8 text-center animate-bounce shadow-[0_0_30px_rgba(245,158,11,0.4)]">
-            <h2 className="text-2xl font-black text-gray-300 mb-1 uppercase tracking-widest">You Won!</h2>
-            <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-600 mb-8 drop-shadow-lg">{prize}</p>
+            <h2 className="text-2xl font-black text-gray-300 mb-1 uppercase tracking-widest">Your Lucky Number:</h2>
+            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-600 mb-8 drop-shadow-lg tracking-widest">{prize}</p>
             
-            {prize.includes("Try Again") ? (
-              <button onClick={() => setPrize(null)} className="w-full bg-gray-700 hover:bg-gray-600 px-6 py-4 rounded-xl text-white font-bold transition">
-                Try Again Tomorrow
-              </button>
-            ) : (
-              <button onClick={handleClaim} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 px-8 py-4 rounded-xl text-white font-black text-xl shadow-[0_0_20px_rgba(34,197,94,0.6)] transform transition hover:scale-105">
-                CLAIM REWARD NOW
-              </button>
-            )}
+            <button onClick={handleClaim} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 px-8 py-4 rounded-xl text-white font-black text-xl shadow-[0_0_20px_rgba(34,197,94,0.6)] transform transition hover:scale-105">
+              CHECK LIVE RESULTS NOW
+            </button>
           </div>
         )}
       </div>
