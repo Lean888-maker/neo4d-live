@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { sendTelegramMessage } from '@/app/utils/telegram';
-import { fetch4dData } from '@/app/utils/fetch4d';
+import { sendTelegramMessage } from '../../../utils/telegram';
+import { fetch4dData } from '../../../utils/fetch4d';
 
 export const dynamic = 'force-dynamic'; 
 

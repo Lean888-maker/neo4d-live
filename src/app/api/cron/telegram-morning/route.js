@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { sendTelegramMessage } from '@/app/utils/telegram';
+import { sendTelegramMessage } from '../../../utils/telegram';
 
 export const dynamic = 'force-dynamic'; // Ensures cron always runs fresh
 
