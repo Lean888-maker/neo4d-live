@@ -1,114 +1,182 @@
 .wheelContainer {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   margin: 0 auto;
   border-radius: 50%;
-  border: 8px solid #f59e0b; /* Golden border */
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(0,0,0,0.5);
+  border: 12px solid #ffd700;
+  box-shadow: 
+    0 0 30px rgba(255, 215, 0, 0.6),
+    inset 0 0 20px rgba(0,0,0,0.8),
+    0 0 10px #ffea00;
   overflow: hidden;
-  background: #111;
+  background: #1a1a1a;
+  position: relative;
+}
+
+/* Lights around the border effect */
+.wheelContainer::before {
+  content: '';
+  position: absolute;
+  top: -12px; left: -12px; right: -12px; bottom: -12px;
+  border-radius: 50%;
+  border: 4px dashed rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  z-index: 5;
+  animation: rotateLights 10s linear infinite;
+}
+
+@keyframes rotateLights {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .wheel {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); /* Realistic spin physics */
+  transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
   position: relative;
   background: conic-gradient(
-    #dc2626 0deg 60deg,
-    #1f2937 60deg 120deg,
-    #dc2626 120deg 180deg,
-    #1f2937 180deg 240deg,
-    #dc2626 240deg 300deg,
-    #1f2937 300deg 360deg
+    #8b0000 0deg 60deg,
+    #2c2c2c 60deg 120deg,
+    #8b0000 120deg 180deg,
+    #2c2c2c 180deg 240deg,
+    #8b0000 240deg 300deg,
+    #2c2c2c 300deg 360deg
   );
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
 }
 
-.slice {
+/* Add a center gold pin */
+.wheel::after {
+  content: '';
   position: absolute;
-  width: 50%;
-  height: 50%;
-  top: 0;
-  right: 0;
-  transform-origin: 0% 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: bold;
-  font-size: 14px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-  /* The exact placement requires complex CSS, for a simple high-end look we use absolute positioning of text */
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  background: radial-gradient(circle, #ffe066 0%, #b8860b 80%, #000 100%);
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+  border: 2px solid #ffea00;
 }
 
-/* Hardcoded slice text positioning for 6 slices (60 degrees each) */
 .sliceText {
   position: absolute;
   top: 50%;
   left: 50%;
   transform-origin: center;
   text-align: center;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 16px;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
-  width: 100px;
-  margin-left: -50px;
-  margin-top: -80px; /* Push out towards edge */
+  color: #fff;
+  text-shadow: 
+    1px 1px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    0 2px 4px rgba(0,0,0,0.8);
+  width: 120px;
+  margin-left: -60px;
+  margin-top: -95px;
+  letter-spacing: 0.5px;
 }
 
-.slice1 { transform: rotate(30deg) translateY(-80px); }
-.slice2 { transform: rotate(90deg) translateY(-80px); }
-.slice3 { transform: rotate(150deg) translateY(-80px); }
-.slice4 { transform: rotate(210deg) translateY(-80px); }
-.slice5 { transform: rotate(270deg) translateY(-80px); }
-.slice6 { transform: rotate(330deg) translateY(-80px); }
+/* Adjusted placement so text points correctly to edge */
+.slice1 { transform: rotate(30deg) translateY(-85px); }
+.slice2 { transform: rotate(90deg) translateY(-85px); color: #ffd700; }
+.slice3 { transform: rotate(150deg) translateY(-85px); }
+.slice4 { transform: rotate(210deg) translateY(-85px); color: #ffd700; }
+.slice5 { transform: rotate(270deg) translateY(-85px); }
+.slice6 { transform: rotate(330deg) translateY(-85px); color: #ffd700; }
 
-/* The little pointer arrow at the top */
 .pointer {
   position: absolute;
-  top: -15px;
+  top: -25px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid #ffd700;
+  z-index: 20;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.7));
+}
+
+.pointer::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -15px;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-top: 30px solid #f59e0b; /* Gold arrow */
-  z-index: 10;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  border-top: 30px solid #fff3a1;
+  z-index: 21;
 }
 
 .spinButton {
-  margin-top: 40px;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: white;
-  border: none;
-  padding: 15px 40px;
-  font-size: 20px;
-  font-weight: 800;
-  border-radius: 30px;
+  margin-top: 50px;
+  background: linear-gradient(to bottom, #ffe066 0%, #f59e0b 50%, #b8860b 100%);
+  color: #3e2723;
+  border: 2px solid #fff3a1;
+  padding: 18px 50px;
+  font-size: 24px;
+  font-weight: 900;
+  border-radius: 40px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-  transition: all 0.2s ease;
+  box-shadow: 
+    0 8px 0 #8b6508,
+    0 15px 20px rgba(0,0,0,0.5),
+    inset 0 2px 10px rgba(255,255,255,0.8);
+  transition: all 0.1s ease;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spinButton::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
 }
 
 .spinButton:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+  transform: translateY(2px);
+  box-shadow: 
+    0 6px 0 #8b6508,
+    0 10px 15px rgba(0,0,0,0.5),
+    inset 0 2px 10px rgba(255,255,255,0.8);
 }
 
 .spinButton:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(8px);
+  box-shadow: 
+    0 0 0 #8b6508,
+    0 5px 10px rgba(0,0,0,0.5),
+    inset 0 2px 5px rgba(255,255,255,0.8);
 }
 
 .spinButton:disabled {
-  background: #4b5563;
-  color: #9ca3af;
+  background: #374151;
+  color: #6b7280;
+  border-color: #4b5563;
+  box-shadow: 0 4px 0 #1f2937;
   cursor: not-allowed;
-  box-shadow: none;
+}
+
+.spinButton:disabled::before {
+  display: none;
 }

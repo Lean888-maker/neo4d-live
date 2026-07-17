@@ -128,23 +128,25 @@ export default function TelegramGame() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-900 via-black to-black text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
       
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-black text-amber-500 mb-2 drop-shadow-md">Welcome, {tgUser?.first_name || 'Player'}!</h1>
-        <p className="text-gray-400">Spin the wheel to win free iGaming credits today.</p>
+      {/* Background ambient light */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="mb-12 text-center relative z-10">
+        <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 mb-3 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+          Welcome, {tgUser?.first_name || 'VIP'}!
+        </h1>
+        <p className="text-lg text-amber-100/80 font-bold tracking-wide uppercase">Spin the wheel to win free credit</p>
       </div>
 
-      <div className={styles.wheelContainer}>
+      <div className={`${styles.wheelContainer} relative z-10`}>
         <div className={styles.pointer}></div>
         <div 
           className={styles.wheel}
           style={{ transform: `rotate(${wheelRotation}deg)` }}
         >
-          {/* We use hardcoded texts in CSS for standard slices for visual simplicity, 
-              or we can map them dynamically if we use complex CSS/SVG. 
-              Given our CSS, we just put absolute divs. */}
           {slices.map((s, i) => (
              <div key={s.id} className={`${styles.sliceText} ${styles[`slice${i+1}`]}`}>
                {s.text}
@@ -153,30 +155,32 @@ export default function TelegramGame() {
         </div>
       </div>
 
-      {!prize ? (
-        <button 
-          className={styles.spinButton} 
-          onClick={spinWheel}
-          disabled={spinning}
-        >
-          {spinning ? 'Spinning...' : 'SPIN NOW!'}
-        </button>
-      ) : (
-        <div className="mt-8 bg-gray-800 border-2 border-amber-500 rounded-xl p-6 text-center animate-bounce">
-          <h2 className="text-2xl font-bold text-white mb-2">You Won!</h2>
-          <p className="text-3xl font-black text-amber-500 mb-6">{prize}</p>
-          
-          {prize.includes("Try Again") ? (
-            <button onClick={() => setPrize(null)} className="bg-gray-600 hover:bg-gray-500 px-6 py-2 rounded-full text-white font-bold">
-              Try Again Tomorrow
-            </button>
-          ) : (
-            <button onClick={handleClaim} className="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full text-white font-black text-xl shadow-[0_0_15px_rgba(34,197,94,0.5)]">
-              CLAIM REWARD NOW
-            </button>
-          )}
-        </div>
-      )}
+      <div className="relative z-10">
+        {!prize ? (
+          <button 
+            className={styles.spinButton} 
+            onClick={spinWheel}
+            disabled={spinning}
+          >
+            {spinning ? 'SPINNING...' : 'SPIN NOW!'}
+          </button>
+        ) : (
+          <div className="mt-10 bg-gradient-to-b from-gray-800 to-gray-900 border-2 border-amber-400 rounded-2xl p-8 text-center animate-bounce shadow-[0_0_30px_rgba(245,158,11,0.4)]">
+            <h2 className="text-2xl font-black text-gray-300 mb-1 uppercase tracking-widest">You Won!</h2>
+            <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-600 mb-8 drop-shadow-lg">{prize}</p>
+            
+            {prize.includes("Try Again") ? (
+              <button onClick={() => setPrize(null)} className="w-full bg-gray-700 hover:bg-gray-600 px-6 py-4 rounded-xl text-white font-bold transition">
+                Try Again Tomorrow
+              </button>
+            ) : (
+              <button onClick={handleClaim} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 px-8 py-4 rounded-xl text-white font-black text-xl shadow-[0_0_20px_rgba(34,197,94,0.6)] transform transition hover:scale-105">
+                CLAIM REWARD NOW
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
