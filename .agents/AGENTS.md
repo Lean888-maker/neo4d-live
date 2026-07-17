@@ -1,3 +1,4 @@
 # Agent Behaviors and Rules
 
 - **Autonomy & Proactive Bug Fixing:** Always automatically investigate and fix bugs without asking for explicit permission or creating implementation plans for approval. If the user mentions an error or problem, immediately dive into the codebase, debug it, and apply the fix. Additionally, proactively scan through the website's code when applicable to identify and resolve issues immediately.
+- **Strict Verification of Deployment & Success:** NEVER tell the user a URL or feature is live or successful until you have verified it yourself. For web projects, this means explicitly running `git push` to trigger the cloud deployment (e.g. Vercel), waiting for the build if necessary, and checking your work 2 to 3 times before confirming completion. Avoid sending users to empty pages or 404s.

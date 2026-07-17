@@ -6,11 +6,13 @@ const defaultLocale = 'zh';
 export function middleware(request) {
   const { pathname } = request.nextUrl;
   
-  // Exclude internal Next.js routes, API routes, the embeddable widget, and static files
+  // Exclude internal Next.js routes, API routes, the embeddable widget, promotional pages, and static files
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/widget') ||
+    pathname.startsWith('/promo') ||
+    pathname.startsWith('/telegram-game') ||
     pathname.includes('.') ||
     pathname === '/favicon.ico' ||
     pathname === '/manifest.json' ||
