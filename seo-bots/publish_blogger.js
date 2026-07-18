@@ -28,7 +28,7 @@ export async function publishToBlogger(articleData) {
       },
       title: articleData.title,
       content: htmlContent,
-      labels: ["4D Results", "Magnum", "Toto", "Da Ma Cai"]
+      labels: ["万字票成绩", "万能4D", "多多", "大马彩"]
     });
 
     console.log(`✅ Successfully published to Blogger: ${postRes.data.url}`);

@@ -22,7 +22,7 @@ export async function publishToHashnode(articleData) {
         title: articleData.title,
         contentMarkdown: articleData.finalContent,
         publicationId: publicationId,
-        tags: [{ slug: "web-development", name: "Web Development" }]
+        tags: [{ slug: "4d-results", name: "万字票成绩" }, { slug: "magnum-4d", name: "万能4D" }]
       }
     };
 

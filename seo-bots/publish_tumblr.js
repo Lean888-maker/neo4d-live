@@ -15,7 +15,7 @@ export async function publishToTumblr(articleData) {
       title: articleData.title,
       body: articleData.finalContent,
       format: "markdown",
-      tags: "4d, lottery, magnum, toto"
+      tags: "4d, 万字票, 万能, 多多, 大马彩, 今日4d成绩"
     }, {
       headers: { Authorization: `Bearer ${process.env.TUMBLR_OAUTH_TOKEN}` }
     });

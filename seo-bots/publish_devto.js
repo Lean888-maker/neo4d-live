@@ -12,7 +12,7 @@ export async function publishToDevTo(articleData) {
         title: articleData.title,
         body_markdown: articleData.finalContent,
         published: true,
-        tags: ["webdev", "tutorial", "javascript", "programming"] // Dev.to requires tech tags
+        tags: ["4d", "malaysia", "万字票", "万能"] // Dev.to usually requires English alphabet tags, but accepts unicode.
       }
     }, {
       headers: { 'api-key': apiKey }

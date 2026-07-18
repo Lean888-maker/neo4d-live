@@ -16,12 +16,13 @@ export function injectInternalLinks(articlePath) {
 
   // Define keywords and their target URLs
   const linkMap = [
-    { keyword: /Magnum 4D/gi, url: 'https://neo4d.live/' },
-    { keyword: /Sports Toto/gi, url: 'https://neo4d.live/' },
-    { keyword: /Da Ma Cai/gi, url: 'https://neo4d.live/' },
-    { keyword: /Carta Ramalan/gi, url: 'https://neo4d.live/en/ramalan' },
-    { keyword: /4D forecast/gi, url: 'https://neo4d.live/en/ramalan' },
-    { keyword: /live 4d results/gi, url: 'https://neo4d.live/' }
+    { keyword: /万能4D/gi, url: 'https://neo4d.live/' },
+    { keyword: /大马彩/gi, url: 'https://neo4d.live/' },
+    { keyword: /多多博彩/gi, url: 'https://neo4d.live/' },
+    { keyword: /4D预测/gi, url: 'https://neo4d.live/promo' },
+    { keyword: /万字票成绩/gi, url: 'https://neo4d.live/' },
+    { keyword: /今日开奖/gi, url: 'https://neo4d.live/' },
+    { keyword: /心水字/gi, url: 'https://neo4d.live/' },
   ];
 
   // Track injected links to avoid over-stuffing (max 1 per keyword)

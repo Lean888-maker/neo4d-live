@@ -26,7 +26,7 @@ export async function publishToMedium(articleData) {
       contentFormat: "markdown",
       content: articleData.finalContent,
       canonicalUrl: `https://neo4d.live/blog/${articleData.slug}`,
-      tags: ["4d result", "malaysia", "lottery", "predictions", "magnum", "sports toto"],
+      tags: ["万字票", "马来西亚", "万能", "多多", "今日成绩"],
       publishStatus: "public" // or "draft" if we want to review it first
     }, {
       headers: { Authorization: `Bearer ${token}` }
