@@ -1,0 +1,51 @@
+name: Hourly SEO Supercharge
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-hourly-bots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Create Environment Variables
+        run: |
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env.local
+          echo "MEDIUM_INTEGRATION_TOKEN=${{ secrets.MEDIUM_INTEGRATION_TOKEN }}" >> .env.local
+          echo "BLOGGER_API_KEY=${{ secrets.BLOGGER_API_KEY }}" >> .env.local
+          echo "BLOG_ID=${{ secrets.BLOG_ID }}" >> .env.local
+          echo "HASHNODE_API_KEY=${{ secrets.HASHNODE_API_KEY }}" >> .env.local
+          echo "DEVTO_API_KEY=${{ secrets.DEVTO_API_KEY }}" >> .env.local
+          echo "TUMBLR_CONSUMER_KEY=${{ secrets.TUMBLR_CONSUMER_KEY }}" >> .env.local
+          echo "TUMBLR_CONSUMER_SECRET=${{ secrets.TUMBLR_CONSUMER_SECRET }}" >> .env.local
+          echo "TUMBLR_TOKEN=${{ secrets.TUMBLR_TOKEN }}" >> .env.local
+          echo "TUMBLR_TOKEN_SECRET=${{ secrets.TUMBLR_TOKEN_SECRET }}" >> .env.local
+          echo "TUMBLR_BLOG_IDENTIFIER=${{ secrets.TUMBLR_BLOG_IDENTIFIER }}" >> .env.local
+          echo "WP_API_URL=${{ secrets.WP_API_URL }}" >> .env.local
+          echo "WP_USERNAME=${{ secrets.WP_USERNAME }}" >> .env.local
+          echo "WP_APP_PASSWORD=${{ secrets.WP_APP_PASSWORD }}" >> .env.local
+      - name: Run SEO Health Checker
+        run: node seo-bots/seo_checker.js
+      - name: Run SEO Supercharge Manager
+        run: node seo-bots/supercharge_manager.js
+      - name: Commit and Push new SEO Articles
+        run: |
+          git config --global user.name "seo-supercharge-bot"
+          git config --global user.email "seo-bot@neo4d.live"
+          git add seo-bots/output/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-generated SEO supercharge article" && git push)
