@@ -7,7 +7,8 @@ export default function sitemap() {
     '/predictions',
     '/dreams',
     '/analysis',
-    '/scanner'
+    '/scanner',
+    '/strategy'
   ];
 
   const sitemapEntries = [];
