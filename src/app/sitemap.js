@@ -8,7 +8,8 @@ export default function sitemap() {
     '/dreams',
     '/analysis',
     '/scanner',
-    '/strategy'
+    '/strategy',
+    '/ramalan'
   ];
 
   const sitemapEntries = [];
