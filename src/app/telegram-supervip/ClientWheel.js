@@ -15,18 +15,29 @@ export default function PremiumPrelander() {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    // Wait for Telegram WebApp SDK to load
+    // Detect if we are inside a Telegram WebApp iframe based on URL parameters
+    const isTelegramEnvironment = window.location.hash.includes('tgWebAppData') || window.location.search.includes('tgWebAppData');
+    
+    if (!isTelegramEnvironment) {
+      // Instantly load for external Ad Traffic. No 500ms delay. Prevents high bounce rate.
+      setIsVerified(true);
+      setIsExternal(true);
+      setLoading(false);
+      return;
+    }
+
+    // If we are in Telegram, poll for the SDK to be fully hydrated (up to 3 seconds for slow 3G)
+    let attempts = 0;
     const initApp = async () => {
       const WebApp = window.Telegram?.WebApp;
-      if (WebApp) {
+      if (WebApp && WebApp.initData) {
         WebApp.ready();
-        WebApp.expand(); // Full screen inside Telegram
+        WebApp.expand();
         
         const user = WebApp.initDataUnsafe?.user;
         setTgUser(user);
 
         if (user) {
-          // Verify they are actually subscribed to the channel
           try {
             const res = await fetch('/api/telegram/verify', {
               method: 'POST',
@@ -41,15 +52,20 @@ export default function PremiumPrelander() {
             console.error("Verification failed", e);
           }
         }
+        setLoading(false);
       } else {
-        // Fallback for desktop browser testing
-        setIsVerified(true);
-        setIsExternal(true);
+        attempts++;
+        if (attempts < 30) { // 30 * 100ms = 3000ms max wait
+          setTimeout(initApp, 100);
+        } else {
+          // Absolute fallback if Telegram SDK totally fails
+          setIsVerified(true);
+          setIsExternal(true);
+          setLoading(false);
+        }
       }
-      setLoading(false);
     };
-
-    setTimeout(initApp, 500);
+    initApp();
   }, []);
 
   const generateNumber = () => {
