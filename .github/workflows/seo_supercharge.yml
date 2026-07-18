@@ -2,31 +2,30 @@ name: Hourly SEO Supercharge & Verification
 
 on:
   schedule:
-    - cron: '0 * * * *' # Run at minute 0 past every hour
-  workflow_dispatch: # Allow manual trigger from GitHub UI
+    - cron: '0 * * * *' # Hourly SEO Supercharge
+    - cron: '30 11 * * *' # 7:30 PM MYT (Evening Results & Indexing)
+    - cron: '30 15 * * *' # 11:30 PM MYT (Competitor Audit)
+  workflow_dispatch:
 
 permissions:
-  contents: write # Needed to commit new articles back to the repository
+  contents: write
 
 jobs:
-  run-seo-bots:
+  run-hourly-bots:
     runs-on: ubuntu-latest
-    
+    if: github.event.schedule == '0 * * * *' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install Dependencies
         run: npm ci
-
       - name: Create Environment Variables
         run: |
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env.local
@@ -46,14 +45,51 @@ jobs:
 
       - name: Run SEO Health Checker
         run: node seo-bots/seo_checker.js
-        
       - name: Run SEO Supercharge Manager
         run: node seo-bots/supercharge_manager.js
-
       - name: Commit and Push new SEO Articles
         run: |
           git config --global user.name "seo-supercharge-bot"
           git config --global user.email "seo-bot@neo4d.live"
           git add seo-bots/output/
-          # Only commit if there are changes
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-generated SEO supercharge article" && git push)
+
+  run-evening-broadcast:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '30 11 * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Inject Google Credentials
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS_JSON=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > .env.local
+      - name: Trigger Telegram Evening Broadcast
+        run: curl -X GET "https://neo4d.live/api/cron/telegram-evening" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
+      - name: Force Google Indexing
+        run: node seo-bots/google_indexer.js
+
+  run-nightly-audit:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '30 15 * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Competitor Auditor
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node seo-bots/competitor_auditor.js

@@ -56,3 +56,33 @@ export async function publishToFacebookReels(videoData) {
     return false;
   }
 }
+
+/**
+ * Publishes a photo to a Facebook Page or Group.
+ */
+export async function publishToFacebookPhoto(imageUrl, description) {
+  const pageId = process.env.FB_PAGE_ID;
+  const token = process.env.FB_PAGE_ACCESS_TOKEN;
+
+  if (!pageId || !token) {
+    console.warn("⚠️ Facebook API keys missing. Skipping Facebook upload.");
+    return false;
+  }
+
+  try {
+    console.log("📤 Publishing Photo to Facebook...");
+    
+    const url = `https://graph.facebook.com/v19.0/${pageId}/photos`;
+    const res = await axios.post(url, {
+      url: imageUrl,
+      message: description,
+      access_token: token
+    });
+
+    console.log(`✅ Successfully published Photo to Facebook! Post ID: ${res.data.post_id}`);
+    return true;
+  } catch (error) {
+    console.error("❌ Failed to publish photo to Facebook:", error.response?.data || error.message);
+    return false;
+  }
+}
