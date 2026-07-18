@@ -38,4 +38,4 @@ jobs:
           git config --global user.name "seo-supercharge-bot"
           git config --global user.email "seo-bot@neo4d.live"
           git add src/app/data/faq_schema.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: nightly FAQ schema generation" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: nightly FAQ schema generation [skip ci]" && git pull --rebase origin main && git push)
