@@ -28,7 +28,7 @@ export async function generateArticle() {
     console.log(`Generating SEO article for topic: "${topic}"...`);
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3.1-pro',
       contents: prompt,
     });
 
