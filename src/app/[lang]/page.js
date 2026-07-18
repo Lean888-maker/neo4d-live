@@ -36,7 +36,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'NEO4D LIVE | 实时4D开彩结果',
     description: '全马最快、无广告的4D实时开彩数据中心。提供即时开彩通知与大伯公梦境解析。',
-    images: ['https://neo4d.live/og-image.png'],
+    images: ['https://neo4d.live/api/og'],
   }
 };
 
