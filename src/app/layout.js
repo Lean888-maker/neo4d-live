@@ -57,6 +57,7 @@ export const viewport = {
 
 import Script from 'next/script';
 import CaiShenChat from './CaiShenChat';
+import './globals.css';
 
 export default function RootLayout({ children }) {
   return (

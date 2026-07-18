@@ -14,6 +14,7 @@ export function middleware(request) {
     pathname.startsWith('/promo') ||
     pathname.startsWith('/telegram-vip') ||
     pathname.startsWith('/telegram-game') ||
+    pathname.startsWith('/telegram-supervip') ||
     pathname.includes('.') ||
     pathname === '/favicon.ico' ||
     pathname === '/manifest.json' ||
