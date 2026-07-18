@@ -1,6 +1,5 @@
-const CACHE_NAME = 'neo4d-cache-v1';
+const CACHE_NAME = 'neo4d-cache-v2';
 const ASSETS_TO_CACHE = [
-  '/',
   '/manifest.json',
   '/images/logo_magnum.gif',
   '/images/logo_toto.gif',
