@@ -1,6 +1,8 @@
 name: Evening SEO & Indexing
 
 on:
+  push:
+    branches: [ "main" ]
   schedule:
     - cron: '30 11 * * *' # 7:30 PM MYT
   workflow_dispatch:
