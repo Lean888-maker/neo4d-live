@@ -124,7 +124,7 @@ export default function PremiumPrelander() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="animate-pulse text-amber-500 font-bold text-xl tracking-widest">LOADING VIP PORTAL...</div>
+        <div className="animate-pulse text-amber-500 font-bold text-xl tracking-widest">正在加载VIP系统...</div>
       </div>
     );
   }
@@ -133,13 +133,13 @@ export default function PremiumPrelander() {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
-        <h1 className="text-3xl font-bold text-red-500 mb-4 tracking-widest">ACCESS DENIED</h1>
-        <p className="text-gray-300 mb-8">Exclusive access restricted to NEO4D Telegram Subscribers.</p>
+        <h1 className="text-3xl font-bold text-red-500 mb-4 tracking-widest">访问被拒绝</h1>
+        <p className="text-gray-300 mb-8">仅限NEO4D Telegram内部订阅者访问。</p>
         <button 
           onClick={() => { window.Telegram?.WebApp?.openTelegramLink('https://t.me/NEO4DLIVE'); }}
           className="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-black py-4 px-8 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)] transition transform hover:scale-105"
         >
-          VERIFY MEMBERSHIP
+          验证会员身份
         </button>
       </div>
     );
@@ -156,12 +156,12 @@ export default function PremiumPrelander() {
       {/* Header */}
       <div className="text-center relative z-10 w-full">
         <div className="inline-block bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-500/30 px-6 py-2 rounded-full mb-6">
-          <span className="text-amber-400 font-bold tracking-widest text-sm uppercase">VIP Exclusive Access</span>
+          <span className="text-amber-400 font-bold tracking-widest text-sm uppercase">VIP专属通道</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-lg mb-2">
-          {tgUser?.first_name ? `${tgUser.first_name}, ` : ''}YOUR LUCKY 4D
+          {tgUser?.first_name ? `${tgUser.first_name}, ` : ''}您的幸运4D
         </h1>
-        <p className="text-gray-400 font-medium tracking-wide">Generate today's high-probability combination</p>
+        <p className="text-gray-400 font-medium tracking-wide">生成今日高胜率号码</p>
       </div>
 
       {/* Slot Machine Display */}
@@ -194,19 +194,19 @@ export default function PremiumPrelander() {
           >
             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_infinite]"></div>
             <span className="relative text-black font-black text-2xl uppercase tracking-widest drop-shadow-sm">
-              {spinning ? 'GENERATING...' : 'GENERATE NUMBER'}
+              {spinning ? '生成中...' : '生成幸运号码'}
             </span>
           </button>
         ) : (
           <div className="w-full flex flex-col items-center gap-4 animate-[fadeIn_0.5s_ease-out]">
-            <div className="text-amber-400 font-bold tracking-widest uppercase text-sm mb-2 animate-pulse">Number Locked Successfully</div>
+            <div className="text-amber-400 font-bold tracking-widest uppercase text-sm mb-2 animate-pulse">号码已成功锁定</div>
             <button 
               onClick={handleClaim} 
               className="w-full relative group overflow-hidden bg-gradient-to-b from-emerald-500 to-green-700 hover:from-emerald-400 hover:to-green-600 px-8 py-5 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.5)] transform transition-all duration-300 hover:scale-[1.02] active:scale-95"
             >
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_infinite]"></div>
               <span className="relative text-white font-black text-xl md:text-2xl uppercase tracking-widest drop-shadow-md">
-                {isExternal ? 'JOIN VIP TELEGRAM TO CHECK' : 'CHECK LIVE DRAW NOW'}
+                {isExternal ? '加入VIP群组查看直播' : '立即查看开奖直播'}
               </span>
             </button>
           </div>
@@ -216,7 +216,7 @@ export default function PremiumPrelander() {
       {/* Footer Social Proof */}
       <div className="relative z-10 mt-12 text-center border-t border-gray-800 w-full pt-6">
         <p className="text-gray-500 text-xs tracking-widest uppercase">
-          Live feed: User ***921 just claimed 4509
+          实时动态：用户***921刚刚领取了4509
         </p>
       </div>
 
