@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'How to Predict 4D Winning Numbers 2026 | NEO4D Strategy Guide',
@@ -50,6 +51,19 @@ export default function StrategyPage({ params }) {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">{t.title}</h1>
           <p className="text-lg md:text-xl text-amber-400 font-bold">{t.subtitle}</p>
+        </div>
+      </div>
+      
+      <div className="max-w-4xl mx-auto px-6 -mt-8 relative z-10">
+        <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-500/30">
+          <Image 
+            src="/images/strategy-hero.png" 
+            alt="4D Strategy Guide 2026" 
+            width={1200} 
+            height={630} 
+            className="w-full h-auto object-cover"
+            priority
+          />
         </div>
       </div>
       
