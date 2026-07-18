@@ -6,6 +6,7 @@ import Script from 'next/script';
 export default function PremiumPrelander() {
   const [tgUser, setTgUser] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
+  const [isExternal, setIsExternal] = useState(false);
   const [loading, setLoading] = useState(true);
   
   const [spinning, setSpinning] = useState(false);
@@ -43,6 +44,7 @@ export default function PremiumPrelander() {
       } else {
         // Fallback for desktop browser testing
         setIsVerified(true);
+        setIsExternal(true);
       }
       setLoading(false);
     };
@@ -96,11 +98,10 @@ export default function PremiumPrelander() {
   };
 
   const handleClaim = () => {
-    const targetUrl = `https://neo4d.live/zh`;
-    if (window.Telegram?.WebApp) {
-      window.Telegram.WebApp.openLink(targetUrl);
+    if (!isExternal) {
+      window.Telegram?.WebApp?.openLink('https://neo4d.live/zh');
     } else {
-      window.location.href = targetUrl;
+      window.location.href = 'https://t.me/NEO4DLIVE';
     }
   };
 
@@ -188,8 +189,8 @@ export default function PremiumPrelander() {
               className="w-full relative group overflow-hidden bg-gradient-to-b from-emerald-500 to-green-700 hover:from-emerald-400 hover:to-green-600 px-8 py-5 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.5)] transform transition-all duration-300 hover:scale-[1.02] active:scale-95"
             >
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_infinite]"></div>
-              <span className="relative text-white font-black text-2xl uppercase tracking-widest drop-shadow-md">
-                CHECK LIVE DRAW NOW
+              <span className="relative text-white font-black text-xl md:text-2xl uppercase tracking-widest drop-shadow-md">
+                {isExternal ? 'JOIN VIP TELEGRAM TO CHECK' : 'CHECK LIVE DRAW NOW'}
               </span>
             </button>
           </div>
