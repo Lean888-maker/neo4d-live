@@ -82,6 +82,7 @@ async function runSeoCheck() {
     
   } catch (err) {
     console.error("🔥 FATAL ERROR IN SEO CHECKER:", err.message);
+    process.exit(1);
   }
 }
 

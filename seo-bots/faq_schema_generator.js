@@ -58,6 +58,7 @@ async function generateFreshFAQ() {
 
   } catch (err) {
     console.error("🔥 FATAL ERROR IN FAQ GENERATOR:", err.message);
+    process.exit(1);
   }
 }
 

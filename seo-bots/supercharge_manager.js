@@ -53,6 +53,7 @@ async function runSupercharge() {
 
   } catch (err) {
     console.error("🔥 FATAL ERROR IN SUPERCHARGE MANAGER:", err);
+    process.exit(1);
   }
 }
 

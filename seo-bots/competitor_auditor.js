@@ -55,10 +55,11 @@ async function runAudit() {
     }
 
   } catch (err) {
-    console.error("🔥 FATAL ERROR IN AUDITOR:", err.message);
+    console.error("🔥 FATAL ERROR IN COMPETITOR AUDITOR:", err.message);
     if (process.env.TELEGRAM_BOT_TOKEN) {
       await sendTelegramMessage(`🔥 <b>CRITICAL ERROR IN AUDITOR</b>\n\n${err.message}`);
     }
+    process.exit(1);
   }
 }
 
