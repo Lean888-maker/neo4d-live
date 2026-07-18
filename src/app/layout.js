@@ -22,6 +22,12 @@ export const metadata = {
     type: 'website',
     locale: 'en_MY',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NEO4D LIVE - Live 4D Results Today',
+    description: 'Fastest live 4D results (Keputusan 4D) in Malaysia and Singapore.',
+    images: ['https://neo4d.live/api/og'],
+  },
   robots: {
     index: true,
     follow: true,
