@@ -1,4 +1,5 @@
 import { generateArticle } from './article_generator.js';
+import { injectInternalLinks } from './internal_linker.js';
 import { publishToMedium } from './publish_medium.js';
 import { publishToBlogger } from './publish_blogger.js';
 import { publishToDevTo } from './publish_devto.js';
@@ -16,6 +17,9 @@ async function runSupercharge() {
   try {
     // 1. Generate the core article
     const articleData = await generateArticle();
+    
+    // 1.5 Inject highly optimized internal links back to neo4d.live
+    injectInternalLinks(articleData.filePath);
     
     // 2. We use an array of publisher functions
     const publishers = [
