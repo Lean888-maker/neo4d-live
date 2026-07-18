@@ -13,7 +13,7 @@ export const metadata = {
     siteName: 'NEO4D LIVE',
     images: [
       {
-        url: 'https://neo4d.live/api/og',
+        url: 'https://neo4d.live/og-premium.png',
         width: 1200,
         height: 630,
         alt: 'NEO4D LIVE - Ad-Free Live 4D Results',
@@ -26,7 +26,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'NEO4D LIVE - Live 4D Results Today',
     description: 'Fastest live 4D results (Keputusan 4D) in Malaysia and Singapore.',
-    images: ['https://neo4d.live/api/og'],
+    images: ['https://neo4d.live/og-premium.png'],
   },
   robots: {
     index: true,
