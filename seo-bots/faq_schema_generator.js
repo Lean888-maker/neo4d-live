@@ -19,8 +19,9 @@ async function generateFreshFAQ() {
       You are an expert SEO for a Malaysian 4D lottery website.
       Generate 3 highly searched, trending questions related to 4D lotteries (e.g., Magnum, Toto, Da Ma Cai, Dream Numbers, Carta Ramalan).
       Provide a concise, accurate answer for each.
+      Generate the questions and answers ENTIRELY in Simplified Chinese (Mandarin).
       Output ONLY a valid JSON array of objects with "question" and "answer" properties.
-      Example: [{"question": "What time is Magnum 4D draw?", "answer": "The Magnum 4D draw starts at 7:00 PM..."}]
+      Example: [{"question": "万能4D几点开彩？", "answer": "万能4D的开彩时间是晚上7点..."}]
     `;
 
     const response = await ai.models.generateContent({

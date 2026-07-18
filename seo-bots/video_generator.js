@@ -39,7 +39,7 @@ export async function generateDailyVideo() {
     
     return {
       videoPath: outputPath,
-      description: `🧧💰 Today's Lucky Predictions for ${today} are in! \n\nOur top picks: ${num1} & ${num2}!\n\nAre you playing today? Check your live 4D results instantly at https://neo4d.live 🏆\n\n#Magnum4D #SportsToto #4DResultMalaysia #Keputusan4D`
+      description: `🧧💰 今日最强心水字 ${today} 来了！ \n\n我们的首选号码：${num1} & ${num2}！\n\n您今天有买字吗？立刻前往 https://neo4d.live 查看最快开奖成绩 🏆\n\n#万能4D #大马彩 #多多 #4DResultMalaysia #今日4D`
     };
   } catch (error) {
     console.error("❌ FFmpeg Video Generation Failed:", error.message);
