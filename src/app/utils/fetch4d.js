@@ -16,7 +16,7 @@ export async function fetch4dData() {
       },
       body: 'action=get_data2',
       next: { revalidate: 15 },
-      signal: AbortSignal.timeout(2500)
+      signal: AbortSignal.timeout(8000)
     };
     const response = await fetch(url, options);
     if (!response.ok) throw new Error(`HTTP ${response.status} from ${url}`);
