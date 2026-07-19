@@ -35,6 +35,18 @@ Requirements:
 4. Keep the tone professional, tech-savvy, and engaging.
 5. Include exactly two natural-sounding HTML backlink anchors to: "https://neo4d.live". For example: <a href="https://neo4d.live">大马彩最新成绩</a> or <a href="https://neo4d.live">网上买4D</a>.
 6. Output in Markdown format (except for the backlinks, use HTML <a> tags for those). Do not output the markdown codeblock ticks. Just the raw markdown content.`
+  },
+  {
+    topic: "Live 4D Draw Today - Instant Results",
+    prompt: `Write a high-urgency, highly engaging SEO blog post (600-800 words) announcing that today is a 4D draw day in Malaysia. Build excitement and direct readers to check their results live as they happen.
+
+Requirements:
+1. Write the ENTIRE blog post in Simplified Chinese (Mandarin), suitable for a Malaysian audience.
+2. Use an extremely urgent, click-worthy title (e.g., "【现场直击】今日4D开彩...").
+3. Emphasize that results for Magnum (万能), Sports Toto (多多), and Da Ma Cai (大马彩) are rolling out LIVE tonight at 7:00 PM.
+4. Keep the tone thrilling, urgent, and fast-paced.
+5. Include exactly two natural-sounding HTML backlink anchors directing users to check results NOW: "https://neo4d.live". For example: <a href="https://neo4d.live">今日4D现场直播</a> or <a href="https://neo4d.live">立即查看万字票开奖</a>.
+6. Output in Markdown format (except for the backlinks, use HTML <a> tags for those). Do not output the markdown codeblock ticks. Just the raw markdown content.`
   }
 ];
 
