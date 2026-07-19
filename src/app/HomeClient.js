@@ -718,17 +718,19 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                             return (
                               <div 
                                 key={i} 
-                                className={`font-number text-xl md:text-2xl py-2.5 rounded-xl border-2 transition-all font-black shadow-sm ${
+                                className={`font-number text-[1.1rem] md:text-xl py-1.5 md:py-2 tracking-tight rounded-lg border-2 transition-all font-black shadow-sm ${
                                   isPending 
-                                    ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                    : 'text-black ' +
-                                      `${op.id === 'magnum' ? 'bg-amber-100/70 border-amber-300 hover:border-amber-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'toto' ? 'bg-rose-100/70 border-rose-300 hover:border-rose-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'damacai' ? 'bg-blue-100/70 border-blue-300 hover:border-blue-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'singapore' ? 'bg-sky-100/70 border-sky-300 hover:border-sky-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'sabah' ? 'bg-orange-100/70 border-orange-300 hover:border-orange-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'sarawak' ? 'bg-emerald-100/70 border-emerald-300 hover:border-emerald-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'sandakan' ? 'bg-purple-100/70 border-purple-300 hover:border-purple-500 hover:shadow-md' : ''}`
+                                    ? 'text-slate-400 border-white/5 bg-slate-800/50' 
+                                    : 'text-slate-900 ' +
+                                      `${op.id === 'magnum' ? 'bg-amber-100 border-amber-300 hover:border-amber-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-100 border-rose-300 hover:border-rose-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-100 border-blue-300 hover:border-blue-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-100 border-sky-300 hover:border-sky-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-100 border-orange-300 hover:border-orange-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-100 border-emerald-300 hover:border-emerald-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-100 border-purple-300 hover:border-purple-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'granddragon' ? 'bg-yellow-100 border-yellow-300 hover:border-yellow-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'ninelotto' ? 'bg-red-100 border-red-300 hover:border-red-500 hover:shadow-md' : ''}`
                                 }`}
                               >
                                 {num}
@@ -737,7 +739,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           })
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-xl py-2.5 rounded-xl border-2 border-slate-50 bg-slate-50/10 text-slate-300 font-black">{num}</div>
+                            <div key={i} className="font-number text-[1.1rem] py-1.5 md:py-2 rounded-lg border-2 border-white/5 bg-slate-800/50 text-slate-400 font-black">{num}</div>
                           ))
                         )}
                       </div>
@@ -756,17 +758,19 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                             return (
                               <div 
                                 key={i} 
-                                className={`font-number text-xl md:text-2xl py-2.5 rounded-xl border-2 transition-all font-black shadow-sm ${
+                                className={`font-number text-[1.1rem] md:text-xl py-1.5 md:py-2 tracking-tight rounded-lg border-2 transition-all font-black shadow-sm ${
                                   isPending 
-                                    ? 'text-slate-300 border-slate-100 bg-slate-50/10' 
-                                    : 'text-black ' +
-                                      `${op.id === 'magnum' ? 'bg-amber-100/70 border-amber-300 hover:border-amber-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'toto' ? 'bg-rose-100/70 border-rose-300 hover:border-rose-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'damacai' ? 'bg-blue-100/70 border-blue-300 hover:border-blue-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'singapore' ? 'bg-sky-100/70 border-sky-300 hover:border-sky-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'sabah' ? 'bg-orange-100/70 border-orange-300 hover:border-orange-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'sarawak' ? 'bg-emerald-100/70 border-emerald-300 hover:border-emerald-500 hover:shadow-md' : ''}` +
-                                      `${op.id === 'sandakan' ? 'bg-purple-100/70 border-purple-300 hover:border-purple-500 hover:shadow-md' : ''}`
+                                    ? 'text-slate-400 border-white/5 bg-slate-800/50' 
+                                    : 'text-slate-900 ' +
+                                      `${op.id === 'magnum' ? 'bg-amber-100 border-amber-300 hover:border-amber-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'toto' ? 'bg-rose-100 border-rose-300 hover:border-rose-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'damacai' ? 'bg-blue-100 border-blue-300 hover:border-blue-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'singapore' ? 'bg-sky-100 border-sky-300 hover:border-sky-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sabah' ? 'bg-orange-100 border-orange-300 hover:border-orange-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sarawak' ? 'bg-emerald-100 border-emerald-300 hover:border-emerald-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'sandakan' ? 'bg-purple-100 border-purple-300 hover:border-purple-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'granddragon' ? 'bg-yellow-100 border-yellow-300 hover:border-yellow-500 hover:shadow-md' : ''}` +
+                                      `${op.id === 'ninelotto' ? 'bg-red-100 border-red-300 hover:border-red-500 hover:shadow-md' : ''}`
                                 }`}
                               >
                                 {num}
@@ -775,7 +779,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           })
                         ) : (
                           Array(10).fill('----').map((num, i) => (
-                            <div key={i} className="font-number text-xl py-2.5 rounded-xl border-2 border-slate-50 bg-slate-50/10 text-slate-300 font-black">{num}</div>
+                            <div key={i} className="font-number text-[1.1rem] py-1.5 md:py-2 rounded-lg border-2 border-white/5 bg-slate-800/50 text-slate-400 font-black">{num}</div>
                           ))
                         )}
                       </div>
