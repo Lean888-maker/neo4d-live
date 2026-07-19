@@ -88,6 +88,33 @@ export async function fetch4dData() {
         jp1: opData.ESTJP1 || opData.JP1 || null,
         jp2: opData.ESTJP2 || opData.JP2 || null,
         jp3: opData.ESTJP3 || opData.JP3 || null
+      },
+      jackpotGames: {
+        magnumLife: id === 'magnum' && opData.L1 ? {
+          numbers: [opData.L1, opData.L2, opData.L3, opData.L4, opData.L5, opData.L6, opData.L7, opData.L8].filter(Boolean),
+          bonus: [opData.LB1, opData.LB2].filter(Boolean)
+        } : null,
+        toto650: id === 'toto' && opData.P6501 ? {
+          numbers: [opData.P6501, opData.P6502, opData.P6503, opData.P6504, opData.P6505, opData.P6506].filter(Boolean),
+          jp1: opData.P650JP1,
+          jp2: opData.P650JP2
+        } : null,
+        toto655: id === 'toto' && opData.P6551 ? {
+          numbers: [opData.P6551, opData.P6552, opData.P6553, opData.P6554, opData.P6555, opData.P6556].filter(Boolean),
+          jp1: opData.P655JP
+        } : null,
+        toto658: id === 'toto' && opData.P6581 ? {
+          name: 'Supreme Toto 6/58',
+          numbers: [opData.P6581, opData.P6582, opData.P6583, opData.P6584, opData.P6585, opData.P6586].filter(Boolean),
+          jp1: opData.P658JP
+        } : null,
+        damacai3d: id === 'damacai' && data['D3']?.P1 ? {
+          name: 'Da Ma Cai 3D Jackpot',
+          numbers: [data['D3'].P1, data['D3'].P2, data['D3'].P3].filter(Boolean),
+          jp1: data['D3'].J61,
+          jp2: data['D3'].J62,
+          jp3: data['D3'].J63
+        } : null
       }
     };
   }
