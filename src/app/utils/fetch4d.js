@@ -15,7 +15,7 @@ export async function fetch4dData() {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       },
       body: 'action=get_data2',
-      next: { revalidate: 15 },
+      cache: 'no-store',
       signal: AbortSignal.timeout(8000)
     };
     const response = await fetch(url, options);
