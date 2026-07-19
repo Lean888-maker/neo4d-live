@@ -40,7 +40,9 @@ export async function fetch4dData() {
     singapore: { key: 'S', special: 10, consolation: 10 },
     sandakan: { key: 'ST', special: 13, consolation: 10 },
     sarawak: { key: 'SW', special: 10, consolation: 10 },
-    sabah: { key: 'SB', special: 13, consolation: 10 }
+    sabah: { key: 'SB', special: 13, consolation: 10 },
+    granddragon: { key: 'G', special: 13, consolation: 10 },
+    ninelotto: { key: 'H', special: 13, consolation: 10 }
   };
 
   const results = {

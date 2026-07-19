@@ -42,8 +42,9 @@ const t = {
     tabAll: 'All Results',
     tabWest: 'West Malaysia',
     tabEast: 'East Malaysia',
-    tabSg: 'Singapore Pools',
-    copied: 'Copied results description to clipboard!',
+    tabSg: 'Singapore',
+    tabCambodia: 'Cambodia',
+    copied: 'Results copied to clipboard!',
     secFortune: '🧧 Fortune Playground',
     dreamTitle: '🔮 Tua Pek Kong Dream Dictionary',
     dreamDesc: 'Type a dream or keyword (e.g. snake, gold, accident) to discover its lucky 3D/4D numbers.',
@@ -87,6 +88,7 @@ const t = {
     tabWest: '西马结果',
     tabEast: '东马结果',
     tabSg: '新加坡博彩',
+    tabCambodia: '柬埔寨开彩',
     copied: '已将开彩结果复制至剪贴板！',
     secFortune: '🧧 财神福地',
     dreamTitle: '🔮 大伯公千字图 (Dream Dictionary)',
@@ -233,6 +235,26 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       borderColor: 'group-hover:border-[#6B21A8] border-slate-200 border-t-8 border-t-[#6B21A8]',
       p1Gradient: 'from-purple-100/50 via-purple-50/10 to-white border-purple-300'
     },
+    { 
+      id: 'granddragon', 
+      name: 'GRAND DRAGON LOTTO', 
+      jpName: '豪龙 (Hao Long)', 
+      logoImg: null,
+      color: 'text-slate-900', 
+      headerBg: 'bg-[#FACC15]',
+      borderColor: 'group-hover:border-[#FACC15] border-slate-200 border-t-8 border-t-[#FACC15]',
+      p1Gradient: 'from-yellow-100/50 via-yellow-50/10 to-white border-yellow-300'
+    },
+    { 
+      id: 'ninelotto', 
+      name: '9 LOTTO', 
+      jpName: '9Lotto (Hari Hari)', 
+      logoImg: null,
+      color: 'text-white', 
+      headerBg: 'bg-[#DC2626]',
+      borderColor: 'group-hover:border-[#DC2626] border-slate-200 border-t-8 border-t-[#DC2626]',
+      p1Gradient: 'from-red-100/50 via-red-50/10 to-white border-red-300'
+    },
   ];
 
   // Zodiac list with translation compatibility
@@ -330,6 +352,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       if (activeRegion === 'west') return ['magnum', 'toto', 'damacai'].includes(op.id);
       if (activeRegion === 'east') return ['sabah', 'sarawak', 'sandakan'].includes(op.id);
       if (activeRegion === 'sg') return ['singapore'].includes(op.id);
+      if (activeRegion === 'cambodia') return ['granddragon', 'ninelotto'].includes(op.id);
       return true;
     });
   }, [activeRegion]);
@@ -392,7 +415,9 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       singapore: '新加坡博彩 (SINGAPORE POOLS)',
       sabah: '沙巴 88 (SABAH 88)',
       sarawak: '砂拉越特別大彩 (SPECIAL CASHSWEEP)',
-      sandakan: '山打根 4D (SANDAKAN 4D)'
+      sandakan: '山打根 4D (SANDAKAN 4D)',
+      granddragon: '豪龙 (GRAND DRAGON)',
+      ninelotto: '9Lotto (HARI HARI)'
     };
     
     for (const [id, label] of Object.entries(mapping)) {
@@ -568,6 +593,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                 { id: 'west', label: t[lang].tabWest },
                 { id: 'east', label: t[lang].tabEast },
                 { id: 'sg', label: t[lang].tabSg },
+                { id: 'cambodia', label: t[lang].tabCambodia },
               ].map(tab => (
                 <button
                   key={tab.id}
