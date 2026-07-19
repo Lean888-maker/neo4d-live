@@ -32,6 +32,7 @@ const t = {
     prize1: '🏆 首獎 1ST PRIZE',
     prize2: '🥈 二獎 2ND PRIZE',
     prize3: '🥉 三獎 3RD PRIZE',
+    jackpot: '💰 Jackpot',
     special: '特別獎 (Special Prizes)',
     consolation: '安慰獎 (Consolation Prizes)',
     showAll: 'Show All Prizes',
@@ -77,6 +78,7 @@ const t = {
     prize1: '🏆 首獎 1ST PRIZE',
     prize2: '🥈 二獎 2ND PRIZE',
     prize3: '🥉 三獎 3RD PRIZE',
+    jackpot: '💰 积宝 (Jackpot)',
     special: '特别奖 (Special Prizes)',
     consolation: '安慰奖 (Consolation Prizes)',
     showAll: '展开全部奖项',
@@ -161,6 +163,11 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       hash = normalized.charCodeAt(i) + ((hash << 5) - hash);
     }
     return Math.abs(hash % 10000).toString().padStart(4, '0');
+  };
+
+  const shareToWhatsApp = (text) => {
+    const encodedText = encodeURIComponent(text + '\n\nCheck live at: https://neo4d.live');
+    window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
   };
 
   // List of operators with solid brand colors and Chinese translations
@@ -424,10 +431,15 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       const opData = results[id];
       if (!opData) continue;
       text += `【${label}】\n`;
-    text += `1ST: *${opData.numbers?.first || '----'}*\n`;
-    text += `2ND: *${opData.numbers?.second || '----'}*\n`;
-    text += `3RD: *${opData.numbers?.third || '----'}*\n\n`;
-  }
+      text += `1ST: *${opData.numbers?.first || '----'}*\n`;
+      text += `2ND: *${opData.numbers?.second || '----'}*\n`;
+      text += `3RD: *${opData.numbers?.third || '----'}*\n`;
+      if (opData.jackpots?.jp1 || opData.jackpots?.jp2) {
+        text += `💰 Jackpot 1: *${opData.jackpots?.jp1 || '-'}*\n`;
+        if (opData.jackpots?.jp2) text += `💰 Jackpot 2: *${opData.jackpots?.jp2}*\n`;
+      }
+      text += `\n`;
+    }
   
   text += `查看完整特别奖、安慰奖与大伯公梦境吉数解析：\n👉 https://neo4d.live/`;
   return text;
@@ -664,12 +676,12 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           {t[lang].prize1}
                         </span>
                         <button 
-                          onClick={() => copyToClipboard(`${operatorName} 1st: ${data?.numbers?.first || '----'}`)}
-                          className="opacity-0 group-hover/prize:opacity-100 transition-opacity p-2 text-slate-500 hover:text-slate-800"
-                          title="Copy result"
+                          onClick={() => shareToWhatsApp(`*${operatorName} 1st Prize:*\n${data?.numbers?.first || '----'}`)}
+                          className="opacity-0 group-hover/prize:opacity-100 transition-opacity p-2 text-green-600 hover:text-green-700"
+                          title="Share to WhatsApp"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
                           </svg>
                         </button>
                       </div>
@@ -701,6 +713,48 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                       </div>
                     </div>
                   </div>
+
+                  {/* Jackpot Display Layout - Clean & Uncluttered */}
+                  {(data?.jackpots?.jp1 || data?.jackpots?.jp2 || data?.jackpots?.jp3) && (
+                    <div className="px-5 pb-3">
+                      <div className="rounded-xl border border-amber-500/30 bg-gradient-to-r from-amber-500/5 to-amber-600/10 p-4 shadow-sm backdrop-blur-sm relative overflow-hidden group/jp">
+                        <h4 className="text-sm font-black text-amber-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)] animate-pulse"></span>
+                          {t[lang].jackpot}
+                        </h4>
+                        <div className={`grid gap-3 ${data?.jackpots?.jp3 ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
+                          {data?.jackpots?.jp1 && (
+                            <div className="flex flex-col">
+                              <span className="text-[10px] text-amber-600/80 uppercase font-bold tracking-widest">Jackpot 1</span>
+                              <span className="text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5">{data.jackpots.jp1}</span>
+                            </div>
+                          )}
+                          {data?.jackpots?.jp2 && (
+                            <div className="flex flex-col">
+                              <span className="text-[10px] text-amber-600/80 uppercase font-bold tracking-widest">Jackpot 2</span>
+                              <span className="text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5">{data.jackpots.jp2}</span>
+                            </div>
+                          )}
+                          {data?.jackpots?.jp3 && (
+                            <div className="flex flex-col">
+                              <span className="text-[10px] text-amber-600/80 uppercase font-bold tracking-widest">Jackpot 3</span>
+                              <span className="text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5">{data.jackpots.jp3}</span>
+                            </div>
+                          )}
+                        </div>
+                        {/* WhatsApp share for jackpot */}
+                        <button 
+                          onClick={() => shareToWhatsApp(`*${operatorName} Jackpot!*\n${data.jackpots.jp1 ? `JP1: ${data.jackpots.jp1}\n` : ''}${data.jackpots.jp2 ? `JP2: ${data.jackpots.jp2}` : ''}`)}
+                          className="absolute right-3 top-3 opacity-0 group-hover/jp:opacity-100 transition-opacity p-2 text-green-600 hover:text-green-700"
+                          title="Share to WhatsApp"
+                        >
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Drawers for Specials/Consolation - Color-Coded & Enlarged */}
                   <div className="px-5 pb-5 border-t border-white/10 bg-transparent pt-4 space-y-4">

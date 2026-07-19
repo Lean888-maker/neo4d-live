@@ -83,6 +83,11 @@ export async function fetch4dData() {
         third: normalize(opData.P3),
         special,
         consolation
+      },
+      jackpots: {
+        jp1: opData.ESTJP1 || opData.JP1 || null,
+        jp2: opData.ESTJP2 || opData.JP2 || null,
+        jp3: opData.ESTJP3 || opData.JP3 || null
       }
     };
   }
