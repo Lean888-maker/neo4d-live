@@ -62,36 +62,57 @@ export default async function Page({ params }) {
     "browserRequirements": "Requires JavaScript. Requires HTML5."
   };
 
+  let faqData = [];
+  try {
+    faqData = require('../data/faq_schema.json');
+  } catch (e) {
+    console.error("Failed to load dynamic FAQ schema");
+  }
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What time are the live 4D results drawn in Malaysia and Singapore?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Live 4D results are drawn on Wednesdays, Saturdays, and Sundays (with Special Draws occasionally on Tuesdays) starting around 7:00 PM and concluding around 8:30 PM (Asia/Kuala_Lumpur time)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does NEO4D deliver results so fast without ads?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "NEO4D aggregates broadcast streams directly from official digit networks. By refusing to place display banner ads, the system remains lightweight and executes real-time updates at lightning speeds directly to users."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does the Red Packet Fortune Shaker work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The Red Packet Fortune Shaker calculates a unique lucky pick using secure mathematical algorithms to help you generate random winning numbers for today's draws."
-        }
+    "mainEntity": faqData.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
       }
-    ]
+    }))
   };
+
+  // Elite SEO Strategy: LiveBlogPosting schema on draw days (Wed, Sat, Sun, Tue)
+  // This helps trigger Google's "LIVE" badge in search results during peak hours (6:30 PM - 8:30 PM)
+  const today = new Date();
+  const mytHour = (today.getUTCHours() + 8) % 24;
+  const mytDay = today.getUTCDay(); // 0 = Sun, 3 = Wed, 6 = Sat
+  const isDrawDay = [0, 2, 3, 6].includes(mytDay); // Tue included for Special Draws
+  
+  let liveBlogSchema = null;
+  if (isDrawDay) {
+    liveBlogSchema = {
+      "@context": "https://schema.org",
+      "@type": "LiveBlogPosting",
+      "headline": "马来西亚4D开彩直播 - 最新万能、多多、大马彩成绩",
+      "description": "实时更新今天的马来西亚4D开彩成绩。包括 Magnum 4D, Sports Toto, Da Ma Cai。",
+      "about": {
+        "@type": "Event",
+        "name": "Malaysia 4D Draw",
+        "startDate": `${today.toISOString().split('T')[0]}T19:00:00+08:00`
+      },
+      "coverageStartTime": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
+      "coverageEndTime": `${today.toISOString().split('T')[0]}T20:30:00+08:00`,
+      "liveBlogUpdate": [
+        {
+          "@type": "BlogPosting",
+          "headline": "4D Draw Commences",
+          "datePublished": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
+          "articleBody": "开彩正式开始！我们将实时更新万能、多多和大马彩的最新成绩。"
+        }
+      ]
+    };
+  }
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -132,6 +153,12 @@ export default async function Page({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {liveBlogSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(liveBlogSchema) }}
+        />
+      )}
       <HomeClient initialResults={initialResults} initialLang={lang} />
     </>
   );
