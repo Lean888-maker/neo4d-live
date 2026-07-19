@@ -622,8 +622,8 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
             </div>
           </div>
 
-          {/* Dynamic Grid for filtered operators */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Dynamic Masonry for filtered operators to prevent empty space clutter */}
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 w-full max-w-7xl mx-auto">
             {filteredOperators.map((op) => {
               const data = getProviderData(op.id);
               const operatorName = lang === 'zh' ? op.jpName : op.name;
@@ -631,7 +631,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
               return (
                 <div 
                   key={op.id} 
-                  className={`group bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-black/60 relative ${op.borderColor}`}
+                  className={`group bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-black/60 relative break-inside-avoid mb-6 ${op.borderColor}`}
                 >
                   {/* Operator Header info with Solid Brand Colored Banner */}
                   <div className={`px-5 py-4 flex justify-between items-center border-b border-black/10 ${op.headerBg} ${op.color}`}>
