@@ -408,11 +408,10 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
   return text;
 };
 
-  const copyShareTextToClipboard = () => {
+  const forwardShareTextToWhatsApp = () => {
     const text = getFormattedShareText();
     if (!text) return;
-    navigator.clipboard.writeText(text);
-    alert(lang === 'zh' ? '已成功复制今日开彩结果分享文案！' : 'Copied formatted results description to clipboard!');
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   if (loading) {
@@ -549,10 +548,10 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
           {/* Formatted Today's Results Copy Tool */}
           <div className="max-w-2xl mx-auto relative z-10">
             <button
-              onClick={copyShareTextToClipboard}
+              onClick={forwardShareTextToWhatsApp}
               className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl border-2 border-emerald-400/40 font-black text-sm md:text-base uppercase tracking-wider shadow-lg hover:scale-102 hover:border-emerald-300 transition-all cursor-pointer active:scale-95 duration-100"
             >
-              <span className="text-xl">📋</span> {lang === 'zh' ? '一键复制今日开彩结果 (微信/WhatsApp转发文案)' : 'Copy Today\'s 4D Results (Share to WhatsApp)'}
+              <span className="text-xl">💬</span> {lang === 'zh' ? '一键转发今日开彩结果 (WhatsApp)' : 'Forward Today\'s 4D Results (WhatsApp)'}
             </button>
           </div>
 
