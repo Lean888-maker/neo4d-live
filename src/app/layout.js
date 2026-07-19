@@ -64,6 +64,9 @@ export const viewport = {
 import Script from 'next/script';
 import CaiShenChat from './CaiShenChat';
 import './globals.css';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
   return (
@@ -118,7 +121,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body>
+      <body className={inter.className}>
         {children}
         <CaiShenChat />
       </body>

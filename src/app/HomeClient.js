@@ -441,7 +441,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-slate-600 font-medium bg-[#faf8f5]">
+      <div className="min-h-screen flex flex-col items-center justify-center text-slate-400 font-medium bg-slate-950">
         <div className="relative flex h-16 w-16 mb-6">
           <span className="draw-ping-ring absolute inline-flex h-full w-full rounded-full bg-slate-300 opacity-60"></span>
           <div className="relative inline-flex rounded-full h-16 w-16 bg-white border-2 border-slate-300 items-center justify-center text-slate-700 font-black text-xl tracking-widest">
@@ -456,7 +456,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
   return (
     <>
       {/* Thematic Background Watermark Overlay (Famous Lucky Numbers & Hanzi) */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-[0.025] select-none z-0">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-5 select-none z-0">
         {/* Lucky Numbers */}
         <div className="absolute top-[12%] left-[4%] font-black text-[13vw] text-amber-600 font-mono tracking-tighter">8888</div>
         <div className="absolute top-[32%] right-[8%] font-black text-[12vw] text-red-600 font-mono">發</div>
@@ -465,7 +465,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
         <div className="absolute top-[45%] left-[45%] font-black text-[9vw] text-amber-600 font-mono tracking-tighter">7777</div>
       </div>
 
-      <main className="min-h-screen text-slate-800 pb-16 relative z-10">
+      <main className="min-h-screen bg-slate-950 text-slate-200 pb-16 relative z-10">
         
         {/* Header Section (Agency-Grade Redesign) */}
         <div className="relative py-8 border-b-2 border-amber-500/20 bg-gradient-to-b from-red-800 via-red-900 to-red-950 text-white shadow-xl overflow-hidden">
@@ -601,7 +601,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                   className={`px-5 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider border whitespace-nowrap transition-all duration-150 cursor-pointer ${
                     activeRegion === tab.id
                       ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                      : 'bg-white/5 backdrop-blur-md border-white/10 text-slate-400 hover:text-white hover:border-white/30 hover:bg-white/10'
                   }`}
                 >
                   {tab.label}
@@ -619,7 +619,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
               return (
                 <div 
                   key={op.id} 
-                  className={`group bg-white rounded-2xl overflow-hidden border transition-all duration-200 relative ${op.borderColor} shadow-md`}
+                  className={`group bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-black/60 relative ${op.borderColor}`}
                 >
                   {/* Operator Header info with Solid Brand Colored Banner */}
                   <div className={`px-5 py-4 flex justify-between items-center border-b border-black/10 ${op.headerBg} ${op.color}`}>
@@ -630,11 +630,11 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           alt={operatorName} 
                           loading="lazy"
                           decoding="async"
-                          className="h-14 md:h-16 w-auto object-contain rounded border border-white bg-white p-0.5 shadow-sm shrink-0" 
+                          className="h-14 md:h-16 w-auto object-contain rounded border border-white/20 bg-white/10 backdrop-blur-sm p-0.5 shadow-sm shrink-0" 
                         />
                       ) : (
                         /* Circular SVG Singapore Pools Badge */
-                        <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex flex-col items-center justify-center text-sky-800 font-black text-xs md:text-sm border border-slate-200 shadow-sm leading-tight shrink-0">
+                        <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-sm flex flex-col items-center justify-center text-sky-400 font-black text-xs md:text-sm border border-white/20 shadow-inner leading-tight shrink-0">
                           <span>SG</span>
                           <span className="text-[8px] md:text-[9px] font-black opacity-90">POOL</span>
                         </div>
@@ -649,13 +649,13 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                       </div>
                     </div>
                     
-                    <span className="text-[10px] md:text-[11px] font-mono font-black bg-white/20 border border-white/30 px-2.5 py-1 rounded text-inherit shadow-sm shrink-0">
+                    <span className="text-[10px] md:text-[11px] font-mono font-black bg-black/30 border border-white/10 px-2.5 py-1 rounded text-white shadow-sm shrink-0">
                       {data?.date || results?.date || t[lang].pending}
                     </span>
                   </div>
 
                   {/* High-Contrast Bold Prize Display */}
-                  <div className="p-5 space-y-3 bg-white">
+                  <div className="p-5 space-y-3 bg-transparent">
                     
                     {/* 1st Prize - Super Sized */}
                     <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
@@ -681,21 +681,21 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                     {/* 2nd & 3rd Prize Side-by-Side - Super Sized */}
                     <div className="grid grid-cols-2 gap-3">
                       {/* 2nd Prize */}
-                      <div className="flex flex-col p-4 rounded-xl border-2 border-slate-200 bg-slate-50">
-                        <span className="text-black text-xs md:text-sm font-black uppercase tracking-widest">
+                      <div className="flex flex-col p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-inner">
+                        <span className="text-slate-300 text-xs md:text-sm font-black uppercase tracking-widest">
                           {t[lang].prize2}
                         </span>
-                        <span className="font-number text-4xl md:text-5xl text-center text-black tracking-[0.05em] mt-2 font-black">
+                        <span className="font-number text-4xl md:text-5xl text-center text-white tracking-[0.05em] mt-2 font-black">
                           {data?.numbers?.second || '----'}
                         </span>
                       </div>
 
                       {/* 3rd Prize */}
-                      <div className="flex flex-col p-4 rounded-xl border-2 border-slate-200 bg-slate-50">
-                        <span className="text-black text-xs md:text-sm font-black uppercase tracking-widest">
+                      <div className="flex flex-col p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-inner">
+                        <span className="text-slate-300 text-xs md:text-sm font-black uppercase tracking-widest">
                           {t[lang].prize3}
                         </span>
-                        <span className="font-number text-4xl md:text-5xl text-center text-black tracking-[0.05em] mt-2 font-black">
+                        <span className="font-number text-4xl md:text-5xl text-center text-white tracking-[0.05em] mt-2 font-black">
                           {data?.numbers?.third || '----'}
                         </span>
                       </div>
@@ -703,11 +703,11 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                   </div>
 
                   {/* Drawers for Specials/Consolation - Color-Coded & Enlarged */}
-                  <div className="px-5 pb-5 border-t border-slate-100 bg-slate-50/20 pt-4 space-y-4">
+                  <div className="px-5 pb-5 border-t border-white/10 bg-transparent pt-4 space-y-4">
                     
                     {/* Special Numbers */}
                     <div>
-                      <h4 className="text-sm font-black text-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                      <h4 className="text-sm font-black text-slate-300 uppercase tracking-widest mb-3 flex items-center gap-2">
                         <span className="h-2.5 w-2.5 rounded-full bg-amber-500 shadow-sm"></span>
                         {t[lang].special}
                       </h4>
@@ -745,7 +745,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
 
                     {/* Consolation Numbers (Starters) */}
                     <div>
-                      <h4 className="text-sm font-black text-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                      <h4 className="text-sm font-black text-slate-300 uppercase tracking-widest mb-3 flex items-center gap-2">
                         <span className="h-2.5 w-2.5 rounded-full bg-slate-400 shadow-sm"></span>
                         {t[lang].consolation}
                       </h4>
@@ -855,11 +855,11 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
           </section>
 
           {/* Interactive Dream Dictionary Component */}
-          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200 shadow-md max-w-2xl mx-auto w-full">
+          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-lg max-w-2xl mx-auto w-full">
             <div className="space-y-4">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
                 <span className="text-xl">🔮</span>
-                <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
+                <h2 className="text-sm font-black text-slate-200 uppercase tracking-tight">
                   {t[lang].dreamTitle}
                 </h2>
               </div>
@@ -873,12 +873,13 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                   value={searchVal}
                   onChange={(e) => setSearchVal(e.target.value)}
                   placeholder={t[lang].dreamPlaceholder}
-                  className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-slate-800 transition-all font-medium pr-10"
+                  className="w-full bg-slate-800/50 border border-white/10 text-white rounded-2xl px-5 py-4 pl-12 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 shadow-inner placeholder-slate-400 font-medium"
                 />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
                 {searchVal && (
                   <button 
                     onClick={() => { setSearchVal(''); setDreamQuery(''); }}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white font-bold text-sm cursor-pointer"
                   >
                     ✕
                   </button>
@@ -890,17 +891,17 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                   {dreamResults.length > 0 ? (
                     <div className="grid grid-cols-1 gap-3 max-h-60 overflow-y-auto pr-1">
                       {dreamResults.map(item => (
-                        <div key={item.id} className="p-4 rounded-2xl bg-amber-50/30 border border-amber-100 flex items-center justify-between gap-4">
+                        <div key={item.id} className="p-4 rounded-2xl bg-slate-800/50 border border-white/5 flex items-center justify-between gap-4">
                           <div className="space-y-1">
-                            <h4 className="text-xs font-bold text-slate-800">
+                            <h4 className="text-xs font-bold text-white">
                               {lang === 'zh' ? item.titleZh : item.titleEn}
                             </h4>
-                            <p className="text-[10px] text-slate-500 leading-normal">
+                            <p className="text-sm text-slate-400 italic text-center">
                               {lang === 'zh' ? item.descZh : item.descEn}
                             </p>
                           </div>
                           <div className="flex flex-col items-center gap-1.5 shrink-0">
-                            <span className="font-number text-2xl text-amber-600 tracking-wider font-black">
+                            <span className="font-number text-2xl text-amber-400 tracking-wider font-black">
                               {item.number}
                             </span>
                             <div className="flex gap-1">
@@ -909,7 +910,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                                   navigator.clipboard.writeText(item.number);
                                   alert(t[lang].copied);
                                 }}
-                                className="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-[9px] font-bold rounded text-slate-600 transition-colors cursor-pointer"
+                                className="px-2 py-1 bg-slate-700 hover:bg-slate-600 text-[9px] font-bold rounded text-white transition-colors cursor-pointer"
                               >
                                 {lang === 'zh' ? '复制' : 'Copy'}
                               </button>
@@ -929,17 +930,18 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                     </div>
                   ) : (
                     /* Fallback Deterministic Generator */
-                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4">
+                    <div className="mt-4 p-5 rounded-2xl bg-slate-800/80 border border-white/10 text-center shadow-inner relative overflow-hidden">
+                      <div className="absolute inset-0 bg-[url('/images/badge_pixiu.png')] bg-cover opacity-5 mix-blend-overlay"></div>
                       <div className="space-y-1">
-                        <h4 className="text-xs font-bold text-slate-700">
+                        <h4 className="text-xs font-bold text-slate-200">
                           {t[lang].dreamNoMatch.replace('{query}', dreamQuery)}
                         </h4>
                         <p className="text-[10px] text-slate-400">
                           {lang === 'zh' ? '这是根据您的关键字专属算出的今日好运吉数。' : 'This is your custom fortune lucky number calculated for today based on your search keyword.'}
                         </p>
                       </div>
-                      <div className="flex flex-col items-center gap-1.5 shrink-0">
-                        <span className="font-number text-2xl text-slate-700 tracking-wider font-black">
+                      <div className="flex flex-col items-center gap-1.5 shrink-0 mt-3">
+                        <span className="font-number text-2xl text-amber-400 tracking-wider font-black">
                           {getDeterministicDreamNumber(dreamQuery)}
                         </span>
                         <div className="flex gap-1">
@@ -948,7 +950,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                               navigator.clipboard.writeText(getDeterministicDreamNumber(dreamQuery));
                               alert(t[lang].copied);
                             }}
-                            className="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-[9px] font-bold rounded text-slate-700 transition-colors cursor-pointer"
+                            className="px-2 py-1 bg-slate-700 hover:bg-slate-600 text-[9px] font-bold rounded text-white transition-colors cursor-pointer"
                           >
                             {lang === 'zh' ? '复制' : 'Copy'}
                           </button>
@@ -971,16 +973,16 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
             </div>
           </section>
 
-          {/* Bottom Section: Zodiac Lucky Picker (Relocated to clean up space) */}
-          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-white border border-slate-200 shadow-md">
+          {/* Bottom Section: Zodiac Lucky Picker */}
+          <section className="glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-lg">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2 border-b border-white/10 pb-3">
                 <span className="text-xl">🔮</span>
-                <h2 className="text-sm font-black text-slate-800 uppercase tracking-tight">
+                <h2 className="text-sm font-black text-slate-200 uppercase tracking-tight">
                   {t[lang].zodiacTitle}
                 </h2>
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-400">
                 {t[lang].zodiacDesc}
               </p>
               
@@ -991,27 +993,27 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                     <button
                       key={z.raw}
                       onClick={() => getZodiacLuckyNumber(localZodiacName)}
-                      className={`p-2.5 rounded-2xl text-center border text-[10px] font-extrabold transition-all cursor-pointer ${
-                        selectedZodiac === localZodiacName
-                          ? 'bg-red-600 border-red-600 text-white shadow-md transform scale-105'
-                          : 'bg-slate-50/50 border-slate-200 text-slate-600 hover:bg-red-50/50 hover:border-red-200'
+                      className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-1 transition-all ${
+                        selectedZodiac === localZodiacName 
+                          ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-md scale-105 border-0' 
+                          : 'bg-slate-800/50 border border-white/5 hover:border-white/20 hover:bg-slate-700/50 text-slate-300'
                       }`}
                     >
                       <div className="text-xl mb-0.5">{z.emoji}</div>
-                      <div className="truncate">{localZodiacName}</div>
+                      <div className="truncate text-[10px] font-bold">{localZodiacName}</div>
                     </button>
                   );
                 })}
               </div>
 
               {selectedZodiac && (
-                <div className="p-4 rounded-2xl bg-amber-50/40 border border-amber-100 text-center animate-pulse-subtle max-w-md mx-auto mt-4 space-y-3">
+                <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-center animate-pulse-subtle max-w-md mx-auto mt-4 space-y-3">
                   {isZodiacSpinning ? (
                     <div className="text-xs font-bold text-slate-400 uppercase tracking-widest animate-pulse">{t[lang].calcZodiac}</div>
                   ) : (
                     <>
                       <div className="space-y-1">
-                        <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">
                           {t[lang].zodiacLuck.replace('{name}', selectedZodiac)}
                         </span>
                         <div className="font-number text-4xl text-amber-600 tracking-[0.2em] font-black">{zodiacLuckyNum}</div>
