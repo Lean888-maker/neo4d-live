@@ -1,0 +1,28 @@
+config {
+  type: "table",
+  schema: "neo4d_analytics",
+  name: "hottest_numbers_5yr",
+  description: "Aggregates the top hottest numbers over the last 5 years.",
+  tags: ["daily_update"]
+}
+
+WITH last_5_years AS (
+  SELECT 
+    draw_date,
+    first_prize AS lucky_number
+  FROM
+    ${ref("historical_draws")}
+  WHERE
+    draw_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 5 YEAR)
+)
+
+SELECT
+  lucky_number,
+  COUNT(1) AS frequency
+FROM
+  last_5_years
+GROUP BY
+  lucky_number
+ORDER BY
+  frequency DESC
+LIMIT 10

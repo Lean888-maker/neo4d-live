@@ -1,0 +1,7 @@
+config {
+  type: "declaration",
+  database: "neo4d-production",
+  schema: "raw_data",
+  name: "historical_draws",
+  description: "Raw historical 4D draws ingested from source APIs."
+}

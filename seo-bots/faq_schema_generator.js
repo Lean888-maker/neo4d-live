@@ -25,7 +25,7 @@ async function generateFreshFAQ() {
     `;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
+      model: 'gemini-2.0-flash',
       contents: prompt,
     });
 

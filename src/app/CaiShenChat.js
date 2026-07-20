@@ -42,14 +42,14 @@ export default function CaiShenChat() {
     setMessages(prev => [...prev, { sender: 'user', text: userText }]);
     setInput('');
 
-    // Simulate typing delay to inflate Dwell Time
+      // Simulate typing delay to inflate Dwell Time
     setTimeout(() => {
       if (chatState === 0) {
         setUserZodiac(userText);
-        setMessages(prev => [...prev, { sender: 'bot', text: `啊，属${userText}！今天这个生肖的磁场非常强。告诉我，你昨晚梦到了什么？（或者回复'没有'）` }]);
+        setMessages(prev => [...prev, { sender: 'bot', text: `啊，属${userText}！今天这个生肖的偏财磁场非常强。让我连线我的 **5年历史大数据(BigQuery)** 为你分析。告诉我，你昨晚梦到了什么？（或者回复'没有'）` }]);
         setChatState(1);
       } else if (chatState === 1) {
-        setMessages(prev => [...prev, { sender: 'bot', text: `正在为你测算梦境与生肖的财富磁场... 稍等啊...` }]);
+        setMessages(prev => [...prev, { sender: 'bot', text: `正在使用AI扫描 **2020-2024年** 所有的开奖记录，匹配你的生肖与梦境频率... 稍等啊...` }]);
         
         setTimeout(() => {
           // Generate a deterministic random number based on input length
@@ -58,7 +58,7 @@ export default function CaiShenChat() {
           
           setMessages(prev => [...prev, { 
             sender: 'bot', 
-            text: `发啊！🧧 你的专属超强发财字是 [ **${luckyNum}** ]。财神爷指示你**必须**把这个发财字分享到3个WhatsApp群，锁定你的财富磁场，不然财运就溜走咯！`,
+            text: `发啊！🧧 经过 **5年历史大数据运算**，你的专属超强发财字是 [ **${luckyNum}** ]。财神爷指示你**必须**把这个发财字分享到3个WhatsApp群，锁定你的财富磁场，不然财运就溜走咯！`,
             isFinal: luckyNum
           }]);
           setChatState(2);

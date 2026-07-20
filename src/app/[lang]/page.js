@@ -98,8 +98,31 @@ export default async function Page({ params }) {
       "description": "实时更新今天的马来西亚4D开彩成绩。包括 Magnum 4D, Sports Toto, Da Ma Cai。",
       "about": {
         "@type": "Event",
-        "name": "Malaysia 4D Draw",
-        "startDate": `${today.toISOString().split('T')[0]}T19:00:00+08:00`
+        "name": "Malaysia 4D Draw - Magnum, Sports Toto, Da Ma Cai",
+        "description": "Live 4D draw results for Malaysia's major lottery operators: Magnum 4D, Sports Toto, Da Ma Cai, Singapore Pools, Sabah 88, Sandakan 4D, and Special CashSweep.",
+        "startDate": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
+        "endDate": `${today.toISOString().split('T')[0]}T20:30:00+08:00`,
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "image": "https://neo4d.live/og-premium.png",
+        "url": "https://neo4d.live",
+        "organizer": {
+          "@type": "Organization",
+          "name": "NEO4D LIVE",
+          "url": "https://neo4d.live"
+        },
+        "location": {
+          "@type": "VirtualLocation",
+          "url": "https://neo4d.live"
+        },
+        "offers": {
+          "@type": "Offer",
+          "name": "Free Live 4D Results",
+          "price": "0",
+          "priceCurrency": "MYR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://neo4d.live"
+        }
       },
       "coverageStartTime": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
       "coverageEndTime": `${today.toISOString().split('T')[0]}T20:30:00+08:00`,

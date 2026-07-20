@@ -1,0 +1,5 @@
+dataformCoreVersion: "3.0.0"
+defaultProject: "neo4d-production" # Replace with actual GCP Project ID
+defaultLocation: "asia-southeast1"
+defaultDataset: "neo4d_analytics"
+defaultAssertionDataset: "neo4d_analytics_assertions"
