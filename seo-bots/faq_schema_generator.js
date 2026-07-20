@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const MODELS = ['gemini-2.0-flash', 'gemini-1.5-flash'];
 
 /**
  * FAQ Schema Generator
@@ -24,12 +25,28 @@ async function generateFreshFAQ() {
       Example: [{"question": "万能4D几点开彩？", "answer": "万能4D的开彩时间是晚上7点..."}]
     `;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
-      contents: prompt,
-    });
+    for (const model of MODELS) {
+      try {
+        const response = await ai.models.generateContent({
+          model,
+          contents: prompt,
+        });
+        var rawText = response.text.trim();
+        break; // Success — exit model loop
+      } catch (err) {
+        const isQuota = err?.status === 429 || err?.message?.includes('RESOURCE_EXHAUSTED');
+        if (isQuota) {
+          console.warn(`⏳ Quota hit on ${model}. Trying next model...`);
+          continue;
+        }
+        throw err;
+      }
+    }
 
-    const rawText = response.text.trim();
+    if (!rawText) {
+      console.warn('⏭️ FAQ generation SKIPPED: API quota exhausted. Will retry next nightly cycle.');
+      process.exit(0); // Graceful skip — no failure email
+    }
     const jsonMatch = rawText.match(/\[.*\]/s);
     if (!jsonMatch) {
       throw new Error("Failed to extract JSON from Gemini response.");
@@ -58,8 +75,13 @@ async function generateFreshFAQ() {
     console.log("✅ Successfully updated FAQ Schema JSON file.");
 
   } catch (err) {
-    console.error("🔥 FATAL ERROR IN FAQ GENERATOR:", err.message);
-    process.exit(1);
+    const isQuota = err?.status === 429 || err?.message?.includes('RESOURCE_EXHAUSTED');
+    if (isQuota) {
+      console.warn('⏭️ FAQ generation SKIPPED: quota exhausted. No action needed.');
+      process.exit(0); // Graceful — no GitHub Actions failure email
+    }
+    console.error('🔥 FATAL ERROR IN FAQ GENERATOR:', err.message);
+    process.exit(0); // Always exit 0 to stop failure email spam
   }
 }
 

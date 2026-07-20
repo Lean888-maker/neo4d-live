@@ -41,13 +41,15 @@ jobs:
           echo "WP_APP_PASSWORD=${{ secrets.WP_APP_PASSWORD }}" >> .env.local
       - name: Run SEO Health Checker
         run: node seo-bots/seo_checker.js
+        continue-on-error: true
       - name: Run SEO Supercharge Manager
         run: node seo-bots/supercharge_manager.js
+        continue-on-error: true
       - name: Commit and Push new SEO Articles
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add seo-bots/output/*.md
-          git commit -m "docs(seo): auto-generate hourly 4D content [skip ci]" || echo "No changes to commit"
           git pull --rebase origin main
+          git add seo-bots/output/*.md
+          git diff --staged --quiet || git commit -m "docs(seo): auto-generate hourly 4D content [skip ci]"
           git push

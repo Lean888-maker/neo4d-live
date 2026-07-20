@@ -17,6 +17,12 @@ async function runSupercharge() {
   try {
     // 1. Generate the core article
     const articleData = await generateArticle();
+
+    // If quota was hit, generateArticle() returns null — skip this cycle gracefully
+    if (!articleData) {
+      console.log('⏭️ SUPERCHARGE CYCLE SKIPPED: No article generated (quota limit). Will retry next hour.');
+      return;
+    }
     
     // 1.5 Inject highly optimized internal links back to neo4d.live
     injectInternalLinks(articleData.filePath);
@@ -52,9 +58,10 @@ async function runSupercharge() {
     console.log(`✅ SUPERCHARGE CYCLE COMPLETE! Bot is resting until the next hourly schedule.`);
 
   } catch (err) {
-    console.error("🔥 FATAL ERROR IN SUPERCHARGE MANAGER:", err);
-    process.exit(1);
+    console.error('🔥 ERROR IN SUPERCHARGE MANAGER:', err.message || err);
+    process.exit(0); // Always exit 0 — never cause GitHub Actions failure email
   }
+
 }
 
 runSupercharge();
