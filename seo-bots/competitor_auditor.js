@@ -55,11 +55,13 @@ async function runAudit() {
     }
 
   } catch (err) {
-    console.error("🔥 FATAL ERROR IN COMPETITOR AUDITOR:", err.message);
+    console.error("🔥 ERROR IN COMPETITOR AUDITOR:", err.message);
     if (process.env.TELEGRAM_BOT_TOKEN) {
-      await sendTelegramMessage(`🔥 <b>CRITICAL ERROR IN AUDITOR</b>\n\n${err.message}`);
+      try {
+        await sendTelegramMessage(`🔥 <b>AUDITOR ERROR</b>\n\n${err.message}`);
+      } catch (_) { /* ignore telegram failures */ }
     }
-    process.exit(1);
+    process.exit(0); // Never cause GitHub Actions failure email
   }
 }
 

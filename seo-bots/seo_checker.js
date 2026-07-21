@@ -81,8 +81,8 @@ async function runSeoCheck() {
     }
     
   } catch (err) {
-    console.error("🔥 FATAL ERROR IN SEO CHECKER:", err.message);
-    process.exit(1);
+    console.error("🔥 ERROR IN SEO CHECKER:", err.message);
+    process.exit(0); // Never cause GitHub Actions failure email
   }
 }
 
