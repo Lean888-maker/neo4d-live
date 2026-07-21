@@ -9,7 +9,8 @@ export const metadata = {
   keywords: '4d prediction, 今日万字预测, magnum 4d prediction, sports toto lucky number, 4d forecast today',
 };
 
-export default async function PredictionsPage() {
+export default async function PredictionsPage({ params }) {
+  const lang = (await params)?.lang || 'zh';
   let content = '';
   let errorMsg = '';
   
@@ -80,11 +81,11 @@ export default async function PredictionsPage() {
 
           {/* Quick links to other sections */}
           <div className="grid grid-cols-2 gap-4 mt-6">
-            <Link href="/dreams" className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-amber-300 text-center shadow-sm hover:shadow transition-all group">
+            <Link href={`/${lang}/dreams`} className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-amber-300 text-center shadow-sm hover:shadow transition-all group">
               <span className="text-2xl block mb-1">🔮</span>
               <span className="text-xs font-black text-slate-800 group-hover:text-amber-600">大伯公千字图</span>
             </Link>
-            <Link href="/" className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-amber-300 text-center shadow-sm hover:shadow transition-all group">
+            <Link href={`/${lang}`} className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-amber-300 text-center shadow-sm hover:shadow transition-all group">
               <span className="text-2xl block mb-1">🏆</span>
               <span className="text-xs font-black text-slate-800 group-hover:text-amber-600">最新开彩结果</span>
             </Link>
