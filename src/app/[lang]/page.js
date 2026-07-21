@@ -71,9 +71,21 @@ export default async function Page({ params }) {
 
   let faqData = [];
   try {
-    faqData = require('../data/faq_schema.json');
+    const fs = require('fs'); // fallback if needed or import at top
+    // Wait, let's just use dynamic import or require since next.js dev handles it, but fs is safer:
+    const fsModule = await import('fs');
+    const pathModule = await import('path');
+    const faqPath = pathModule.join(process.cwd(), 'src/app/data/faq_schema.json');
+    faqData = JSON.parse(fsModule.readFileSync(faqPath, 'utf8'));
   } catch (e) {
-    console.error("Failed to load dynamic FAQ schema");
+    console.error("Failed to load dynamic FAQ schema using fs, attempting standard import:", e.message);
+    try {
+      // Direct import fallback
+      const data = await import('../data/faq_schema.json', { assert: { type: 'json' } });
+      faqData = data.default || data;
+    } catch (importErr) {
+      console.error("All FAQ schema load attempts failed:", importErr.message);
+    }
   }
 
   const faqSchema = {
