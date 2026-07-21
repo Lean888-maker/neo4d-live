@@ -14,6 +14,14 @@ export default function sitemap() {
 
   const sitemapEntries = [];
 
+  // Add root domain first (highest priority for Google indexing)
+  sitemapEntries.push({
+    url: baseUrl,
+    lastModified: new Date(),
+    changeFrequency: 'always',
+    priority: 1.0,
+  });
+
   locales.forEach(locale => {
     routes.forEach(route => {
       sitemapEntries.push({

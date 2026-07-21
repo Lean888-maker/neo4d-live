@@ -82,60 +82,59 @@ export default async function Page({ params }) {
     }))
   };
 
-  // Elite SEO Strategy: LiveBlogPosting schema on draw days (Wed, Sat, Sun, Tue)
-  // This helps trigger Google's "LIVE" badge in search results during peak hours (6:30 PM - 8:30 PM)
+  // Elite SEO Strategy: LiveBlogPosting schema - ALWAYS rendered so Google always finds all Event fields
+  // EventScheduled on draw days (Wed/Sat/Sun + Special Tue), EventPostponed on off-days
   const today = new Date();
-  const mytHour = (today.getUTCHours() + 8) % 24;
-  const mytDay = today.getUTCDay(); // 0 = Sun, 3 = Wed, 6 = Sat
-  const isDrawDay = [0, 2, 3, 6].includes(mytDay); // Tue included for Special Draws
-  
-  let liveBlogSchema = null;
-  if (isDrawDay) {
-    liveBlogSchema = {
-      "@context": "https://schema.org",
-      "@type": "LiveBlogPosting",
-      "headline": "马来西亚4D开彩直播 - 最新万能、多多、大马彩成绩",
-      "description": "实时更新今天的马来西亚4D开彩成绩。包括 Magnum 4D, Sports Toto, Da Ma Cai。",
-      "about": {
-        "@type": "Event",
-        "name": "Malaysia 4D Draw - Magnum, Sports Toto, Da Ma Cai",
-        "description": "Live 4D draw results for Malaysia's major lottery operators: Magnum 4D, Sports Toto, Da Ma Cai, Singapore Pools, Sabah 88, Sandakan 4D, and Special CashSweep.",
-        "startDate": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
-        "endDate": `${today.toISOString().split('T')[0]}T20:30:00+08:00`,
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-        "image": "https://neo4d.live/og-premium.png",
-        "url": "https://neo4d.live",
-        "organizer": {
-          "@type": "Organization",
-          "name": "NEO4D LIVE",
-          "url": "https://neo4d.live"
-        },
-        "location": {
-          "@type": "VirtualLocation",
-          "url": "https://neo4d.live"
-        },
-        "offers": {
-          "@type": "Offer",
-          "name": "Free Live 4D Results",
-          "price": "0",
-          "priceCurrency": "MYR",
-          "availability": "https://schema.org/InStock",
-          "url": "https://neo4d.live"
-        }
+  const mytDay = today.getUTCDay(); // 0=Sun, 3=Wed, 6=Sat
+  const isDrawDay = [0, 2, 3, 6].includes(mytDay);
+  const drawDateStr = today.toISOString().split('T')[0];
+
+  const liveBlogSchema = {
+    "@context": "https://schema.org",
+    "@type": "LiveBlogPosting",
+    "headline": "马来西亚4D开彩直播 - 最新万能、多多、大马彩成绩",
+    "description": "实时更新今天的马来西亚4D开彩成绩。包括 Magnum 4D, Sports Toto, Da Ma Cai。",
+    "about": {
+      "@type": "Event",
+      "name": "Malaysia 4D Draw - Magnum, Sports Toto, Da Ma Cai",
+      "description": "Live 4D draw results for Malaysia's major lottery operators: Magnum 4D, Sports Toto, Da Ma Cai, Singapore Pools, Sabah 88, Sandakan 4D, and Special CashSweep.",
+      "startDate": `${drawDateStr}T19:00:00+08:00`,
+      "endDate": `${drawDateStr}T20:30:00+08:00`,
+      "eventStatus": isDrawDay
+        ? "https://schema.org/EventScheduled"
+        : "https://schema.org/EventPostponed",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "image": "https://neo4d.live/og-premium.png",
+      "url": "https://neo4d.live",
+      "organizer": {
+        "@type": "Organization",
+        "name": "NEO4D LIVE",
+        "url": "https://neo4d.live"
       },
-      "coverageStartTime": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
-      "coverageEndTime": `${today.toISOString().split('T')[0]}T20:30:00+08:00`,
-      "liveBlogUpdate": [
-        {
-          "@type": "BlogPosting",
-          "headline": "4D Draw Commences",
-          "datePublished": `${today.toISOString().split('T')[0]}T19:00:00+08:00`,
-          "articleBody": "开彩正式开始！我们将实时更新万能、多多和大马彩的最新成绩。"
-        }
-      ]
-    };
-  }
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://neo4d.live"
+      },
+      "offers": {
+        "@type": "Offer",
+        "name": "Free Live 4D Results",
+        "price": "0",
+        "priceCurrency": "MYR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://neo4d.live"
+      }
+    },
+    "coverageStartTime": `${drawDateStr}T19:00:00+08:00`,
+    "coverageEndTime": `${drawDateStr}T20:30:00+08:00`,
+    "liveBlogUpdate": [
+      {
+        "@type": "BlogPosting",
+        "headline": "4D Draw Commences",
+        "datePublished": `${drawDateStr}T19:00:00+08:00`,
+        "articleBody": "开彩正式开始！我们将实时更新万能、多多和大马彩的最新成绩。"
+      }
+    ]
+  };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

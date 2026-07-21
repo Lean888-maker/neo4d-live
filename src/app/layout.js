@@ -4,6 +4,11 @@ export const metadata = {
   keywords: 'live 4d results, check4d, keputusan 4d, 4d results today, magnum 4d, sports toto 4d, da ma cai 1+3d, singapore pools 4d, sabah 88, sandakan 4d, special cashsweep, neo4d, live 4d',
   alternates: {
     canonical: 'https://neo4d.live',
+    languages: {
+      'zh': 'https://neo4d.live/zh',
+      'en': 'https://neo4d.live/en',
+      'x-default': 'https://neo4d.live',
+    },
   },
   manifest: '/manifest.json',
   openGraph: {
