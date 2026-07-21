@@ -32,6 +32,16 @@ export default function sitemap() {
         priority: route === '' ? 1 : 0.8,
       });
     });
+
+    const zodiacs = ['rat', 'ox', 'tiger', 'rabbit', 'dragon', 'snake', 'horse', 'goat', 'monkey', 'rooster', 'dog', 'pig'];
+    zodiacs.forEach(z => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/zodiac/${z}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily',
+        priority: 0.7,
+      });
+    });
   });
 
   return sitemapEntries;
