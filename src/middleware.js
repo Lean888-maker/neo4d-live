@@ -30,16 +30,16 @@ export function middleware(request) {
 
   if (pathnameHasLocale) return;
 
-  // Simple language negotiation or fallback to default
-  const acceptLanguage = request.headers.get('accept-language');
-  let locale = defaultLocale;
-  
+  // Language negotiation: check zh FIRST — our primary audience is Malaysian Chinese.
+  // A Malaysian Chinese browser typically sends: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
+  // If we checked 'en' first they'd land on English, which is wrong.
   if (acceptLanguage) {
-    if (acceptLanguage.includes('en')) {
-      locale = 'en';
-    } else if (acceptLanguage.includes('zh')) {
+    if (acceptLanguage.includes('zh')) {
       locale = 'zh';
+    } else if (acceptLanguage.includes('en')) {
+      locale = 'en';
     }
+    // Anything else (ms, ta, etc.) falls back to zh (Chinese default)
   }
 
   request.nextUrl.pathname = `/${locale}${pathname}`;
