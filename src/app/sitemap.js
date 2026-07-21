@@ -9,7 +9,8 @@ export default function sitemap() {
     '/analysis',
     '/scanner',
     '/strategy',
-    '/ramalan'
+    '/ramalan',
+    '/zodiac'
   ];
 
   const sitemapEntries = [];
