@@ -3,42 +3,49 @@ import HomeClient from '../HomeClient';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
-  title: 'NEO4D LIVE | 实时4D开彩结果 Magnum, Sports Toto, Da Ma Cai, Singapore Pools',
-  description: '全马最快、无广告的4D开彩结果网站。提供 Magnum万能、Sports Toto多多、Da Ma Cai大马彩、新加坡博彩等实时开彩数据与大伯公梦境解析吉数。',
-  keywords: 'keputusan 4d, live 4d results, check4d, 4d results today, magnum 4d, sports toto, da ma cai, singapore pools, sandakan 4d, special cashsweep, sabah 88, neo4d, 大伯公千字图',
-  alternates: {
-    canonical: 'https://neo4d.live',
-  },
-  verification: {
-    google: 'b4QjddVCf67G-frXKSLfZj7NlNJKO5rJEVpkurOhlYQ',
-    other: {
-      'msvalidate.01': '9CE1B0F2F43E22E0706B879AE521A68A',
+export async function generateMetadata({ params }) {
+  const { lang } = await params;
+  const isZh = lang === 'zh';
+
+  return {
+    title: 'NEO4D LIVE | 实时4D开彩结果 Magnum, Sports Toto, Da Ma Cai, Singapore Pools',
+    description: isZh
+      ? '全马最快、无广告的4D开彩结果网站。提供 Magnum万能、Sports Toto多多、Da Ma Cai大马彩、新加坡博彩等实时开彩数据与大伯公梦境解析吉数。'
+      : 'Malaysia fastest ad-free live 4D results. Real-time Magnum 4D, Sports Toto, Da Ma Cai, Singapore Pools draw results with dream number analysis.',
+    keywords: 'keputusan 4d, live 4d results, check4d, 4d results today, magnum 4d, sports toto, da ma cai, singapore pools, sandakan 4d, special cashsweep, sabah 88, neo4d, 大伯公千字图',
+    alternates: {
+      // Each language page declares its OWN canonical — never the redirecting root
+      canonical: `https://neo4d.live/${lang}`,
+      languages: {
+        'zh': 'https://neo4d.live/zh',
+        'en': 'https://neo4d.live/en',
+        'x-default': 'https://neo4d.live/zh',
+      },
     },
-  },
-  openGraph: {
-    title: 'NEO4D LIVE | 实时4D开彩结果 (Magnum, Sports Toto, Da Ma Cai)',
-    description: '全马最快、无广告、无弹窗的4D实时开彩数据中心。提供即时开彩通知、生肖吉数、大伯公千字图梦境解析。',
-    url: 'https://neo4d.live',
-    siteName: 'NEO4D LIVE',
-    images: [
-      {
-        url: 'https://neo4d.live/og-premium.png',
-        width: 1200,
-        height: 630,
-        alt: 'NEO4D LIVE - 无广告实时4D开彩',
-      }
-    ],
-    type: 'website',
-    locale: 'zh_CN',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'NEO4D LIVE | 实时4D开彩结果',
-    description: '全马最快、无广告的4D实时开彩数据中心。提供即时开彩通知与大伯公梦境解析。',
-    images: ['https://neo4d.live/og-premium.png'],
-  }
-};
+    verification: {
+      google: 'b4QjddVCf67G-frXKSLfZj7NlNJKO5rJEVpkurOhlYQ',
+      other: {
+        'msvalidate.01': '9CE1B0F2F43E22E0706B879AE521A68A',
+      },
+    },
+    openGraph: {
+      title: 'NEO4D LIVE | 实时4D开彩结果 (Magnum, Sports Toto, Da Ma Cai)',
+      description: '全马最快、无广告、无弹窗的4D实时开彩数据中心。提供即时开彩通知、生肖吉数、大伯公千字图梦境解析。',
+      url: `https://neo4d.live/${lang}`,
+      siteName: 'NEO4D LIVE',
+      images: [{ url: 'https://neo4d.live/og-premium.png', width: 1200, height: 630, alt: 'NEO4D LIVE - 无广告实时4D开彩' }],
+      type: 'website',
+      locale: isZh ? 'zh_CN' : 'en_MY',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'NEO4D LIVE | 实时4D开彩结果',
+      description: '全马最快、无广告的4D实时开彩数据中心。提供即时开彩通知与大伯公梦境解析。',
+      images: ['https://neo4d.live/og-premium.png'],
+    },
+  };
+}
+
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
