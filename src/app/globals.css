@@ -2,8 +2,8 @@
 
 @layer base {
   body {
-    background-color: #faf8f5;
-    color: #1e293b;
+    background-color: #020617;
+    color: #f8fafc;
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     /* Removed background-attachment:fixed — causes GPU repaint on every scroll (major mobile lag) */
@@ -30,16 +30,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #020617;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #1e293b;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #334155;
 }
 
 /* Glassmorphism Styles mapped to Light Theme */

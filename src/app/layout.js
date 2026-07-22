@@ -111,28 +111,33 @@ export default function RootLayout({ children }) {
         </Script>
         <Script id="cache-killer" strategy="afterInteractive">
           {`
-            if ('serviceWorker' in navigator) {
-              navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                var unregisteredAny = false;
-                var promises = registrations.map(function(reg) {
-                  return reg.unregister().then(function(success) {
-                    if (success) unregisteredAny = true;
+            try {
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  if (!registrations || registrations.length === 0) return;
+                  var unregisteredAny = false;
+                  var promises = registrations.map(function(reg) {
+                    return reg.unregister().then(function(success) {
+                      if (success) unregisteredAny = true;
+                    }).catch(function(err) {});
                   });
-                });
-                Promise.all(promises).then(function() {
-                  if (unregisteredAny) {
-                    console.log('Active Service Worker detected and killed. Reloading for fresh live network files...');
-                    window.location.reload();
-                  }
-                });
-              });
-            }
-            if ('caches' in window) {
-              caches.keys().then(function(names) {
-                names.forEach(function(name) {
-                  caches.delete(name);
-                });
-              });
+                  Promise.all(promises).then(function() {
+                    if (unregisteredAny) {
+                      console.log('Active Service Worker detected and killed. Reloading for fresh live network files...');
+                      window.location.reload();
+                    }
+                  }).catch(function(err) {});
+                }).catch(function(err) {});
+              }
+              if ('caches' in window) {
+                caches.keys().then(function(names) {
+                  names.forEach(function(name) {
+                    caches.delete(name).catch(function(err) {});
+                  });
+                }).catch(function(err) {});
+              }
+            } catch (e) {
+              console.error('Cache killer error caught:', e);
             }
           `}
         </Script>
