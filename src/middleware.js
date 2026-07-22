@@ -28,7 +28,11 @@ export function middleware(request) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameHasLocale) return;
+  if (pathnameHasLocale) {
+    const response = NextResponse.next();
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+    return response;
+  }
 
   // Language negotiation: check zh FIRST — our primary audience is Malaysian Chinese.
   const acceptLanguage = request.headers.get('accept-language');
@@ -43,7 +47,9 @@ export function middleware(request) {
   }
 
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  const redirectResponse = NextResponse.redirect(request.nextUrl);
+  redirectResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  return redirectResponse;
 }
 
 export const config = {
