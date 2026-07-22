@@ -307,11 +307,24 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
   };
 
   useEffect(() => {
-    // Register PWA Service Worker for offline support and instant shell loading
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js')
-        .then((reg) => console.log('NEO4D Service Worker registered:', reg.scope))
-        .catch((err) => console.error('NEO4D Service Worker registration failed:', err));
+    // Forcefully unregister all service workers and wipe cache storage to bypass local PWA caching loops
+    if (typeof window !== 'undefined') {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (let registration of registrations) {
+            registration.unregister().then((success) => {
+              if (success) console.log('ServiceWorker unregistered successfully');
+            });
+          }
+        });
+      }
+      if ('caches' in window) {
+        caches.keys().then((names) => {
+          for (let name of names) {
+            caches.delete(name);
+          }
+        });
+      }
     }
 
     if (!initialResults) {
