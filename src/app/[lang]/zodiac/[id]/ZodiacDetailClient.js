@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const zodiacDataMap = {
@@ -127,6 +128,12 @@ const zodiacDataMap = {
 
 export default function ZodiacDetailClient({ id, lang }) {
   const zodiac = zodiacDataMap[id];
+  const [cacheVersion, setCacheVersion] = useState('');
+
+  useEffect(() => {
+    setCacheVersion(Date.now().toString());
+  }, []);
+
   const todayStr = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
   const dateIso = new Date().toISOString().split('T')[0];
 
@@ -242,7 +249,7 @@ export default function ZodiacDetailClient({ id, lang }) {
                 属{zodiac.name}者今日的偏财偏向于“动水”磁场。打开发财箱可以让你的个人运势产生共鸣，摇出属于你的第二组头奖预测号码。
               </p>
               <Link 
-                href={`/${lang}/telegram-supervip`}
+                href={`/${lang}/telegram-supervip${cacheVersion ? `?v=${cacheVersion}` : ''}`}
                 className="mt-4 inline-block bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black px-8 py-3.5 rounded-xl shadow transition-transform hover:scale-105 active:scale-95 text-xs uppercase tracking-wider"
               >
                 🧧 摇取属{zodiac.name}专属发财箱

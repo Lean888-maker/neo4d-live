@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const zodiacList = [
@@ -20,6 +20,11 @@ const zodiacList = [
 
 export default function ZodiacClient({ lang }) {
   const [selectedZodiac, setSelectedZodiac] = useState(null);
+  const [cacheVersion, setCacheVersion] = useState('');
+
+  useEffect(() => {
+    setCacheVersion(Date.now().toString());
+  }, []);
 
   const todayStr = new Date().toISOString().split('T')[0];
 
@@ -152,7 +157,7 @@ export default function ZodiacClient({ lang }) {
 
               {/* Action Button */}
               <Link 
-                href={`/${lang}/telegram-supervip`}
+                href={`/${lang}/telegram-supervip${cacheVersion ? `?v=${cacheVersion}` : ''}`}
                 className="w-full bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-black py-4 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.02] active:scale-95 text-center uppercase tracking-wider text-sm"
               >
                 🧧 打开发财箱求取第二组吉数

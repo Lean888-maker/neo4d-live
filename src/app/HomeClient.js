@@ -109,9 +109,11 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
 
   // Language state (defaults to route param)
   const [lang, setLang] = useState(initialLang);
+  const [cacheVersion, setCacheVersion] = useState('');
 
   useEffect(() => {
     setLang(initialLang);
+    setCacheVersion(Date.now().toString());
   }, [initialLang]);
 
   // Tab state
@@ -552,31 +554,31 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-5xl mx-auto relative z-10">
             <Link 
-              href={`/${lang}/scanner`}
+              href={`/${lang}/scanner${cacheVersion ? `?v=${cacheVersion}` : ''}`}
               className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
               <span className="text-lg">📷</span> <span className="whitespace-nowrap">{lang === 'zh' ? '扫票对奖' : 'Scan Ticket'}</span>
             </Link>
             <Link 
-              href={`/${lang}/predictions`}
+              href={`/${lang}/predictions${cacheVersion ? `?v=${cacheVersion}` : ''}`}
               className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
               <span className="text-lg">📈</span> <span className="whitespace-nowrap">{lang === 'zh' ? '万字预测' : 'AI Predictions'}</span>
             </Link>
             <Link 
-              href={`/${lang}/analysis`}
+              href={`/${lang}/analysis${cacheVersion ? `?v=${cacheVersion}` : ''}`}
               className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
               <span className="text-lg">📊</span> <span className="whitespace-nowrap">{lang === 'zh' ? '频数分析' : 'Stats Analyzer'}</span>
             </Link>
             <Link 
-              href={`/${lang}/dreams`}
+              href={`/${lang}/dreams${cacheVersion ? `?v=${cacheVersion}` : ''}`}
               className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px]"
             >
               <span className="text-lg">🔮</span> <span className="whitespace-nowrap">{lang === 'zh' ? '千字图' : 'Dream Dict'}</span>
             </Link>
             <Link 
-              href={`/${lang}/zodiac`}
+              href={`/${lang}/zodiac${cacheVersion ? `?v=${cacheVersion}` : ''}`}
               className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-2xl border-2 border-amber-500/30 font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 hover:border-amber-400/70 transition-all cursor-pointer text-center min-h-[64px] col-span-2 sm:col-span-1"
             >
               <span className="text-lg">🧧</span> <span className="whitespace-nowrap">{lang === 'zh' ? '生肖吉数' : 'Zodiac'}</span>
