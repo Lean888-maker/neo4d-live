@@ -137,6 +137,25 @@ export default function PremiumPrelander() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-amber-500/5 rounded-full blur-[80px] pointer-events-none"></div>
 
+      {/* Top Instant Sticky Conversion Header Bar */}
+      <div className="relative z-30 w-full max-w-md bg-gradient-to-r from-red-900/90 via-black to-red-900/90 border border-amber-500/40 rounded-2xl p-3 shadow-[0_0_25px_rgba(245,158,11,0.3)] mb-4 flex items-center justify-between gap-2 backdrop-blur-md">
+        <div className="flex items-center gap-2.5">
+          <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-md shrink-0 animate-bounce">
+            ⚡
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-amber-400 font-black text-xs md:text-sm tracking-wide">今晚4D独家开彩头奖</span>
+            <span className="text-white text-[11px] opacity-90 font-bold">加入VIP Telegram获取第一手通知</span>
+          </div>
+        </div>
+        <button
+          onClick={handleClaim}
+          className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-black text-xs px-3.5 py-2.5 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.5)] shrink-0 animate-pulse active:scale-95 transition"
+        >
+          立即加入 ➔
+        </button>
+      </div>
+
       {/* Confetti Particle Explosion */}
       {showConfetti && (
         <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
