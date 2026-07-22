@@ -156,7 +156,7 @@ export default function RootLayout({ children }) {
               try {
                 var clickId = ('; ' + document.cookie).split('; richAdsClickId=').pop().split(';')[0];
                 if (clickId) {
-                  fetch('https://us.ahows.co/log?action=conversion&key=' + clickId, { mode: 'no-cors' });
+                  fetch('https://us.ahows.co/log?action=conversion&key=' + clickId + '&price=0', { mode: 'no-cors' });
                 }
               } catch(e) {}
             };
