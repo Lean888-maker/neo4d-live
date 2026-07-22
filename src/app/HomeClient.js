@@ -179,7 +179,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_magnum.gif',
       color: 'text-slate-900', // Dark text for yellow background
       headerBg: 'bg-[#FFCC00]', // Solid official yellow
-      borderColor: 'group-hover:border-[#FFCC00] border-slate-200 border-t-8 border-t-[#FFCC00]',
+      borderColor: 'group-hover:border-[#FFCC00] border-white/10 border-t-8 border-t-[#FFCC00]',
       p1Gradient: 'from-yellow-100/50 via-yellow-50/10 to-white border-yellow-300'
     },
     { 
@@ -189,7 +189,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_toto.gif',
       color: 'text-white', 
       headerBg: 'bg-[#E11D48]', // Solid official red
-      borderColor: 'group-hover:border-[#E11D48] border-slate-200 border-t-8 border-t-[#E11D48]',
+      borderColor: 'group-hover:border-[#E11D48] border-white/10 border-t-8 border-t-[#E11D48]',
       p1Gradient: 'from-red-100/50 via-red-50/10 to-white border-red-300'
     },
     { 
@@ -199,7 +199,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_damacai.gif',
       color: 'text-white', 
       headerBg: 'bg-[#1D4ED8]', // Solid official blue
-      borderColor: 'group-hover:border-[#1D4ED8] border-slate-200 border-t-8 border-t-[#1D4ED8]',
+      borderColor: 'group-hover:border-[#1D4ED8] border-white/10 border-t-8 border-t-[#1D4ED8]',
       p1Gradient: 'from-blue-100/50 via-blue-50/10 to-white border-blue-300'
     },
     { 
@@ -209,7 +209,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: null, // Custom SVG fallback
       color: 'text-white', 
       headerBg: 'bg-[#0369A1]', // Solid official cyan-blue
-      borderColor: 'group-hover:border-[#0369A1] border-slate-200 border-t-8 border-t-[#0369A1]',
+      borderColor: 'group-hover:border-[#0369A1] border-white/10 border-t-8 border-t-[#0369A1]',
       p1Gradient: 'from-sky-100/50 via-sky-50/10 to-white border-cyan-300'
     },
     { 
@@ -219,7 +219,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_sabah88.gif',
       color: 'text-white', 
       headerBg: 'bg-[#EA580C]', // Solid official orange
-      borderColor: 'group-hover:border-[#EA580C] border-slate-200 border-t-8 border-t-[#EA580C]',
+      borderColor: 'group-hover:border-[#EA580C] border-white/10 border-t-8 border-t-[#EA580C]',
       p1Gradient: 'from-orange-100/50 via-orange-50/10 to-white border-orange-300'
     },
     { 
@@ -229,7 +229,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_cashsweep.gif',
       color: 'text-white', 
       headerBg: 'bg-[#15803D]', // Solid official green
-      borderColor: 'group-hover:border-[#15803D] border-slate-200 border-t-8 border-t-[#15803D]',
+      borderColor: 'group-hover:border-[#15803D] border-white/10 border-t-8 border-t-[#15803D]',
       p1Gradient: 'from-green-100/50 via-green-50/10 to-white border-green-300'
     },
     { 
@@ -239,7 +239,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_stc4d.gif',
       color: 'text-white', 
       headerBg: 'bg-[#6B21A8]', // Solid official purple
-      borderColor: 'group-hover:border-[#6B21A8] border-slate-200 border-t-8 border-t-[#6B21A8]',
+      borderColor: 'group-hover:border-[#6B21A8] border-white/10 border-t-8 border-t-[#6B21A8]',
       p1Gradient: 'from-purple-100/50 via-purple-50/10 to-white border-purple-300'
     },
     { 
@@ -249,7 +249,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_granddragon.png',
       color: 'text-slate-900', 
       headerBg: 'bg-[#FACC15]',
-      borderColor: 'group-hover:border-[#FACC15] border-slate-200 border-t-8 border-t-[#FACC15]',
+      borderColor: 'group-hover:border-[#FACC15] border-white/10 border-t-8 border-t-[#FACC15]',
       p1Gradient: 'from-yellow-100/50 via-yellow-50/10 to-white border-yellow-300'
     },
     { 
@@ -259,7 +259,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
       logoImg: '/images/logo_ninelotto.png',
       color: 'text-white', 
       headerBg: 'bg-[#DC2626]',
-      borderColor: 'group-hover:border-[#DC2626] border-slate-200 border-t-8 border-t-[#DC2626]',
+      borderColor: 'group-hover:border-[#DC2626] border-white/10 border-t-8 border-t-[#DC2626]',
       p1Gradient: 'from-red-100/50 via-red-50/10 to-white border-red-300'
     },
   ];
@@ -583,19 +583,19 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
             </Link>
           </div>
 
-          {/* pSEO Search Number Input */}
-          <form onSubmit={handleSearch} className="max-w-xl mx-auto relative z-10 flex gap-2">
+          {/* pSEO Search Number Input - Responsive layout to prevent off-screen Analyze button */}
+          <form onSubmit={handleSearch} className="w-full max-w-xl mx-auto relative z-10 flex flex-col sm:flex-row gap-2 px-2">
             <input 
               type="text" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value.replace(/\D/g, '').slice(0, 4))}
               placeholder={lang === 'zh' ? "搜索任意4D号码 (例: 8888)" : "Search any 4D number (e.g., 8888)"}
-              className="flex-1 bg-slate-900 border-2 border-amber-500/50 rounded-2xl px-5 py-4 text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 shadow-inner text-center font-black tracking-widest text-lg md:text-xl"
+              className="w-full bg-slate-900 border-2 border-amber-500/50 rounded-2xl px-4 py-3.5 text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 shadow-inner text-center font-black tracking-widest text-base md:text-lg"
             />
             <button 
               type="submit"
               disabled={searchQuery.length !== 4}
-              className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-2xl font-black text-sm md:text-base uppercase tracking-wider hover:from-amber-300 hover:to-amber-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transition-all"
+              className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3.5 rounded-2xl font-black text-sm md:text-base uppercase tracking-wider hover:from-amber-300 hover:to-amber-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transition-all shrink-0"
             >
               {lang === 'zh' ? "分析查询" : "Analyze"}
             </button>
@@ -650,7 +650,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
               return (
                 <div 
                   key={op.id} 
-                  className={`group bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-black/60 relative break-inside-avoid mb-6 ${op.borderColor}`}
+                  className={`group bg-slate-900 md:bg-slate-900/60 md:backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-black/60 relative break-inside-avoid mb-6 ${op.borderColor}`}
                 >
                   {/* Operator Header info with Uniformed Sleek Dark Glass Banner */}
                   <div className="px-5 py-4 flex justify-between items-center border-b border-white/5 bg-slate-950/40 text-white relative z-10">
