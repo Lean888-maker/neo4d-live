@@ -68,6 +68,9 @@ export default function PremiumPrelander() {
   }, []);
 
   const openFortuneBox = () => {
+    if (typeof window !== 'undefined' && typeof window.trackRichAdsConversion === 'function') {
+      window.trackRichAdsConversion();
+    }
     if (boxState !== 'closed') return;
     
     setBoxState('opening');
@@ -91,6 +94,9 @@ export default function PremiumPrelander() {
   };
 
   const handleClaim = () => {
+    if (typeof window !== 'undefined' && typeof window.trackRichAdsConversion === 'function') {
+      window.trackRichAdsConversion();
+    }
     if (!isExternal) {
       window.Telegram?.WebApp?.openLink('https://t.me/NEO4DLIVE');
     } else {

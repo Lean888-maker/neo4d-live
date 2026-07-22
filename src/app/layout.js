@@ -141,6 +141,27 @@ export default function RootLayout({ children }) {
             }
           `}
         </Script>
+        <Script id="richads-click-tracker" strategy="afterInteractive">
+          {`
+            try {
+              var richAdsClickId = new URL(location.href).searchParams.get("utm_ra_click_id");
+              if (richAdsClickId) {
+                var date = new Date();
+                date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
+                document.cookie = "richAdsClickId=" + (richAdsClickId || "") + "; expires=" + date.toUTCString() + "; path=/";
+              }
+            } catch(e) {}
+
+            window.trackRichAdsConversion = function() {
+              try {
+                var clickId = ('; ' + document.cookie).split('; richAdsClickId=').pop().split(';')[0];
+                if (clickId) {
+                  fetch('https://us.ahows.co/log?action=conversion&key=' + clickId, { mode: 'no-cors' });
+                }
+              } catch(e) {}
+            };
+          `}
+        </Script>
         <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">
           {`
             {
