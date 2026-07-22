@@ -639,8 +639,8 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                   key={op.id} 
                   className={`group bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-black/60 relative break-inside-avoid mb-6 ${op.borderColor}`}
                 >
-                  {/* Operator Header info with Solid Brand Colored Banner */}
-                  <div className={`px-5 py-4 flex justify-between items-center border-b border-black/10 ${op.headerBg} ${op.color}`}>
+                  {/* Operator Header info with Uniformed Sleek Dark Glass Banner */}
+                  <div className="px-5 py-4 flex justify-between items-center border-b border-white/5 bg-slate-950/40 text-white relative z-10">
                     <div className="flex items-center gap-3">
                       {op.logoImg ? (
                         <img 
@@ -658,7 +658,18 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                         </div>
                       )}
                       <div>
-                        <h3 className="font-black text-base md:text-lg tracking-tight uppercase">
+                        <h3 className="font-black text-base md:text-lg tracking-tight uppercase flex items-center gap-2">
+                          <span className={`h-2.5 w-2.5 rounded-full shrink-0 ${
+                            op.id === 'magnum' ? 'bg-[#FFCC00] shadow-[0_0_8px_#FFCC00]' :
+                            op.id === 'toto' ? 'bg-[#E11D48] shadow-[0_0_8px_#E11D48]' :
+                            op.id === 'damacai' ? 'bg-[#1D4ED8] shadow-[0_0_8px_#1D4ED8]' :
+                            op.id === 'singapore' ? 'bg-[#0369A1] shadow-[0_0_8px_#0369A1]' :
+                            op.id === 'sabah' ? 'bg-[#EA580C] shadow-[0_0_8px_#EA580C]' :
+                            op.id === 'sarawak' ? 'bg-[#15803D] shadow-[0_0_8px_#15803D]' :
+                            op.id === 'sandakan' ? 'bg-[#6B21A8] shadow-[0_0_8px_#6B21A8]' :
+                            op.id === 'granddragon' ? 'bg-[#FACC15] shadow-[0_0_8px_#FACC15]' :
+                            op.id === 'ninelotto' ? 'bg-[#DC2626] shadow-[0_0_8px_#DC2626]' : 'bg-slate-400'
+                          }`}></span>
                           <span className="font-black">{operatorName}</span>
                         </h3>
                         <p className="text-xs md:text-sm opacity-95 font-bold uppercase tracking-wider mt-0.5">
