@@ -674,11 +674,10 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
 
                   {/* High-Contrast Bold Prize Display */}
                   <div className="p-5 space-y-3 bg-transparent">
-                    
-                    {/* 1st Prize - Super Sized */}
-                    <div className={`flex flex-col p-4 rounded-xl border bg-gradient-to-br ${op.p1Gradient} relative overflow-hidden group/prize`}>
+                    {/* 1st Prize - Clean Dark theme with glowing gold numbers */}
+                    <div className="flex flex-col p-4 rounded-xl border border-amber-500/40 bg-slate-950/60 relative overflow-hidden group/prize">
                       <div className="flex justify-between items-center relative z-10">
-                        <span className="text-black text-sm md:text-base font-black uppercase tracking-widest flex items-center gap-1.5">
+                        <span className="text-amber-500 text-xs md:text-sm font-black uppercase tracking-widest flex items-center gap-1.5">
                           {t[lang].prize1}
                         </span>
                         <button 
@@ -691,7 +690,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           </svg>
                         </button>
                       </div>
-                      <span className="font-number text-6xl md:text-[5.5rem] text-center text-black tracking-[0.05em] py-3 drop-shadow-md">
+                      <span className="font-number text-6xl md:text-[5.5rem] text-center text-amber-400 tracking-[0.05em] py-3 drop-shadow-md font-black">
                         {data?.numbers?.first || '----'}
                       </span>
                     </div>
@@ -728,23 +727,29 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                           <span className="h-2.5 w-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)] animate-pulse"></span>
                           {t[lang].jackpot}
                         </h4>
-                        <div className={`grid gap-3 ${data?.jackpots?.jp3 ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
+                        <div className="grid gap-3 grid-cols-1 sm:grid-cols-2">
                           {data?.jackpots?.jp1 && (
-                            <div className="flex flex-col">
-                              <span className="text-[10px] text-amber-600/80 uppercase font-bold tracking-widest">Jackpot 1</span>
-                              <span className="text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5">{data.jackpots.jp1}</span>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-[9px] md:text-[10px] text-amber-600/80 uppercase font-bold tracking-widest truncate">
+                                {op.id === 'magnum' ? 'Magnum 4D Jackpot 1' : op.id === 'toto' ? 'Toto 4D Jackpot 1' : op.id === 'damacai' ? 'Da Ma Cai 1+3D JP1' : 'Jackpot 1'}
+                              </span>
+                              <span className="text-lg md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5 break-all">{data.jackpots.jp1}</span>
                             </div>
                           )}
                           {data?.jackpots?.jp2 && (
-                            <div className="flex flex-col">
-                              <span className="text-[10px] text-amber-600/80 uppercase font-bold tracking-widest">Jackpot 2</span>
-                              <span className="text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5">{data.jackpots.jp2}</span>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-[9px] md:text-[10px] text-amber-600/80 uppercase font-bold tracking-widest truncate">
+                                {op.id === 'magnum' ? 'Magnum 4D Jackpot 2' : op.id === 'toto' ? 'Toto 4D Jackpot 2' : op.id === 'damacai' ? 'Da Ma Cai 1+3D JP2' : 'Jackpot 2'}
+                              </span>
+                              <span className="text-lg md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5 break-all">{data.jackpots.jp2}</span>
                             </div>
                           )}
                           {data?.jackpots?.jp3 && (
-                            <div className="flex flex-col">
-                              <span className="text-[10px] text-amber-600/80 uppercase font-bold tracking-widest">Jackpot 3</span>
-                              <span className="text-xl md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5">{data.jackpots.jp3}</span>
+                            <div className="flex flex-col min-w-0 col-span-1 sm:col-span-2 border-t border-amber-500/10 pt-2 mt-1">
+                              <span className="text-[9px] md:text-[10px] text-amber-600/80 uppercase font-bold tracking-widest truncate">
+                                {op.id === 'damacai' ? 'Da Ma Cai 3D Jackpot' : 'Jackpot 3'}
+                              </span>
+                              <span className="text-lg md:text-2xl font-black text-amber-500 drop-shadow-sm mt-0.5 break-all">{data.jackpots.jp3}</span>
                             </div>
                           )}
                         </div>
@@ -768,10 +773,19 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                       <div className="flex flex-col gap-3">
                         {Object.values(data.jackpotGames).filter(Boolean).map((game, i) => (
                           <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-4 shadow-sm backdrop-blur-sm relative group/lotto">
-                            <h4 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-1">
+                            <h4 className="text-sm font-bold text-slate-300 uppercase tracking-widest mb-1.5 flex flex-col md:flex-row justify-between items-start md:items-center gap-1">
                               <span>{game.name}</span>
-                              {game.jp1 && <span className="text-amber-400 font-black">{game.jp1}</span>}
                             </h4>
+                            
+                            {/* Render JP1, JP2, and JP3 for additional games like Da Ma Cai 3D/Lottos in a clean list to prevent overlapping */}
+                            {(game.jp1 || game.jp2 || game.jp3) && (
+                              <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3 text-[11px] font-bold text-amber-500 bg-amber-500/5 border border-amber-500/10 rounded-lg p-2.5">
+                                {game.jp1 && <div>Jackpot 1: <span className="text-white font-mono">{game.jp1}</span></div>}
+                                {game.jp2 && <div>Jackpot 2: <span className="text-white font-mono">{game.jp2}</span></div>}
+                                {game.jp3 && <div>Jackpot 3: <span className="text-white font-mono">{game.jp3}</span></div>}
+                              </div>
+                            )}
+
                             <div className="flex flex-wrap gap-2">
                               {game.numbers.map((num, idx) => (
                                 <span key={idx} className="w-auto px-3 h-8 md:h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-black text-white text-sm md:text-base shadow-inner">
