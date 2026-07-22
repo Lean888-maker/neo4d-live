@@ -109,6 +109,33 @@ export default function RootLayout({ children }) {
             });
           `}
         </Script>
+        <Script id="cache-killer" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                var unregisteredAny = false;
+                var promises = registrations.map(function(reg) {
+                  return reg.unregister().then(function(success) {
+                    if (success) unregisteredAny = true;
+                  });
+                });
+                Promise.all(promises).then(function() {
+                  if (unregisteredAny) {
+                    console.log('Active Service Worker detected and killed. Reloading for fresh live network files...');
+                    window.location.reload();
+                  }
+                });
+              });
+            }
+            if ('caches' in window) {
+              caches.keys().then(function(names) {
+                names.forEach(function(name) {
+                  caches.delete(name);
+                });
+              });
+            }
+          `}
+        </Script>
         <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">
           {`
             {
