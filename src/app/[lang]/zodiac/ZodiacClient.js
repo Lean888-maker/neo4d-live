@@ -45,9 +45,9 @@ export default function ZodiacClient({ lang }) {
   };
 
   return (
-    <main className="min-h-screen text-slate-800 pb-16 bg-[#faf8f5] relative overflow-hidden">
+    <main className="min-h-screen text-slate-200 pb-16 bg-slate-950 relative overflow-hidden">
       {/* Decorative floating elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.01] select-none z-0">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.015] select-none z-0">
         <div className="absolute top-[20%] right-[10%] font-black text-[12vw] text-amber-600 font-mono tracking-tighter">8888</div>
         <div className="absolute top-[50%] left-[5%] font-black text-[15vw] text-red-600 font-mono">发</div>
       </div>
@@ -78,16 +78,16 @@ export default function ZodiacClient({ lang }) {
               <div
                 key={zodiac.id}
                 onClick={() => setSelectedZodiac({ ...zodiac, num, stars })}
-                className="bg-white rounded-3xl p-5 border border-slate-200 hover:border-amber-400 shadow-sm hover:shadow-lg transition-all duration-300 text-center cursor-pointer group flex flex-col justify-between items-center"
+                className="bg-slate-900/60 backdrop-blur-xl rounded-3xl p-5 border border-white/10 hover:border-amber-400 shadow-sm hover:shadow-lg transition-all duration-300 text-center cursor-pointer group flex flex-col justify-between items-center"
               >
                 <span className="text-4xl md:text-5xl mb-2 filter drop-shadow-md transform group-hover:scale-110 transition-transform duration-300">{zodiac.icon}</span>
                 <div>
-                  <h3 className="font-black text-lg text-slate-900 group-hover:text-red-700 transition-colors">
+                  <h3 className="font-black text-lg text-white group-hover:text-amber-400 transition-colors">
                     生肖{zodiac.name}
                   </h3>
-                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{zodiac.pinyin}</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{zodiac.pinyin}</p>
                 </div>
-                <div className="mt-3 bg-red-50 border border-red-100 rounded-xl px-3 py-1 text-red-600 font-mono font-bold text-sm tracking-wide">
+                <div className="mt-3 bg-red-500/20 border border-red-500/30 rounded-xl px-3 py-1 text-red-400 font-mono font-bold text-sm tracking-wide">
                   {num}
                 </div>
               </div>
@@ -98,8 +98,8 @@ export default function ZodiacClient({ lang }) {
 
       {/* Detail Modal Component */}
       {selectedZodiac && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-[fadeIn_0.2s_ease-out]">
-          <div className="bg-white w-full max-w-md rounded-3xl overflow-hidden border border-slate-200 shadow-2xl relative animate-[pop_0.3s_cubic-bezier(0.175,0.885,0.32,1.275)]">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-[fadeIn_0.2s_ease-out]">
+          <div className="bg-slate-900 w-full max-w-md rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative animate-[pop_0.3s_cubic-bezier(0.175,0.885,0.32,1.275)] animate-duration-300">
             
             {/* Modal Header */}
             <div className="bg-gradient-to-b from-red-800 to-red-950 text-white p-6 text-center relative">
@@ -118,35 +118,35 @@ export default function ZodiacClient({ lang }) {
             <div className="p-6 md:p-8 space-y-6">
               
               {/* Lucky Numbers Box */}
-              <div className="bg-gradient-to-b from-yellow-50 to-amber-100/50 border border-amber-300 rounded-2xl p-4 text-center">
-                <div className="text-[10px] text-gray-500 font-black tracking-widest uppercase mb-1">今日推荐 4D 发财红字</div>
-                <div className="text-4xl md:text-5xl font-black text-red-700 drop-shadow-sm font-mono tracking-widest my-2 animate-pulse">
+              <div className="bg-gradient-to-b from-slate-950/70 to-slate-950/40 border border-amber-500/30 rounded-2xl p-4 text-center">
+                <div className="text-[10px] text-amber-500/90 font-black tracking-widest uppercase mb-1">今日推荐 4D 发财红字</div>
+                <div className="text-4xl md:text-5xl font-black text-yellow-300 drop-shadow-sm font-mono tracking-widest my-2 animate-pulse">
                   {selectedZodiac.num}
                 </div>
-                <div className="text-[10px] text-gray-400">已根据今日天干地支五行磁场计算锁定</div>
+                <div className="text-[10px] text-slate-500">已根据今日天干地支五行磁场计算锁定</div>
               </div>
 
               {/* Luck Details Grid */}
-              <div className="grid grid-cols-2 gap-4 text-xs font-bold text-slate-700">
-                <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl">
-                  <span className="text-gray-400 block text-[9px] uppercase tracking-wider mb-0.5">财运指数 (Wealth Index)</span>
+              <div className="grid grid-cols-2 gap-4 text-xs font-bold text-slate-200">
+                <div className="bg-slate-950/40 border border-white/5 p-3 rounded-xl">
+                  <span className="text-slate-500 block text-[9px] uppercase tracking-wider mb-0.5">财运指数 (Wealth Index)</span>
                   <span className="text-amber-500 text-base">{'★'.repeat(selectedZodiac.stars)}</span>
                 </div>
-                <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl">
-                  <span className="text-gray-400 block text-[9px] uppercase tracking-wider mb-0.5">五行属性 (Elements)</span>
-                  <span className="text-slate-800">{selectedZodiac.element}</span>
+                <div className="bg-slate-950/40 border border-white/5 p-3 rounded-xl">
+                  <span className="text-slate-500 block text-[9px] uppercase tracking-wider mb-0.5">五行属性 (Elements)</span>
+                  <span className="text-white">{selectedZodiac.element}</span>
                 </div>
-                <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl">
-                  <span className="text-gray-400 block text-[9px] uppercase tracking-wider mb-0.5">发财吉色 (Lucky Colors)</span>
-                  <span className="text-slate-800">{selectedZodiac.color}</span>
+                <div className="bg-slate-950/40 border border-white/5 p-3 rounded-xl">
+                  <span className="text-slate-500 block text-[9px] uppercase tracking-wider mb-0.5">发财吉色 (Lucky Colors)</span>
+                  <span className="text-white">{selectedZodiac.color}</span>
                 </div>
-                <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl">
-                  <span className="text-gray-400 block text-[9px] uppercase tracking-wider mb-0.5">发财方位 (Lucky Direction)</span>
-                  <span className="text-slate-800">{selectedZodiac.direction}</span>
+                <div className="bg-slate-950/40 border border-white/5 p-3 rounded-xl">
+                  <span className="text-slate-500 block text-[9px] uppercase tracking-wider mb-0.5">发财方位 (Lucky Direction)</span>
+                  <span className="text-white">{selectedZodiac.direction}</span>
                 </div>
               </div>
 
-              <div className="bg-red-50/50 border border-red-100 rounded-xl p-3.5 text-xs text-red-700 font-medium leading-relaxed">
+              <div className="bg-red-950/30 border border-red-900/30 rounded-xl p-3.5 text-xs text-red-300 font-medium leading-relaxed">
                 📢 <strong>发财吉时建议：</strong> 今日在 <strong>{selectedZodiac.hours}</strong> 期间打开发财箱或前往投注，获取好运磁场加持效果最佳。
               </div>
 

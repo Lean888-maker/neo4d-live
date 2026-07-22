@@ -208,14 +208,14 @@ export default function PremiumPrelander() {
             <div className="absolute inset-0 flex items-center justify-center animate-[pop_0.6s_cubic-bezier(0.175,0.885,0.32,1.275)]">
               {/* Massive Golden Ray */}
               <div className="absolute w-64 h-64 bg-amber-400/25 rounded-full filter blur-3xl animate-pulse"></div>
-              {/* Premium Ticket Display */}
-              <div className="w-56 h-36 bg-gradient-to-b from-yellow-50 via-yellow-100 to-amber-200 text-black rounded-xl border-4 border-amber-500 shadow-[0_20px_50px_rgba(245,158,11,0.6)] flex flex-col items-center justify-between p-4 relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-black text-xs px-4 py-0.5 rounded-full border border-amber-400 shadow-md">NEO4D VIP</div>
-                <div className="text-gray-600 text-xs font-bold tracking-widest mt-2">今日推荐必中吉数</div>
-                <div className="text-4xl md:text-5xl font-black tracking-widest text-red-700 drop-shadow-sm font-mono my-2 animate-pulse">
+              {/* Premium Red Packet Display */}
+              <div className="w-56 h-36 bg-gradient-to-b from-red-600 via-red-700 to-red-850 text-white rounded-xl border-4 border-amber-500 shadow-[0_20px_50px_rgba(245,158,11,0.6)] flex flex-col items-center justify-between p-4 relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-black text-xs px-4 py-0.5 rounded-full border border-amber-300 shadow-md">NEO4D VIP</div>
+                <div className="text-amber-200 text-xs font-bold tracking-widest mt-2">今日推荐必中吉数</div>
+                <div className="text-4xl md:text-5xl font-black tracking-widest text-yellow-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] font-mono my-2 animate-pulse">
                   {prize}
                 </div>
-                <div className="text-[10px] text-gray-500 border-t border-dashed border-gray-400 w-full text-center pt-1 font-bold">请妥善保存，祝您今晚中奖！</div>
+                <div className="text-[10px] text-red-200 border-t border-dashed border-red-500 w-full text-center pt-1 font-bold">请妥善保存，祝您今晚中奖！</div>
               </div>
             </div>
           )}

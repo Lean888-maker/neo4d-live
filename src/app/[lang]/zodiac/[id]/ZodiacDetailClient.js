@@ -149,9 +149,9 @@ export default function ZodiacDetailClient({ id, lang }) {
   ];
 
   return (
-    <main className="min-h-screen text-slate-800 pb-16 bg-[#faf8f5] relative overflow-hidden">
+    <main className="min-h-screen text-slate-200 pb-16 bg-slate-950 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.01] select-none z-0">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.015] select-none z-0">
         <div className="absolute top-[15%] left-[5%] font-black text-[15vw] text-red-600 font-mono">吉</div>
         <div className="absolute top-[60%] right-[5%] font-black text-[12vw] text-amber-500 font-mono">发</div>
       </div>
@@ -174,20 +174,20 @@ export default function ZodiacDetailClient({ id, lang }) {
 
       {/* Main Content Area */}
       <div className="max-w-3xl mx-auto px-4 mt-8 relative z-10">
-        <div className="bg-white rounded-3xl p-6 md:p-10 border border-slate-200 shadow-md space-y-8">
+        <div className="bg-slate-900/60 backdrop-blur-xl rounded-3xl p-6 md:p-10 border border-white/10 shadow-md space-y-8">
           
           {/* Top Intro Card */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100">
-            <span className="text-7xl md:text-8xl p-4 bg-red-50 rounded-full border border-red-100 filter drop-shadow-md">{zodiac.icon}</span>
+          <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-white/5">
+            <span className="text-7xl md:text-8xl p-4 bg-red-950/30 rounded-full border border-red-900/30 filter drop-shadow-md">{zodiac.icon}</span>
             <div className="text-center sm:text-left space-y-2">
-              <h2 className="text-2xl md:text-3xl font-black text-slate-900">
+              <h2 className="text-2xl md:text-3xl font-black text-white">
                 生肖属{zodiac.name} ({zodiac.pinyin})
               </h2>
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                <span className="bg-amber-100 text-amber-800 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border border-amber-200">
+                <span className="bg-amber-500/20 text-amber-300 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border border-amber-500/30">
                   五行: {zodiac.element}
                 </span>
-                <span className="bg-red-100 text-red-800 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border border-red-200">
+                <span className="bg-red-500/20 text-red-300 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border border-red-500/30">
                   吉时: {zodiac.hours}
                 </span>
               </div>
@@ -196,27 +196,27 @@ export default function ZodiacDetailClient({ id, lang }) {
 
           {/* Detailed Forecast Paragraphs (SEO Content Richness) */}
           <div className="space-y-4">
-            <h3 className="text-lg font-black text-slate-900 border-l-4 border-red-600 pl-2">
+            <h3 className="text-lg font-black text-white border-l-4 border-red-600 pl-2">
               今日运势详析 (Daily Forecast)
             </h3>
-            <p className="text-sm md:text-base text-slate-700 leading-relaxed indent-8">
+            <p className="text-sm md:text-base text-slate-300 leading-relaxed indent-8">
               {lang === 'zh' ? zodiac.descZh : zodiac.descEn}
             </p>
-            <p className="text-sm md:text-base text-slate-700 leading-relaxed indent-8">
+            <p className="text-sm md:text-base text-slate-300 leading-relaxed indent-8">
               {lang === 'zh' ? zodiac.adviceZh : zodiac.adviceEn}
             </p>
           </div>
 
           {/* Deterministic Lucky Numbers Grid */}
           <div className="space-y-4">
-            <h3 className="text-lg font-black text-slate-900 border-l-4 border-red-600 pl-2">
+            <h3 className="text-lg font-black text-white border-l-4 border-red-600 pl-2">
               今日专属推荐 4D 吉数 (Your Lucky 4D Picks)
             </h3>
             <div className="grid grid-cols-2 gap-4">
               {luckyNums.map((num, idx) => (
-                <div key={idx} className="bg-gradient-to-b from-yellow-50 to-amber-100/30 border border-amber-300/70 rounded-2xl p-4 text-center hover:border-amber-400 transition-colors shadow-sm">
-                  <span className="text-[10px] text-gray-500 font-black tracking-wider uppercase block mb-1">{num.type}</span>
-                  <span className="text-3xl md:text-4xl font-black text-red-700 font-mono tracking-widest block py-1">
+                <div key={idx} className="bg-slate-950/40 border border-amber-500/30 rounded-2xl p-4 text-center hover:border-amber-400 transition-colors shadow-sm">
+                  <span className="text-[10px] text-amber-500/90 font-black tracking-wider uppercase block mb-1">{num.type}</span>
+                  <span className="text-3xl md:text-4xl font-black text-yellow-300 font-mono tracking-widest block py-1 animate-pulse">
                     {num.val}
                   </span>
                 </div>
@@ -225,9 +225,9 @@ export default function ZodiacDetailClient({ id, lang }) {
           </div>
 
           {/* Personality Traits */}
-          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 space-y-3">
-            <h4 className="font-black text-slate-900 text-sm">🧠 生肖【{zodiac.name}】天生特质 (Zodiac Traits)</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
+          <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-5 space-y-3">
+            <h4 className="font-black text-slate-300 text-sm">🧠 生肖【{zodiac.name}】天生特质 (Zodiac Traits)</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
               {lang === 'zh' ? zodiac.personalityZh : zodiac.personalityEn}
             </p>
           </div>
@@ -251,7 +251,7 @@ export default function ZodiacDetailClient({ id, lang }) {
           </div>
 
           {/* Bottom Disclaimer */}
-          <footer className="pt-6 border-t border-slate-100 text-[10px] text-slate-400 font-medium leading-relaxed text-center">
+          <footer className="pt-6 border-t border-white/5 text-[10px] text-slate-500 font-medium leading-relaxed text-center">
             *声明：本生肖运势及4D预测仅基于传统五行学说及大数据算法娱乐性推算，不构成任何投注建议与保证，请理性娱乐。
           </footer>
         </div>
