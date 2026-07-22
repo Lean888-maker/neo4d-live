@@ -1,7 +1,7 @@
 import { getDailyAIContent } from '../../utils/ai';
 import Link from 'next/link';
 
-export const revalidate = 43200; // Revalidate every 12 hours (Server-Side)
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: '每日大伯公千字图与梦境吉数解析 | NEO4D LIVE',
