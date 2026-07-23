@@ -109,36 +109,24 @@ export default function RootLayout({ children }) {
             });
           `}
         </Script>
-        <Script id="cache-killer" strategy="afterInteractive">
+        <Script id="web-push-subscriber" strategy="afterInteractive">
           {`
             try {
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                  if (!registrations || registrations.length === 0) return;
-                  var unregisteredAny = false;
-                  var promises = registrations.map(function(reg) {
-                    return reg.unregister().then(function(success) {
-                      if (success) unregisteredAny = true;
-                    }).catch(function(err) {});
-                  });
-                  Promise.all(promises).then(function() {
-                    if (unregisteredAny) {
-                      console.log('Active Service Worker detected and killed. Reloading for fresh live network files...');
-                      window.location.reload();
-                    }
-                  }).catch(function(err) {});
-                }).catch(function(err) {});
+              if ('serviceWorker' in navigator && 'Notification' in window) {
+                navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                  if (Notification.permission === 'default') {
+                    // Prompt user for push notification permission after 5s
+                    setTimeout(function() {
+                      Notification.requestPermission().then(function(permission) {
+                        if (permission === 'granted') {
+                          console.log('Web Push permission granted for live 4D notifications!');
+                        }
+                      });
+                    }, 5000);
+                  }
+                }).catch(function(e) {});
               }
-              if ('caches' in window) {
-                caches.keys().then(function(names) {
-                  names.forEach(function(name) {
-                    caches.delete(name).catch(function(err) {});
-                  });
-                }).catch(function(err) {});
-              }
-            } catch (e) {
-              console.error('Cache killer error caught:', e);
-            }
+            } catch (e) {}
           `}
         </Script>
         <Script id="richads-click-tracker" strategy="afterInteractive">
