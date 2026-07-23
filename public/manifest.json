@@ -1,23 +1,35 @@
 {
-  "name": "NEO4D LIVE",
+  "name": "NEO4D LIVE | 实时4D开彩",
   "short_name": "NEO4D",
-  "description": "Fastest ad-free real-time 4D results aggregator in Malaysia and Singapore.",
-  "start_url": "/",
+  "description": "全马最快、无广告、无弹窗的4D实时开彩数据中心。",
+  "start_url": "/zh?utm_source=pwa",
   "display": "standalone",
-  "background_color": "#faf8f5",
-  "theme_color": "#991b1b",
+  "background_color": "#020617",
+  "theme_color": "#020617",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon",
-      "sizes": "144x144",
+      "src": "/icon.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/apple-icon",
+      "src": "/apple-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "实时开彩 7PM",
+      "url": "/zh?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "解梦千字图",
+      "url": "/zh/dreams",
+      "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
     }
   ]
 }
