@@ -813,12 +813,12 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                             )}
 
                             <div className="flex flex-wrap gap-2">
-                              {game.numbers.map((num, idx) => (
+                              {game?.numbers?.map((num, idx) => (
                                 <span key={idx} className="w-auto px-3 h-8 md:h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-black text-white text-sm md:text-base shadow-inner">
                                   {num}
                                 </span>
                               ))}
-                              {game.bonus?.map((num, idx) => (
+                              {game?.bonus?.map((num, idx) => (
                                 <span key={`bonus-${idx}`} className="w-auto px-3 h-8 md:h-10 rounded-full bg-amber-600 border border-amber-400 flex items-center justify-center font-black text-white text-sm md:text-base shadow-[0_0_8px_rgba(217,119,6,0.6)]">
                                   {num}
                                 </span>
@@ -827,7 +827,7 @@ export default function HomeClient({ initialResults, initialLang = 'zh' }) {
                             
                             {/* WhatsApp share for lotto games */}
                             <button 
-                              onClick={() => shareToWhatsApp(`*${operatorName} ${game.name}*\nNumbers: ${game.numbers.join(', ')}\n${game.jp1 ? `Jackpot: ${game.jp1}` : ''}`)}
+                              onClick={() => shareToWhatsApp(`*${operatorName} ${game.name}*\nNumbers: ${game?.numbers?.join(', ') || ''}\n${game.jp1 ? `Jackpot: ${game.jp1}` : ''}`)}
                               className="absolute right-3 top-3 opacity-0 group-hover/lotto:opacity-100 transition-opacity p-2 text-green-600 hover:text-green-700"
                               title="Share to WhatsApp"
                             >

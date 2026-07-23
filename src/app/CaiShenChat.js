@@ -52,7 +52,7 @@ export default function CaiShenChat() {
       } else if (chatState === 1) {
         setMessages(prev => [...prev, { sender: 'bot', text: `正在使用AI扫描 **2020-2024年** 所有的开奖记录，匹配你的生肖与梦境频率... 稍等啊...` }]);
         setTimeout(() => {
-          const baseNum = (userText.length * 137 + userZodiac.length * 89) % 10000;
+          const baseNum = (userText.length * 137 + (userZodiac || '').length * 89) % 10000;
           const luckyNum = baseNum.toString().padStart(4, '0');
           setMessages(prev => [...prev, { 
             sender: 'bot', 
