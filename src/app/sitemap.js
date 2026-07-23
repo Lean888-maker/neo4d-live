@@ -42,6 +42,21 @@ export default function sitemap() {
         priority: 0.7,
       });
     });
+
+    const strategyKeywords = [
+      'magnum-4d-prediction',
+      'toto-6d-winning-strategy',
+      'damacai-3d-head-tail',
+      'gdlotto-live-draw-tips'
+    ];
+    strategyKeywords.forEach(kw => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/strategy/${kw}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily',
+        priority: 0.8,
+      });
+    });
   });
 
   return sitemapEntries;
